@@ -1,0 +1,697 @@
+diff --git a/pom.xml b/pom.xml
+index a5bf94c..c6d05b7 100644
+--- a/pom.xml
++++ b/pom.xml
+@@ -20,15 +20,15 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+   <dependencies>
+     <dependency>
+-      <groupId>javax.servlet</groupId>
+-      <artifactId>javax.servlet-api</artifactId>
+-      <version>3.1.0</version>
+-      <scope>provided</scope>
++      <groupId>jakarta.servlet</groupId>
++      <artifactId>jakarta.servlet-api</artifactId>
++      <version>5.0.0</version>
++      <scope>compile</scope>
+     </dependency>
+     <dependency>
+-      <groupId>javax.servlet.jsp</groupId>
+-      <artifactId>javax.servlet.jsp-api</artifactId>
+-      <version>2.3.1</version>
++      <groupId>jakarta.servlet.jsp</groupId>
++      <artifactId>jakarta.servlet.jsp-api</artifactId>
++      <version>3.0.0</version>
+       <scope>provided</scope>
+     </dependency>
+     <dependency>
+
+diff --git a/src/main/java/com/harborclaims/portal/customers/CustomerViewAction.java b/src/main/java/com/harborclaims/portal/customers/CustomerViewAction.java
+index f6e2db5..0812960 100644
+--- a/src/main/java/com/harborclaims/portal/customers/CustomerViewAction.java
++++ b/src/main/java/com/harborclaims/portal/customers/CustomerViewAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.customers;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/customers/CustomerSearchAction.java b/src/main/java/com/harborclaims/portal/customers/CustomerSearchAction.java
+index 3def785..671bae4 100644
+--- a/src/main/java/com/harborclaims/portal/customers/CustomerSearchAction.java
++++ b/src/main/java/com/harborclaims/portal/customers/CustomerSearchAction.java
+@@ -2,8 +2,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.net.URLEncoder;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/customers/CustomerEditAction.java b/src/main/java/com/harborclaims/portal/customers/CustomerEditAction.java
+index fb706c8..70e6abf 100644
+--- a/src/main/java/com/harborclaims/portal/customers/CustomerEditAction.java
++++ b/src/main/java/com/harborclaims/portal/customers/CustomerEditAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.customers;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/customers/CustomerForm.java b/src/main/java/com/harborclaims/portal/customers/CustomerForm.java
+index affdf1b..bd4ca3d 100644
+--- a/src/main/java/com/harborclaims/portal/customers/CustomerForm.java
++++ b/src/main/java/com/harborclaims/portal/customers/CustomerForm.java
+@@ -4,7 +4,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ import java.text.SimpleDateFormat;
+ import java.util.regex.Pattern;
+ 
+-import javax.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequest;
+ 
+ import org.apache.struts.action.ActionErrors;
+ import org.apache.struts.action.ActionForm;
+
+diff --git a/src/main/java/com/harborclaims/portal/customers/CustomerDeleteAction.java b/src/main/java/com/harborclaims/portal/customers/CustomerDeleteAction.java
+index f321c3d..800cbf7 100644
+--- a/src/main/java/com/harborclaims/portal/customers/CustomerDeleteAction.java
++++ b/src/main/java/com/harborclaims/portal/customers/CustomerDeleteAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.customers;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/customers/CustomerSaveAction.java b/src/main/java/com/harborclaims/portal/customers/CustomerSaveAction.java
+index 1f53caf..a628983 100644
+--- a/src/main/java/com/harborclaims/portal/customers/CustomerSaveAction.java
++++ b/src/main/java/com/harborclaims/portal/customers/CustomerSaveAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.customers;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java b/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java
+index fc712f2..d33b961 100644
+--- a/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java
++++ b/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java
+@@ -1,8 +1,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.auth;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
+-import javax.servlet.http.HttpSession;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpSession;
+ 
+ import org.apache.log4j.Logger;
+ import org.apache.struts.action.Action;
+
+diff --git a/src/main/java/com/harborclaims/portal/auth/LogoutAction.java b/src/main/java/com/harborclaims/portal/auth/LogoutAction.java
+index ffaaf54..6b04150 100644
+--- a/src/main/java/com/harborclaims/portal/auth/LogoutAction.java
++++ b/src/main/java/com/harborclaims/portal/auth/LogoutAction.java
+@@ -1,8 +1,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.auth;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
+-import javax.servlet.http.HttpSession;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpSession;
+ 
+ import org.apache.struts.action.Action;
+ import org.apache.struts.action.ActionForm;
+@@ -16,7 +16,7 @@
+             HttpServletResponse response) throws Exception {
+         HttpSession session = request.getSession(false);
+         if (session != null) {
+-            session.invalidate();
++            request.logout();
+         }
+         return mapping.findForward("success");
+     }
+
+diff --git a/src/main/java/com/harborclaims/portal/auth/LoginFilter.java b/src/main/java/com/harborclaims/portal/auth/LoginFilter.java
+index 86e8fbb..6e984a0 100644
+--- a/src/main/java/com/harborclaims/portal/auth/LoginFilter.java
++++ b/src/main/java/com/harborclaims/portal/auth/LoginFilter.java
+@@ -2,16 +2,16 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.io.IOException;
+ 
+-import javax.servlet.Filter;
+-import javax.servlet.FilterChain;
+-import javax.servlet.FilterConfig;
+-import javax.servlet.ServletException;
+-import javax.servlet.ServletRequest;
+-import javax.servlet.ServletResponse;
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletRequestWrapper;
+-import javax.servlet.http.HttpServletResponse;
+-import javax.servlet.http.HttpSession;
++import jakarta.servlet.Filter;
++import jakarta.servlet.FilterChain;
++import jakarta.servlet.FilterConfig;
++import jakarta.servlet.ServletException;
++import jakarta.servlet.ServletRequest;
++import jakarta.servlet.ServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequestWrapper;
++import jakarta.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpSession;
+ 
+ /** Homegrown login filter: no session user means redirect to the login page. */
+ public class LoginFilter implements Filter {
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java b/src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java
+index 142b215..611e080 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.admin;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminUserForm.java b/src/main/java/com/harborclaims/portal/admin/AdminUserForm.java
+index ae284c6..c0350d4 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminUserForm.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminUserForm.java
+@@ -2,7 +2,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.util.regex.Pattern;
+ 
+-import javax.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequest;
+ 
+ import org.apache.struts.action.ActionErrors;
+ import org.apache.struts.action.ActionForm;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java b/src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java
+index 9b9dbe6..3ad723b 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.admin;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminIndexAction.java b/src/main/java/com/harborclaims/portal/admin/AdminIndexAction.java
+index f428c8d..fa1d6d3 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminIndexAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminIndexAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.admin;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java b/src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java
+index f79c76a..712b189 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java
+@@ -2,8 +2,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.net.URLEncoder;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminJobRunAction.java b/src/main/java/com/harborclaims/portal/admin/AdminJobRunAction.java
+index 5ae36b0..fc778f0 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminJobRunAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminJobRunAction.java
+@@ -2,8 +2,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.time.LocalDate;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminUserEditAction.java b/src/main/java/com/harborclaims/portal/admin/AdminUserEditAction.java
+index 748dd27..2953382 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminUserEditAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminUserEditAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.admin;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java b/src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java
+index b938023..dbafea2 100644
+--- a/src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java
++++ b/src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.admin;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicyForm.java b/src/main/java/com/harborclaims/portal/policies/PolicyForm.java
+index 9bb144e..02879e3 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicyForm.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicyForm.java
+@@ -1,6 +1,6 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.policies;
+ 
+-import javax.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequest;
+ 
+ import org.apache.struts.action.ActionErrors;
+ import org.apache.struts.action.ActionForm;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicyEditAction.java b/src/main/java/com/harborclaims/portal/policies/PolicyEditAction.java
+index 0b6ab94..87d653b 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicyEditAction.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicyEditAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.policies;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicyViewAction.java b/src/main/java/com/harborclaims/portal/policies/PolicyViewAction.java
+index 0c34b45..d7f75a2 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicyViewAction.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicyViewAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.policies;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicySaveAction.java b/src/main/java/com/harborclaims/portal/policies/PolicySaveAction.java
+index 6127c25..4a445ff 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicySaveAction.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicySaveAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.policies;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicySearchAction.java b/src/main/java/com/harborclaims/portal/policies/PolicySearchAction.java
+index 522c4bb..a7c86ec 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicySearchAction.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicySearchAction.java
+@@ -2,8 +2,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.net.URLEncoder;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicyCancelAction.java b/src/main/java/com/harborclaims/portal/policies/PolicyCancelAction.java
+index f9fdecd..086ba39 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicyCancelAction.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicyCancelAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.policies;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/policies/PolicyRenewAction.java b/src/main/java/com/harborclaims/portal/policies/PolicyRenewAction.java
+index afebbf9..e7eba8c 100644
+--- a/src/main/java/com/harborclaims/portal/policies/PolicyRenewAction.java
++++ b/src/main/java/com/harborclaims/portal/policies/PolicyRenewAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.policies;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/common/BaseAction.java b/src/main/java/com/harborclaims/portal/common/BaseAction.java
+index 0efe2ca..f73dc20 100644
+--- a/src/main/java/com/harborclaims/portal/common/BaseAction.java
++++ b/src/main/java/com/harborclaims/portal/common/BaseAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.common;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.Action;
+ import org.apache.struts.action.ActionErrors;
+
+diff --git a/src/main/java/com/harborclaims/portal/common/EncodingFilter.java b/src/main/java/com/harborclaims/portal/common/EncodingFilter.java
+index 71ac9f0..75b457a 100644
+--- a/src/main/java/com/harborclaims/portal/common/EncodingFilter.java
++++ b/src/main/java/com/harborclaims/portal/common/EncodingFilter.java
+@@ -2,12 +2,12 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.io.IOException;
+ 
+-import javax.servlet.Filter;
+-import javax.servlet.FilterChain;
+-import javax.servlet.FilterConfig;
+-import javax.servlet.ServletException;
+-import javax.servlet.ServletRequest;
+-import javax.servlet.ServletResponse;
++import jakarta.servlet.Filter;
++import jakarta.servlet.FilterChain;
++import jakarta.servlet.FilterConfig;
++import jakarta.servlet.ServletException;
++import jakarta.servlet.ServletRequest;
++import jakarta.servlet.ServletResponse;
+ 
+ public class EncodingFilter implements Filter {
+ 
+
+diff --git a/src/main/java/com/harborclaims/portal/jobs/SchedulerListener.java b/src/main/java/com/harborclaims/portal/jobs/SchedulerListener.java
+index ae89fb3..28f4493 100644
+--- a/src/main/java/com/harborclaims/portal/jobs/SchedulerListener.java
++++ b/src/main/java/com/harborclaims/portal/jobs/SchedulerListener.java
+@@ -3,8 +3,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ import java.util.Date;
+ import java.util.Properties;
+ 
+-import javax.servlet.ServletContextEvent;
+-import javax.servlet.ServletContextListener;
++import jakarta.servlet.ServletContextEvent;
++import jakarta.servlet.ServletContextListener;
+ 
+ import org.apache.log4j.Logger;
+ import org.quartz.CronTrigger;
+
+diff --git a/src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java b/src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java
+index 416badf..ccb831e 100644
+--- a/src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java
++++ b/src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.reports;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java b/src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java
+index 1aad3fa..1d88997 100644
+--- a/src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java
++++ b/src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java
+@@ -2,8 +2,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.time.LocalDate;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusAction.java b/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusAction.java
+index 7966ace..21dfc5b 100644
+--- a/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusAction.java
++++ b/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.reports;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java b/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java
+index 990e40f..a770a93 100644
+--- a/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java
++++ b/src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.reports;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/reports/ClaimsByAdjusterAction.java b/src/main/java/com/harborclaims/portal/reports/ClaimsByAdjusterAction.java
+index cf13ca1..fe143b9 100644
+--- a/src/main/java/com/harborclaims/portal/reports/ClaimsByAdjusterAction.java
++++ b/src/main/java/com/harborclaims/portal/reports/ClaimsByAdjusterAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.reports;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/NoteForm.java b/src/main/java/com/harborclaims/portal/claims/NoteForm.java
+index 70b8f96..34721a9 100644
+--- a/src/main/java/com/harborclaims/portal/claims/NoteForm.java
++++ b/src/main/java/com/harborclaims/portal/claims/NoteForm.java
+@@ -1,6 +1,6 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequest;
+ 
+ import org.apache.struts.action.ActionErrors;
+ import org.apache.struts.action.ActionForm;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimNewAction.java b/src/main/java/com/harborclaims/portal/claims/ClaimNewAction.java
+index 95e2b34..e8d4e2b 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimNewAction.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimNewAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimForm.java b/src/main/java/com/harborclaims/portal/claims/ClaimForm.java
+index fa8b98a..0bd6478 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimForm.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimForm.java
+@@ -1,6 +1,6 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequest;
+ 
+ import org.apache.struts.action.ActionErrors;
+ import org.apache.struts.action.ActionForm;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimSaveAction.java b/src/main/java/com/harborclaims/portal/claims/ClaimSaveAction.java
+index 0ecf258..139f2dc 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimSaveAction.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimSaveAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/TransitionForm.java b/src/main/java/com/harborclaims/portal/claims/TransitionForm.java
+index 4e8c45e..850fc7d 100644
+--- a/src/main/java/com/harborclaims/portal/claims/TransitionForm.java
++++ b/src/main/java/com/harborclaims/portal/claims/TransitionForm.java
+@@ -1,6 +1,6 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletRequest;
+ 
+ import org.apache.struts.action.ActionErrors;
+ import org.apache.struts.action.ActionForm;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimSearchAction.java b/src/main/java/com/harborclaims/portal/claims/ClaimSearchAction.java
+index af5ea97..5f8b103 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimSearchAction.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimSearchAction.java
+@@ -2,8 +2,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import java.net.URLEncoder;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimTransitionAction.java b/src/main/java/com/harborclaims/portal/claims/ClaimTransitionAction.java
+index 69df8f6..541de9d 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimTransitionAction.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimTransitionAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimNoteAction.java b/src/main/java/com/harborclaims/portal/claims/ClaimNoteAction.java
+index 42e233f..dcc2359 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimNoteAction.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimNoteAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/java/com/harborclaims/portal/claims/ClaimViewAction.java b/src/main/java/com/harborclaims/portal/claims/ClaimViewAction.java
+index 4098c10..dbcfed1 100644
+--- a/src/main/java/com/harborclaims/portal/claims/ClaimViewAction.java
++++ b/src/main/java/com/harborclaims/portal/claims/ClaimViewAction.java
+@@ -1,7 +1,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ package com.harborclaims.portal.claims;
+ 
+-import javax.servlet.http.HttpServletRequest;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletRequest;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.struts.action.ActionForm;
+ import org.apache.struts.action.ActionForward;
+
+diff --git a/src/main/webapp/WEB-INF/web.xml b/src/main/webapp/WEB-INF/web.xml
+index 43fff30..b83672f 100644
+--- a/src/main/webapp/WEB-INF/web.xml
++++ b/src/main/webapp/WEB-INF/web.xml
+@@ -1,9 +1,9 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ <?xml version="1.0" encoding="UTF-8"?>
+ <!-- Deliberately insecure for demonstration. Do not deploy. -->
+-<web-app xmlns="http://java.sun.com/xml/ns/javaee"
++<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+-         version="3.0">
++         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
++         version="5.0">
+   <display-name>Harbor Claims Portal</display-name>
+ 
+   <filter>
+

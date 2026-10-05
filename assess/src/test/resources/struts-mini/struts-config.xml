@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://unreachable.invalid/dtds/struts-config_1_3.dtd" [
+  <!ENTITY xxe SYSTEM "file:///etc/passwd">
+]>
+<struts-config>
+  <form-beans>
+    <form-bean name="aForm" type="demo.AForm"/>
+  </form-beans>
+  <action-mappings>
+    <!-- <action path="/commented/out" type="demo.Nope" roles="GHOST"/> -->
+    <action path="/home" type="org.apache.struts.actions.ForwardAction" parameter="home.page"/>
+    <action path="/customers/list" type="demo.ListAction" name="aForm" scope="request" validate="false">
+      <forward name="success" path="customer.list"/>
+      <forward name="again" path="/customers/list.do?x=1" redirect="true"/>
+      <forward name="raw" path="/WEB-INF/jsp/raw.jsp"/>
+    </action>
+    <action path="/admin/open" type="demo.OpenAction"/>
+    <action path="/admin/closed" type="demo.ClosedAction" roles=""/>
+    <action path="/admin/spaced" type="demo.SpacedAction" roles=" ADMIN,  CSR , "/>
+    <action path="/admin/ghost" type="demo.MissingAction" roles="WIZARD" input="nowhere.page"/>
+  </action-mappings>
+  <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+</struts-config>

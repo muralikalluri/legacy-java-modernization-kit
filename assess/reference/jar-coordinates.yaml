@@ -1,0 +1,15 @@
+# Maven coordinates for WAR jars that carry no META-INF/maven/**/pom.properties.
+# Keyed by file name. A jar that is neither identified from its own metadata nor listed here is reported
+# as "unidentified" (never dropped).
+jars:
+  antlr-2.7.2.jar: "antlr:antlr:2.7.2"
+  bcmail-jdk14-1.38.jar: "org.bouncycastle:bcmail-jdk14:1.38"
+  bcmail-jdk14-138.jar: "org.bouncycastle:bcmail-jdk14:138"
+  bcprov-jdk14-1.38.jar: "org.bouncycastle:bcprov-jdk14:1.38"
+  bcprov-jdk14-138.jar: "org.bouncycastle:bcprov-jdk14:138"
+  bctsp-jdk14-1.38.jar: "org.bouncycastle:bctsp-jdk14:1.38"
+  commons-digester-1.8.jar: "commons-digester:commons-digester:1.8"
+  commons-logging-1.0.4.jar: "commons-logging:commons-logging:1.0.4"
+  commons-validator-1.3.1.jar: "commons-validator:commons-validator:1.3.1"
+  itext-2.1.7.jar: "com.lowagie:itext:2.1.7"
+  oro-2.0.8.jar: "oro:oro:2.0.8"

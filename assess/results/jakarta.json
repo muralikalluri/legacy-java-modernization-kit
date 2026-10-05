@@ -1,0 +1,120 @@
+{
+  "config" : {
+    "webXmlNamespace" : "http://java.sun.com/xml/ns/javaee",
+    "webXmlNeedsJakartaNamespace" : true,
+    "webXmlVersion" : "3.0"
+  },
+  "inputsFingerprint" : "68c230f91b3f2ccc62568e38cf9450d6c707205bf41499703bd685535dcb72de",
+  "javaMain" : {
+    "files" : 73,
+    "filesWithJavax" : 42,
+    "importsByPackage" : {
+      "javax.naming" : 3,
+      "javax.servlet" : 14,
+      "javax.servlet.http" : 76,
+      "javax.sql" : 1
+    },
+    "jakartaMigratingImports" : 90,
+    "jakartaMigratingQualifiedUses" : 0,
+    "javaxImports" : 94,
+    "jdkOwnedImports" : 4,
+    "jdkOwnedQualifiedUses" : 0,
+    "otherImports" : 0,
+    "qualifiedUsesByPackage" : { }
+  },
+  "javaTest" : {
+    "files" : 8,
+    "filesWithJavax" : 1,
+    "importsByPackage" : {
+      "javax.xml.parsers" : 1
+    },
+    "jakartaMigratingImports" : 0,
+    "jakartaMigratingQualifiedUses" : 0,
+    "javaxImports" : 1,
+    "jdkOwnedImports" : 1,
+    "jdkOwnedQualifiedUses" : 0,
+    "otherImports" : 0,
+    "qualifiedUsesByPackage" : { }
+  },
+  "jsp" : {
+    "files" : 25,
+    "filesWithJavaxReferences" : 1,
+    "javaxReferences" : 1,
+    "javaxReferencesByPackage" : {
+      "javax.servlet.error.status_code" : 1
+    },
+    "jstlUris" : 0
+  },
+  "notes" : [
+    "JDK-owned packages (javax.sql, javax.naming, javax.xml.parsers, ...) stay javax after a Jakarta migration.",
+    "Imports are read from Java sources with comments and string literals removed.",
+    "OpenRewrite does not rewrite JSPs, so JSP javax references are reported separately.",
+    "There is no Jakarta-compatible Struts 1: after the rewrite, struts-core still needs javax.servlet. The changed-file count measures the javax surface, not whether a migration is feasible.",
+    "javax.servlet imports in main sources: 90 import statements and 0 fully qualified uses move to jakarta."
+  ],
+  "rewrite" : {
+    "changedFiles" : 43,
+    "changedFilesByKind" : {
+      "jsp" : 0,
+      "mainJava" : 41,
+      "other" : 0,
+      "pom" : 1,
+      "testJava" : 0,
+      "xml" : 1
+    },
+    "files" : [
+      "pom.xml",
+      "src/main/java/com/harborclaims/portal/admin/AdminIndexAction.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminJobRunAction.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminUserEditAction.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminUserForm.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java",
+      "src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java",
+      "src/main/java/com/harborclaims/portal/auth/LoginFilter.java",
+      "src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java",
+      "src/main/java/com/harborclaims/portal/auth/LogoutAction.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimForm.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimNewAction.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimNoteAction.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimSaveAction.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimSearchAction.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimTransitionAction.java",
+      "src/main/java/com/harborclaims/portal/claims/ClaimViewAction.java",
+      "src/main/java/com/harborclaims/portal/claims/NoteForm.java",
+      "src/main/java/com/harborclaims/portal/claims/TransitionForm.java",
+      "src/main/java/com/harborclaims/portal/common/BaseAction.java",
+      "src/main/java/com/harborclaims/portal/common/EncodingFilter.java",
+      "src/main/java/com/harborclaims/portal/customers/CustomerDeleteAction.java",
+      "src/main/java/com/harborclaims/portal/customers/CustomerEditAction.java",
+      "src/main/java/com/harborclaims/portal/customers/CustomerForm.java",
+      "src/main/java/com/harborclaims/portal/customers/CustomerSaveAction.java",
+      "src/main/java/com/harborclaims/portal/customers/CustomerSearchAction.java",
+      "src/main/java/com/harborclaims/portal/customers/CustomerViewAction.java",
+      "src/main/java/com/harborclaims/portal/jobs/SchedulerListener.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicyCancelAction.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicyEditAction.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicyForm.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicyRenewAction.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicySaveAction.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicySearchAction.java",
+      "src/main/java/com/harborclaims/portal/policies/PolicyViewAction.java",
+      "src/main/java/com/harborclaims/portal/reports/ClaimsByAdjusterAction.java",
+      "src/main/java/com/harborclaims/portal/reports/ClaimsByStatusAction.java",
+      "src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java",
+      "src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java",
+      "src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java",
+      "src/main/webapp/WEB-INF/web.xml"
+    ],
+    "mode" : "dry run on a copy of legacy-app; no source file was modified",
+    "patchFile" : "jakarta-dryrun.patch",
+    "patchSha256" : "dd9d3def993c2a04952b20ec7e0e48b9836ac88134acb750976f35455763ac3e",
+    "plugin" : "org.openrewrite.maven:rewrite-maven-plugin:6.46.1",
+    "recipe" : "org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta",
+    "recipeArtifact" : "org.openrewrite.recipe:rewrite-migrate-java:3.42.1"
+  },
+  "schema" : 1,
+  "source" : "legacy-app",
+  "tool" : "assess 1.0.0"
+}

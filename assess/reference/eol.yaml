@@ -1,0 +1,34 @@
+# End-of-life / maintenance status of the frameworks in the legacy app.
+# Reference data, evaluated against asOf below and never against the clock, so results do not drift.
+asOf: "2026-10-05"
+entries:
+  - match: "org.apache.struts:*"
+    versionPrefix: "1."
+    status: EOL
+    since: "2013-04-05"
+    note: "Apache Struts 1 reached end of life. No security fixes; there is no Jakarta-compatible Struts 1."
+    source: "https://struts.apache.org/struts1eol-announcement.html"
+  - match: "log4j:log4j"
+    versionPrefix: "1."
+    status: EOL
+    since: "2015-08-05"
+    note: "Log4j 1.x reached end of life. Replaced by Log4j 2 or Logback."
+    source: "https://logging.apache.org/log4j/1.2/"
+  - match: "org.quartz-scheduler:quartz"
+    versionPrefix: "1."
+    status: SUPERSEDED
+    since: null
+    note: "The Quartz 1.x line is superseded by the maintained 2.x line."
+    source: "https://www.quartz-scheduler.org/"
+  - match: "com.lowagie:itext"
+    versionPrefix: "2."
+    status: UNMAINTAINED
+    since: "2009"
+    note: "2.1.7 (2009) is the last release under this coordinate. Newer iText releases use a different licence; OpenPDF is a maintained fork."
+    source: "https://repo.maven.apache.org/maven2/com/lowagie/itext/"
+  - match: "commons-collections:commons-collections"
+    versionPrefix: "3."
+    status: SUPERSEDED
+    since: null
+    note: "3.2.2 and the 4.x line fix unsafe deserialization in 3.2.1."
+    source: "https://commons.apache.org/proper/commons-collections/security-reports.html"

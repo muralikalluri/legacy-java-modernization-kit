@@ -1,0 +1,7 @@
+{
+  "fetchedAt" : "2026-10-05",
+  "source" : "https://api.osv.dev/v1/query",
+  "package" : "oro:oro",
+  "version" : "2.0.8",
+  "vulns" : [ ]
+}

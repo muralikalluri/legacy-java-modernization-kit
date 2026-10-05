@@ -1,0 +1,34 @@
+# The one module map. Inventory, structure and estimate all read this file.
+# Anything a path, package or JSP does not match is an error, never "Other".
+modules:
+  - name: Customers
+    pathPrefixes: ["/customers/"]
+    packages: ["com.harborclaims.portal.customers"]
+    jsps: ["customer*.jsp"]
+  - name: Claims
+    pathPrefixes: ["/claims/", "/claim/"]
+    packages: ["com.harborclaims.portal.claims"]
+    jsps: ["claim*.jsp"]
+  - name: Policies
+    pathPrefixes: ["/policies/", "/policy/"]
+    # The nightly job lapses policies, so the jobs package belongs here.
+    packages: ["com.harborclaims.portal.policies", "com.harborclaims.portal.jobs"]
+    jsps: ["policy*.jsp"]
+  - name: Reports
+    pathPrefixes: ["/reports/"]
+    packages: ["com.harborclaims.portal.reports"]
+    jsps: ["report*.jsp"]
+  - name: Admin
+    pathPrefixes: ["/admin/"]
+    packages: ["com.harborclaims.portal.admin"]
+    jsps: ["admin*.jsp"]
+  - name: Platform
+    pathPrefixes: ["/login", "/logout", "/home"]
+    packages: ["com.harborclaims.portal.auth", "com.harborclaims.portal.common", "com.harborclaims.portal.config"]
+    jsps: ["layout.jsp", "header.jsp", "footer.jsp", "pager.jsp", "error.jsp", "login.jsp", "home.jsp", "index.jsp"]
+
+# What M6 migrates: every Customers action plus the claim search action.
+migrationScope:
+  - module: Customers
+  - module: Claims
+    actions: ["/claims/search"]

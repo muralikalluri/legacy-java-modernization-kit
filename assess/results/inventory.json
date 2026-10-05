@@ -1,0 +1,2009 @@
+{
+  "actions" : [
+    {
+      "path" : "/admin/index",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminIndexAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "admin.index",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/adminIndex.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/admin/jobRun",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminJobRunAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "jobs",
+          "path" : "/admin/jobs.do",
+          "kind" : "action",
+          "redirect" : false,
+          "resolvedBody" : null
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/admin/jobs",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminJobsAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "admin.jobs",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/adminJobs.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/admin/userEdit",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminUserEditAction",
+      "kind" : "Action",
+      "form" : "adminUserForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "admin.userEdit",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/adminUserEdit.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/admin/userSave",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminUserSaveAction",
+      "kind" : "Action",
+      "form" : "adminUserForm",
+      "scope" : "request",
+      "validate" : "true",
+      "input" : "/admin/userEdit.do",
+      "inputKind" : "action",
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/admin/userToggle",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminUserToggleAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "/admin/users.do",
+          "kind" : "action",
+          "redirect" : true,
+          "resolvedBody" : null
+        },
+        {
+          "name" : "users",
+          "path" : "/admin/users.do",
+          "kind" : "action",
+          "redirect" : false,
+          "resolvedBody" : null
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/admin/users",
+      "module" : "Admin",
+      "type" : "com.harborclaims.portal.admin.AdminUsersAction",
+      "kind" : "Action",
+      "form" : "searchForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "admin.users",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/adminUsers.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/claim/new",
+      "module" : "Claims",
+      "type" : "com.harborclaims.portal.claims.ClaimNewAction",
+      "kind" : "Action",
+      "form" : "claimForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "ADJUSTER",
+        "CSR"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "claim.new",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/claimNew.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/claim/note",
+      "module" : "Claims",
+      "type" : "com.harborclaims.portal.claims.ClaimNoteAction",
+      "kind" : "Action",
+      "form" : "noteForm",
+      "scope" : "request",
+      "validate" : "true",
+      "input" : "/claim/view.do",
+      "inputKind" : "action",
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "ADJUSTER",
+        "SUPERVISOR",
+        "CSR"
+      ],
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/claim/save",
+      "module" : "Claims",
+      "type" : "com.harborclaims.portal.claims.ClaimSaveAction",
+      "kind" : "Action",
+      "form" : "claimForm",
+      "scope" : "request",
+      "validate" : "true",
+      "input" : "claim.new",
+      "inputKind" : "tile",
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "ADJUSTER",
+        "CSR"
+      ],
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/claim/transition",
+      "module" : "Claims",
+      "type" : "com.harborclaims.portal.claims.ClaimTransitionAction",
+      "kind" : "Action",
+      "form" : "transitionForm",
+      "scope" : "request",
+      "validate" : "true",
+      "input" : "/claim/view.do",
+      "inputKind" : "action",
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "ADJUSTER",
+        "SUPERVISOR"
+      ],
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/claim/view",
+      "module" : "Claims",
+      "type" : "com.harborclaims.portal.claims.ClaimViewAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "claim.view",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/claimView.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/claims/search",
+      "module" : "Claims",
+      "type" : "com.harborclaims.portal.claims.ClaimSearchAction",
+      "kind" : "Action",
+      "form" : "searchForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "claim.search",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/claimSearch.jsp"
+        }
+      ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/customers/delete",
+      "module" : "Customers",
+      "type" : "com.harborclaims.portal.customers.CustomerDeleteAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "/customers/list.do",
+          "kind" : "action",
+          "redirect" : true,
+          "resolvedBody" : null
+        },
+        {
+          "name" : "view",
+          "path" : "/customers/view.do",
+          "kind" : "action",
+          "redirect" : false,
+          "resolvedBody" : null
+        }
+      ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/customers/edit",
+      "module" : "Customers",
+      "type" : "com.harborclaims.portal.customers.CustomerEditAction",
+      "kind" : "Action",
+      "form" : "customerForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "CSR"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "customer.edit",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/customerEdit.jsp"
+        }
+      ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/customers/list",
+      "module" : "Customers",
+      "type" : "com.harborclaims.portal.customers.CustomerSearchAction",
+      "kind" : "Action",
+      "form" : "searchForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "customer.search",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/customerSearch.jsp"
+        }
+      ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/customers/save",
+      "module" : "Customers",
+      "type" : "com.harborclaims.portal.customers.CustomerSaveAction",
+      "kind" : "Action",
+      "form" : "customerForm",
+      "scope" : "request",
+      "validate" : "true",
+      "input" : "customer.edit",
+      "inputKind" : "tile",
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "CSR"
+      ],
+      "forwards" : [ ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/customers/search",
+      "module" : "Customers",
+      "type" : "com.harborclaims.portal.customers.CustomerSearchAction",
+      "kind" : "Action",
+      "form" : "searchForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "customer.search",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/customerSearch.jsp"
+        }
+      ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/customers/view",
+      "module" : "Customers",
+      "type" : "com.harborclaims.portal.customers.CustomerViewAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "customer.view",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/customerView.jsp"
+        }
+      ],
+      "migrationScope" : true
+    },
+    {
+      "path" : "/home",
+      "module" : "Platform",
+      "type" : "org.apache.struts.actions.ForwardAction",
+      "kind" : "ForwardAction",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : "home.page",
+      "rolesDeclared" : null,
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/login",
+      "module" : "Platform",
+      "type" : "org.apache.struts.actions.ForwardAction",
+      "kind" : "ForwardAction",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : "login.page",
+      "rolesDeclared" : null,
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/loginSubmit",
+      "module" : "Platform",
+      "type" : "com.harborclaims.portal.auth.LoginSubmitAction",
+      "kind" : "Action",
+      "form" : "loginForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "/home.do",
+          "kind" : "action",
+          "redirect" : true,
+          "resolvedBody" : null
+        },
+        {
+          "name" : "failure",
+          "path" : "login.page",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/login.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/logout",
+      "module" : "Platform",
+      "type" : "com.harborclaims.portal.auth.LogoutAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "/login.do",
+          "kind" : "action",
+          "redirect" : true,
+          "resolvedBody" : null
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policies/list",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicySearchAction",
+      "kind" : "Action",
+      "form" : "searchForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "policy.search",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/policySearch.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policies/search",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicySearchAction",
+      "kind" : "Action",
+      "form" : "searchForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "policy.search",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/policySearch.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policy/cancel",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicyCancelAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "UNDERWRITER",
+        "SUPERVISOR"
+      ],
+      "forwards" : [
+        {
+          "name" : "view",
+          "path" : "/policy/view.do",
+          "kind" : "action",
+          "redirect" : false,
+          "resolvedBody" : null
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policy/edit",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicyEditAction",
+      "kind" : "Action",
+      "form" : "policyForm",
+      "scope" : "request",
+      "validate" : "false",
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "UNDERWRITER"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "policy.edit",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/policyEdit.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policy/renew",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicyRenewAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "UNDERWRITER"
+      ],
+      "forwards" : [
+        {
+          "name" : "view",
+          "path" : "/policy/view.do",
+          "kind" : "action",
+          "redirect" : false,
+          "resolvedBody" : null
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policy/save",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicySaveAction",
+      "kind" : "Action",
+      "form" : "policyForm",
+      "scope" : "request",
+      "validate" : "true",
+      "input" : "/policy/edit.do",
+      "inputKind" : "action",
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "UNDERWRITER"
+      ],
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/policy/view",
+      "module" : "Policies",
+      "type" : "com.harborclaims.portal.policies.PolicyViewAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : null,
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "policy.view",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/policyView.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/reports/claimsByAdjuster",
+      "module" : "Reports",
+      "type" : "com.harborclaims.portal.reports.ClaimsByAdjusterAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "AUDITOR"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "report.claimsByAdjuster",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/reportClaimsByAdjuster.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/reports/claimsByStatus",
+      "module" : "Reports",
+      "type" : "com.harborclaims.portal.reports.ClaimsByStatusAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "AUDITOR"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "report.claimsByStatus",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/reportClaimsByStatus.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/reports/claimsByStatusPdf",
+      "module" : "Reports",
+      "type" : "com.harborclaims.portal.reports.ClaimsByStatusPdfAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "AUDITOR"
+      ],
+      "forwards" : [ ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/reports/index",
+      "module" : "Reports",
+      "type" : "com.harborclaims.portal.reports.ReportsIndexAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "AUDITOR"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "report.index",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/reportsIndex.jsp"
+        }
+      ],
+      "migrationScope" : false
+    },
+    {
+      "path" : "/reports/policyExpiry",
+      "module" : "Reports",
+      "type" : "com.harborclaims.portal.reports.PolicyExpiryAction",
+      "kind" : "Action",
+      "form" : null,
+      "scope" : null,
+      "validate" : null,
+      "input" : null,
+      "inputKind" : null,
+      "parameter" : null,
+      "rolesDeclared" : [
+        "ADMIN",
+        "SUPERVISOR",
+        "AUDITOR"
+      ],
+      "forwards" : [
+        {
+          "name" : "success",
+          "path" : "report.policyExpiry",
+          "kind" : "tile",
+          "redirect" : false,
+          "resolvedBody" : "/WEB-INF/jsp/reportPolicyExpiry.jsp"
+        }
+      ],
+      "migrationScope" : false
+    }
+  ],
+  "errorPages" : [
+    {
+      "code" : "403",
+      "location" : "/WEB-INF/jsp/error.jsp"
+    },
+    {
+      "code" : "404",
+      "location" : "/WEB-INF/jsp/error.jsp"
+    },
+    {
+      "code" : "500",
+      "location" : "/WEB-INF/jsp/error.jsp"
+    }
+  ],
+  "filtersInOrder" : [
+    {
+      "name" : "encoding",
+      "className" : "com.harborclaims.portal.common.EncodingFilter",
+      "urlPatterns" : [
+        "/*"
+      ]
+    },
+    {
+      "name" : "login",
+      "className" : "com.harborclaims.portal.auth.LoginFilter",
+      "urlPatterns" : [
+        "/*"
+      ]
+    }
+  ],
+  "findings" : {
+    "missingActionClasses" : [ ],
+    "unknownRoles" : [ ],
+    "unresolvedTiles" : [ ]
+  },
+  "formBeans" : [
+    {
+      "name" : "loginForm",
+      "type" : "com.harborclaims.portal.auth.LoginForm"
+    },
+    {
+      "name" : "searchForm",
+      "type" : "com.harborclaims.portal.common.SearchForm"
+    },
+    {
+      "name" : "customerForm",
+      "type" : "com.harborclaims.portal.customers.CustomerForm"
+    },
+    {
+      "name" : "claimForm",
+      "type" : "com.harborclaims.portal.claims.ClaimForm"
+    },
+    {
+      "name" : "transitionForm",
+      "type" : "com.harborclaims.portal.claims.TransitionForm"
+    },
+    {
+      "name" : "noteForm",
+      "type" : "com.harborclaims.portal.claims.NoteForm"
+    },
+    {
+      "name" : "policyForm",
+      "type" : "com.harborclaims.portal.policies.PolicyForm"
+    },
+    {
+      "name" : "adminUserForm",
+      "type" : "com.harborclaims.portal.admin.AdminUserForm"
+    }
+  ],
+  "inputsFingerprint" : "6b6cf6cdafc598f6991043f65c2aa8be7b15bafd25a791eeb8e5173f22b12fa9",
+  "integrations" : [
+    {
+      "name" : "JNDI DataSource",
+      "evidence" : "web.xml resource-ref jdbc/HarborDS"
+    },
+    {
+      "name" : "PostgreSQL JDBC driver (container-provided)",
+      "evidence" : "pom: org.postgresql:postgresql 42.2.27 scope provided"
+    },
+    {
+      "name" : "Quartz scheduler (nightly batch)",
+      "evidence" : "pom: org.quartz-scheduler:quartz 1.8.6"
+    },
+    {
+      "name" : "Struts 1 MVC",
+      "evidence" : "pom: org.apache.struts:struts-core 1.3.10"
+    },
+    {
+      "name" : "Tiles 1 page layout",
+      "evidence" : "pom: org.apache.struts:struts-tiles 1.3.10"
+    },
+    {
+      "name" : "iText PDF export",
+      "evidence" : "pom: com.lowagie:itext 2.1.7"
+    },
+    {
+      "name" : "log4j 1.x logging",
+      "evidence" : "pom: log4j:log4j 1.2.17"
+    }
+  ],
+  "javaMain" : [
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminIndexAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminIndexAction",
+      "module" : "Admin",
+      "lines" : 19,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminJobRunAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminJobRunAction",
+      "module" : "Admin",
+      "lines" : 41,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminJobsAction",
+      "module" : "Admin",
+      "lines" : 25,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminManager.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminManager",
+      "module" : "Admin",
+      "lines" : 86,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserDao.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminUserDao",
+      "module" : "Admin",
+      "lines" : 134,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserEditAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminUserEditAction",
+      "module" : "Admin",
+      "lines" : 32,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserForm.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminUserForm",
+      "module" : "Admin",
+      "lines" : 111,
+      "javaxImports" : 1
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminUserSaveAction",
+      "module" : "Admin",
+      "lines" : 32,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminUserToggleAction",
+      "module" : "Admin",
+      "lines" : 27,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java",
+      "pkg" : "com.harborclaims.portal.admin",
+      "className" : "AdminUsersAction",
+      "module" : "Admin",
+      "lines" : 29,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/AppUser.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "AppUser",
+      "module" : "Platform",
+      "lines" : 63,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/AuthManager.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "AuthManager",
+      "module" : "Platform",
+      "lines" : 34,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/LoginFilter.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "LoginFilter",
+      "module" : "Platform",
+      "lines" : 71,
+      "javaxImports" : 10
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/LoginForm.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "LoginForm",
+      "module" : "Platform",
+      "lines" : 27,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "LoginSubmitAction",
+      "module" : "Platform",
+      "lines" : 37,
+      "javaxImports" : 3
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/LogoutAction.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "LogoutAction",
+      "module" : "Platform",
+      "lines" : 23,
+      "javaxImports" : 3
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/auth/UserDao.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "UserDao",
+      "module" : "Platform",
+      "lines" : 32,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/Claim.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "Claim",
+      "module" : "Claims",
+      "lines" : 125,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimDao.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimDao",
+      "module" : "Claims",
+      "lines" : 236,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimForm.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimForm",
+      "module" : "Claims",
+      "lines" : 63,
+      "javaxImports" : 1
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimManager.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimManager",
+      "module" : "Claims",
+      "lines" : 1122,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimNewAction.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimNewAction",
+      "module" : "Claims",
+      "lines" : 19,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimNote.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimNote",
+      "module" : "Claims",
+      "lines" : 32,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimNoteAction.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimNoteAction",
+      "module" : "Claims",
+      "lines" : 22,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimRules.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimRules",
+      "module" : "Claims",
+      "lines" : 115,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimSaveAction.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimSaveAction",
+      "module" : "Claims",
+      "lines" : 28,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimSearchAction.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimSearchAction",
+      "module" : "Claims",
+      "lines" : 31,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimTransitionAction.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimTransitionAction",
+      "module" : "Claims",
+      "lines" : 29,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimViewAction.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "ClaimViewAction",
+      "module" : "Claims",
+      "lines" : 30,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/NoteForm.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "NoteForm",
+      "module" : "Claims",
+      "lines" : 46,
+      "javaxImports" : 1
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/claims/TransitionForm.java",
+      "pkg" : "com.harborclaims.portal.claims",
+      "className" : "TransitionForm",
+      "module" : "Claims",
+      "lines" : 65,
+      "javaxImports" : 1
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/BaseAction.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "BaseAction",
+      "module" : "Platform",
+      "lines" : 50,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/BusinessException.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "BusinessException",
+      "module" : "Platform",
+      "lines" : 24,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/Db.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "Db",
+      "module" : "Platform",
+      "lines" : 30,
+      "javaxImports" : 4
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/EncodingFilter.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "EncodingFilter",
+      "module" : "Platform",
+      "lines" : 25,
+      "javaxImports" : 6
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/Fmt.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "Fmt",
+      "module" : "Platform",
+      "lines" : 25,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/NotFoundException.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "NotFoundException",
+      "module" : "Platform",
+      "lines" : 10,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/Page.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "Page",
+      "module" : "Platform",
+      "lines" : 48,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/Paging.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "Paging",
+      "module" : "Platform",
+      "lines" : 26,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/Roles.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "Roles",
+      "module" : "Platform",
+      "lines" : 14,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/common/SearchForm.java",
+      "pkg" : "com.harborclaims.portal.common",
+      "className" : "SearchForm",
+      "module" : "Platform",
+      "lines" : 45,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/Customer.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "Customer",
+      "module" : "Customers",
+      "lines" : 99,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerDao.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerDao",
+      "module" : "Customers",
+      "lines" : 129,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerDeleteAction.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerDeleteAction",
+      "module" : "Customers",
+      "lines" : 27,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerEditAction.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerEditAction",
+      "module" : "Customers",
+      "lines" : 24,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerForm.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerForm",
+      "module" : "Customers",
+      "lines" : 200,
+      "javaxImports" : 1
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerManager.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerManager",
+      "module" : "Customers",
+      "lines" : 62,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerSaveAction.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerSaveAction",
+      "module" : "Customers",
+      "lines" : 27,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerSearchAction.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerSearchAction",
+      "module" : "Customers",
+      "lines" : 29,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerViewAction.java",
+      "pkg" : "com.harborclaims.portal.customers",
+      "className" : "CustomerViewAction",
+      "module" : "Customers",
+      "lines" : 23,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/jobs/JobRun.java",
+      "pkg" : "com.harborclaims.portal.jobs",
+      "className" : "JobRun",
+      "module" : "Policies",
+      "lines" : 95,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/jobs/JobRunDao.java",
+      "pkg" : "com.harborclaims.portal.jobs",
+      "className" : "JobRunDao",
+      "module" : "Policies",
+      "lines" : 95,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/jobs/PolicyExpiryJob.java",
+      "pkg" : "com.harborclaims.portal.jobs",
+      "className" : "PolicyExpiryJob",
+      "module" : "Policies",
+      "lines" : 26,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/jobs/PolicyExpiryRunner.java",
+      "pkg" : "com.harborclaims.portal.jobs",
+      "className" : "PolicyExpiryRunner",
+      "module" : "Policies",
+      "lines" : 88,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/jobs/SchedulerListener.java",
+      "pkg" : "com.harborclaims.portal.jobs",
+      "className" : "SchedulerListener",
+      "module" : "Policies",
+      "lines" : 80,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/Policy.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "Policy",
+      "module" : "Policies",
+      "lines" : 116,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyCancelAction.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyCancelAction",
+      "module" : "Policies",
+      "lines" : 27,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyDao.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyDao",
+      "module" : "Policies",
+      "lines" : 204,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyEditAction.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyEditAction",
+      "module" : "Policies",
+      "lines" : 26,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyForm.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyForm",
+      "module" : "Policies",
+      "lines" : 134,
+      "javaxImports" : 1
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyManager.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyManager",
+      "module" : "Policies",
+      "lines" : 140,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyRenewAction.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyRenewAction",
+      "module" : "Policies",
+      "lines" : 27,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyRules.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyRules",
+      "module" : "Policies",
+      "lines" : 59,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicySaveAction.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicySaveAction",
+      "module" : "Policies",
+      "lines" : 27,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicySearchAction.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicySearchAction",
+      "module" : "Policies",
+      "lines" : 31,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyViewAction.java",
+      "pkg" : "com.harborclaims.portal.policies",
+      "className" : "PolicyViewAction",
+      "module" : "Policies",
+      "lines" : 25,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/ClaimsByAdjusterAction.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "ClaimsByAdjusterAction",
+      "module" : "Reports",
+      "lines" : 24,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/ClaimsByStatusAction.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "ClaimsByStatusAction",
+      "module" : "Reports",
+      "lines" : 24,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "ClaimsByStatusPdfAction",
+      "module" : "Reports",
+      "lines" : 26,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/PdfReportBuilder.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "PdfReportBuilder",
+      "module" : "Reports",
+      "lines" : 75,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "PolicyExpiryAction",
+      "module" : "Reports",
+      "lines" : 34,
+      "javaxImports" : 2
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/ReportManager.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "ReportManager",
+      "module" : "Reports",
+      "lines" : 71,
+      "javaxImports" : 0
+    },
+    {
+      "file" : "src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java",
+      "pkg" : "com.harborclaims.portal.reports",
+      "className" : "ReportsIndexAction",
+      "module" : "Reports",
+      "lines" : 19,
+      "javaxImports" : 2
+    }
+  ],
+  "jsps" : [
+    {
+      "file" : "WEB-INF/jsp/adminIndex.jsp",
+      "module" : "Admin",
+      "lines" : 6,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/adminJobs.jsp",
+      "module" : "Admin",
+      "lines" : 32,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/adminUserEdit.jsp",
+      "module" : "Admin",
+      "lines" : 25,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/adminUsers.jsp",
+      "module" : "Admin",
+      "lines" : 26,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/claimNew.jsp",
+      "module" : "Claims",
+      "lines" : 14,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/claimSearch.jsp",
+      "module" : "Claims",
+      "lines" : 30,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/claimView.jsp",
+      "module" : "Claims",
+      "lines" : 68,
+      "scriptlets" : 1,
+      "expressions" : 1,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/customerEdit.jsp",
+      "module" : "Customers",
+      "lines" : 20,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/customerSearch.jsp",
+      "module" : "Customers",
+      "lines" : 21,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/customerView.jsp",
+      "module" : "Customers",
+      "lines" : 41,
+      "scriptlets" : 5,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/error.jsp",
+      "module" : "Platform",
+      "lines" : 13,
+      "scriptlets" : 1,
+      "expressions" : 3,
+      "declarations" : 0,
+      "javaxReferences" : 1
+    },
+    {
+      "file" : "WEB-INF/jsp/footer.jsp",
+      "module" : "Platform",
+      "lines" : 2,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/header.jsp",
+      "module" : "Platform",
+      "lines" : 31,
+      "scriptlets" : 10,
+      "expressions" : 9,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/home.jsp",
+      "module" : "Platform",
+      "lines" : 14,
+      "scriptlets" : 3,
+      "expressions" : 4,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/layout.jsp",
+      "module" : "Platform",
+      "lines" : 15,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/login.jsp",
+      "module" : "Platform",
+      "lines" : 12,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/pager.jsp",
+      "module" : "Platform",
+      "lines" : 12,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/policyEdit.jsp",
+      "module" : "Policies",
+      "lines" : 17,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/policySearch.jsp",
+      "module" : "Policies",
+      "lines" : 30,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/policyView.jsp",
+      "module" : "Policies",
+      "lines" : 53,
+      "scriptlets" : 5,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/reportClaimsByAdjuster.jsp",
+      "module" : "Reports",
+      "lines" : 18,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/reportClaimsByStatus.jsp",
+      "module" : "Reports",
+      "lines" : 17,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/reportPolicyExpiry.jsp",
+      "module" : "Reports",
+      "lines" : 27,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "WEB-INF/jsp/reportsIndex.jsp",
+      "module" : "Reports",
+      "lines" : 8,
+      "scriptlets" : 0,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    },
+    {
+      "file" : "index.jsp",
+      "module" : "Platform",
+      "lines" : 1,
+      "scriptlets" : 1,
+      "expressions" : 0,
+      "declarations" : 0,
+      "javaxReferences" : 0
+    }
+  ],
+  "listeners" : [
+    "com.harborclaims.portal.jobs.SchedulerListener"
+  ],
+  "modules" : [
+    {
+      "name" : "Customers",
+      "actions" : 6,
+      "jsps" : 3,
+      "javaMainFiles" : 9,
+      "javaMainLines" : 620,
+      "daos" : 1,
+      "managers" : 1,
+      "actionClasses" : 5,
+      "forms" : 1,
+      "javaTestFiles" : 1,
+      "scriptletBlocks" : 5
+    },
+    {
+      "name" : "Claims",
+      "actions" : 6,
+      "jsps" : 3,
+      "javaMainFiles" : 14,
+      "javaMainLines" : 1963,
+      "daos" : 1,
+      "managers" : 1,
+      "actionClasses" : 6,
+      "forms" : 3,
+      "javaTestFiles" : 2,
+      "scriptletBlocks" : 2
+    },
+    {
+      "name" : "Policies",
+      "actions" : 7,
+      "jsps" : 3,
+      "javaMainFiles" : 16,
+      "javaMainLines" : 1200,
+      "daos" : 2,
+      "managers" : 1,
+      "actionClasses" : 6,
+      "forms" : 1,
+      "javaTestFiles" : 2,
+      "scriptletBlocks" : 5
+    },
+    {
+      "name" : "Reports",
+      "actions" : 5,
+      "jsps" : 4,
+      "javaMainFiles" : 7,
+      "javaMainLines" : 273,
+      "daos" : 0,
+      "managers" : 1,
+      "actionClasses" : 5,
+      "forms" : 0,
+      "javaTestFiles" : 1,
+      "scriptletBlocks" : 0
+    },
+    {
+      "name" : "Admin",
+      "actions" : 7,
+      "jsps" : 4,
+      "javaMainFiles" : 10,
+      "javaMainLines" : 536,
+      "daos" : 1,
+      "managers" : 1,
+      "actionClasses" : 7,
+      "forms" : 1,
+      "javaTestFiles" : 0,
+      "scriptletBlocks" : 0
+    },
+    {
+      "name" : "Platform",
+      "actions" : 4,
+      "jsps" : 8,
+      "javaMainFiles" : 17,
+      "javaMainLines" : 584,
+      "daos" : 1,
+      "managers" : 1,
+      "actionClasses" : 3,
+      "forms" : 2,
+      "javaTestFiles" : 2,
+      "scriptletBlocks" : 31
+    }
+  ],
+  "notes" : [
+    "Counting rule for actions: every <action> element in struts-config.xml, ForwardAction included.",
+    "Counting rule for JSPs: every *.jsp under src/main/webapp.",
+    "rolesDeclared is null when the roles attribute is absent and a list (possibly empty) when present.",
+    "Forwards built in Java code (new ActionForward(...)) are not visible to this inventory."
+  ],
+  "resourceRefs" : [
+    {
+      "name" : "jdbc/HarborDS",
+      "type" : "javax.sql.DataSource"
+    }
+  ],
+  "roles" : [
+    "ADMIN",
+    "ADJUSTER",
+    "SUPERVISOR",
+    "UNDERWRITER",
+    "CSR",
+    "AUDITOR"
+  ],
+  "schema" : 1,
+  "servlets" : [
+    {
+      "name" : "action",
+      "className" : "org.apache.struts.action.ActionServlet",
+      "urlPatterns" : [
+        "*.do"
+      ]
+    }
+  ],
+  "sessionConfig" : {
+    "timeoutMinutes" : "30",
+    "trackingModes" : [
+      "COOKIE"
+    ]
+  },
+  "source" : "legacy-app",
+  "summary" : {
+    "actions" : 35,
+    "actionsWithRolesDeclared" : 21,
+    "actionsWithoutRolesAttribute" : 14,
+    "daos" : 6,
+    "distinctCustomActionClasses" : 31,
+    "filters" : 2,
+    "formBeans" : 8,
+    "forwardActions" : 2,
+    "javaMainFiles" : 73,
+    "javaMainLines" : 5176,
+    "javaTestFiles" : 8,
+    "jspDeclarations" : 0,
+    "jspExpressions" : 17,
+    "jspScriptletBlocks" : 43,
+    "jspScriptlets" : 26,
+    "jsps" : 25,
+    "listeners" : 1,
+    "managers" : 6,
+    "roles" : 6,
+    "servlets" : 1,
+    "tilesDefinitions" : 20
+  },
+  "tilesDefinitions" : [
+    {
+      "name" : "admin.index",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/adminIndex.jsp"
+    },
+    {
+      "name" : "admin.jobs",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/adminJobs.jsp"
+    },
+    {
+      "name" : "admin.userEdit",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/adminUserEdit.jsp"
+    },
+    {
+      "name" : "admin.users",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/adminUsers.jsp"
+    },
+    {
+      "name" : "base.layout",
+      "parent" : null,
+      "layout" : "/WEB-INF/jsp/layout.jsp",
+      "resolvedBody" : "/WEB-INF/jsp/home.jsp"
+    },
+    {
+      "name" : "claim.new",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/claimNew.jsp"
+    },
+    {
+      "name" : "claim.search",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/claimSearch.jsp"
+    },
+    {
+      "name" : "claim.view",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/claimView.jsp"
+    },
+    {
+      "name" : "customer.edit",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/customerEdit.jsp"
+    },
+    {
+      "name" : "customer.search",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/customerSearch.jsp"
+    },
+    {
+      "name" : "customer.view",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/customerView.jsp"
+    },
+    {
+      "name" : "home.page",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/home.jsp"
+    },
+    {
+      "name" : "login.page",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/login.jsp"
+    },
+    {
+      "name" : "policy.edit",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/policyEdit.jsp"
+    },
+    {
+      "name" : "policy.search",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/policySearch.jsp"
+    },
+    {
+      "name" : "policy.view",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/policyView.jsp"
+    },
+    {
+      "name" : "report.claimsByAdjuster",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/reportClaimsByAdjuster.jsp"
+    },
+    {
+      "name" : "report.claimsByStatus",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/reportClaimsByStatus.jsp"
+    },
+    {
+      "name" : "report.index",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/reportsIndex.jsp"
+    },
+    {
+      "name" : "report.policyExpiry",
+      "parent" : "base.layout",
+      "layout" : null,
+      "resolvedBody" : "/WEB-INF/jsp/reportPolicyExpiry.jsp"
+    }
+  ],
+  "tool" : "assess 1.0.0",
+  "webXmlNamespace" : "http://java.sun.com/xml/ns/javaee",
+  "webXmlVersion" : "3.0"
+}

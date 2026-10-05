@@ -1,0 +1,946 @@
+{
+  "advisories" : [
+    {
+      "id" : "CVE-2014-0114",
+      "aliases" : [
+        "GHSA-p66x-2cv9-qq3v"
+      ],
+      "summary" : "Arbitrary code execution in Apache Commons BeanUtils",
+      "severity" : "HIGH",
+      "cvssScore" : null,
+      "severitySource" : "ghsa-label",
+      "packages" : [
+        "commons-beanutils:commons-beanutils:1.8.0"
+      ]
+    },
+    {
+      "id" : "CVE-2015-0899",
+      "aliases" : [
+        "GHSA-cvvx-r33m-v7pq"
+      ],
+      "summary" : "Improper Input Validation in Apache Struts",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.apache.struts:struts-core:1.3.10"
+      ]
+    },
+    {
+      "id" : "CVE-2015-6420",
+      "aliases" : [
+        "GHSA-6hgm-866r-3cjv"
+      ],
+      "summary" : "Insecure Deserialization in Apache Commons Collection",
+      "severity" : "HIGH",
+      "cvssScore" : null,
+      "severitySource" : "ghsa-label",
+      "packages" : [
+        "commons-collections:commons-collections:3.2.1"
+      ]
+    },
+    {
+      "id" : "CVE-2015-7501",
+      "aliases" : [
+        "GHSA-fjq5-5j5f-mvxh"
+      ],
+      "summary" : "Deserialization of Untrusted Data in Apache commons collections",
+      "severity" : "CRITICAL",
+      "cvssScore" : 9.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "commons-collections:commons-collections:3.2.1"
+      ]
+    },
+    {
+      "id" : "CVE-2015-7940",
+      "aliases" : [
+        "GHSA-4mv7-cq75-3qjm"
+      ],
+      "summary" : "Moderate severity vulnerability that affects org.bouncycastle:bcprov-jdk14 and org.bouncycastle:bcprov-jdk15",
+      "severity" : "MEDIUM",
+      "cvssScore" : null,
+      "severitySource" : "ghsa-label",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000338",
+      "aliases" : [
+        "GHSA-4vhj-98r6-424h"
+      ],
+      "summary" : "In Bouncy Castle JCE Provider it is possible to inject extra elements in the sequence making up the signature and still have it validate",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000339",
+      "aliases" : [
+        "GHSA-c8xf-m4ff-jcxj"
+      ],
+      "summary" : "Moderate severity vulnerability that affects org.bouncycastle:bcprov-jdk14 and org.bouncycastle:bcprov-jdk15",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.3,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000341",
+      "aliases" : [
+        "GHSA-r9ch-m4fh-fc7q"
+      ],
+      "summary" : "Moderate severity vulnerability that affects org.bouncycastle:bcprov-jdk14 and org.bouncycastle:bcprov-jdk15",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.9,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000342",
+      "aliases" : [
+        "GHSA-qcj7-g2j5-g7r3"
+      ],
+      "summary" : "In Bouncy Castle JCE Provider ECDSA does not fully validate ASN.1 encoding of signature on verification",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000343",
+      "aliases" : [
+        "GHSA-rrvx-pwf8-p59p"
+      ],
+      "summary" : "In Bouncy Castle JCE Provider the DSA key pair generator generates a weak private key if used with default values",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000344",
+      "aliases" : [
+        "GHSA-2j2x-hx4g-2gf4"
+      ],
+      "summary" : "In Bouncy Castle JCE Provider the DHIES implementation allowed the use of ECB mode",
+      "severity" : "HIGH",
+      "cvssScore" : 7.4,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000345",
+      "aliases" : [
+        "GHSA-9gp4-qrff-c648"
+      ],
+      "summary" : "Moderate severity vulnerability that affects org.bouncycastle:bcprov-jdk14 and org.bouncycastle:bcprov-jdk15",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.9,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000346",
+      "aliases" : [
+        "GHSA-fjqm-246c-mwqg"
+      ],
+      "summary" : "In Bouncy Castle JCE Provider the other party DH public key is not fully validated",
+      "severity" : "LOW",
+      "cvssScore" : 3.7,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1000352",
+      "aliases" : [
+        "GHSA-w285-wf9q-5w69"
+      ],
+      "summary" : "In Bouncy Castle JCE Provider the ECIES implementation allowed the use of ECB mode",
+      "severity" : "HIGH",
+      "cvssScore" : 7.4,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1181",
+      "aliases" : [
+        "GHSA-7jw3-5q4w-89qg"
+      ],
+      "summary" : "Improper Input Validation in Apache Struts",
+      "severity" : "HIGH",
+      "cvssScore" : 8.1,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.apache.struts:struts-core:1.3.10"
+      ]
+    },
+    {
+      "id" : "CVE-2016-1182",
+      "aliases" : [
+        "GHSA-5ggr-mpgw-3mgx"
+      ],
+      "summary" : "Improper Input Validation in Apache Struts",
+      "severity" : "HIGH",
+      "cvssScore" : 8.2,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.apache.struts:struts-core:1.3.10"
+      ]
+    },
+    {
+      "id" : "CVE-2017-9096",
+      "aliases" : [
+        "GHSA-86p9-x5pw-94qx"
+      ],
+      "summary" : "Improper Restriction of XML External Entity Reference in  iText",
+      "severity" : "HIGH",
+      "cvssScore" : 8.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "com.lowagie:itext:2.1.7"
+      ]
+    },
+    {
+      "id" : "CVE-2018-1000180",
+      "aliases" : [
+        "GHSA-xqj7-j8j5-f2xr"
+      ],
+      "summary" : "Bouncy Castle has a flaw in the Low-level interface to RSA key pair generator",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2019-10086",
+      "aliases" : [
+        "GHSA-6phf-73q6-gh87"
+      ],
+      "summary" : "Insecure Deserialization in Apache Commons Beanutils",
+      "severity" : "HIGH",
+      "cvssScore" : 7.3,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "commons-beanutils:commons-beanutils:1.8.0"
+      ]
+    },
+    {
+      "id" : "CVE-2019-13990",
+      "aliases" : [
+        "GHSA-9qcf-c26r-x5rf"
+      ],
+      "summary" : "XML external entity injection in Terracotta Quartz Scheduler",
+      "severity" : "CRITICAL",
+      "cvssScore" : 9.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.quartz-scheduler:quartz:1.8.6"
+      ]
+    },
+    {
+      "id" : "CVE-2019-17571",
+      "aliases" : [
+        "GHSA-2qrg-x229-3v8q"
+      ],
+      "summary" : "Deserialization of Untrusted Data in Log4j",
+      "severity" : "CRITICAL",
+      "cvssScore" : 9.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "log4j:log4j:1.2.17"
+      ]
+    },
+    {
+      "id" : "CVE-2020-15522",
+      "aliases" : [
+        "GHSA-6xx3-rg99-gc3p"
+      ],
+      "summary" : "Timing based private key exposure in Bouncy Castle",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.1,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2020-26939",
+      "aliases" : [
+        "GHSA-72m5-fvvv-55m6"
+      ],
+      "summary" : "Observable Differences in Behavior to Error Inputs in Bouncy Castle",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.3,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2021-4104",
+      "aliases" : [
+        "GHSA-fp5r-v3w9-4333"
+      ],
+      "summary" : "JMSAppender in Log4j 1.2 is vulnerable to deserialization of untrusted data",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "log4j:log4j:1.2.17"
+      ]
+    },
+    {
+      "id" : "CVE-2022-23302",
+      "aliases" : [
+        "GHSA-w9p3-5cr8-m3jj"
+      ],
+      "summary" : "Deserialization of Untrusted Data in Log4j 1.x",
+      "severity" : "HIGH",
+      "cvssScore" : 8.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "log4j:log4j:1.2.17"
+      ]
+    },
+    {
+      "id" : "CVE-2022-23305",
+      "aliases" : [
+        "GHSA-65fg-84f6-3jq3"
+      ],
+      "summary" : "SQL Injection in Log4j 1.2.x",
+      "severity" : "CRITICAL",
+      "cvssScore" : 9.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "log4j:log4j:1.2.17"
+      ]
+    },
+    {
+      "id" : "CVE-2022-23307",
+      "aliases" : [
+        "GHSA-f7vh-qwp3-x37m"
+      ],
+      "summary" : "Deserialization of Untrusted Data in Apache Log4j",
+      "severity" : "CRITICAL",
+      "cvssScore" : 9.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "log4j:log4j:1.2.17"
+      ]
+    },
+    {
+      "id" : "CVE-2022-26520",
+      "aliases" : [
+        "BIT-postgresql-jdbc-driver-2022-26520",
+        "GHSA-673j-qm5f-xpv8",
+        "GHSA-727h-hrw8-jg8q"
+      ],
+      "summary" : "pgjdbc Arbitrary File Write Vulnerability",
+      "severity" : "MEDIUM",
+      "cvssScore" : null,
+      "severitySource" : "ghsa-label",
+      "packages" : [
+        "org.postgresql:postgresql:42.2.27"
+      ]
+    },
+    {
+      "id" : "CVE-2023-26464",
+      "aliases" : [
+        "GHSA-vp98-w2p3-mv35"
+      ],
+      "summary" : "Apache Log4j 1.x (EOL) allows Denial of Service (DoS)",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "log4j:log4j:1.2.17"
+      ]
+    },
+    {
+      "id" : "CVE-2023-33202",
+      "aliases" : [
+        "GHSA-wjxj-5m7g-mg7q"
+      ],
+      "summary" : "Bouncy Castle Denial of Service (DoS)",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2023-34396",
+      "aliases" : [
+        "GHSA-4g42-gqrg-4633"
+      ],
+      "summary" : "Apache Struts vulnerable to memory exhaustion",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.apache.struts:struts-core:1.3.10"
+      ]
+    },
+    {
+      "id" : "CVE-2023-49735",
+      "aliases" : [
+        "GHSA-qw4h-3xjj-84cc"
+      ],
+      "summary" : "Apache Tiles: Unvalidated input may lead to path traversal and XXE",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.apache.struts:struts-tiles:1.3.10"
+      ]
+    },
+    {
+      "id" : "CVE-2024-1597",
+      "aliases" : [
+        "BIT-postgresql-jdbc-driver-2024-1597",
+        "GHSA-24rp-q3w6-vc56"
+      ],
+      "summary" : "org.postgresql:postgresql vulnerable to SQL Injection via line comment generation",
+      "severity" : "CRITICAL",
+      "cvssScore" : 10.0,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.postgresql:postgresql:42.2.27"
+      ]
+    },
+    {
+      "id" : "CVE-2024-29857",
+      "aliases" : [
+        "GHSA-8xfc-gm6g-vgpv"
+      ],
+      "summary" : "Bouncy Castle certificate parsing issues cause high CPU usage during parameter evaluation.",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.3,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2024-30171",
+      "aliases" : [
+        "GHSA-v435-xc8x-wvr9"
+      ],
+      "summary" : "Bouncy Castle affected by timing side-channel for RSA key exchange (\"The Marvin Attack\")",
+      "severity" : "MEDIUM",
+      "cvssScore" : 5.9,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2025-48734",
+      "aliases" : [
+        "GHSA-wxr5-93ph-8wr9"
+      ],
+      "summary" : "Apache Commons Improper Access Control vulnerability",
+      "severity" : "HIGH",
+      "cvssScore" : 8.8,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "commons-beanutils:commons-beanutils:1.8.0"
+      ]
+    },
+    {
+      "id" : "CVE-2025-54656",
+      "aliases" : [
+        "GHSA-cx25-xg7c-xfm5"
+      ],
+      "summary" : "Apache Struts Extras Before 2 has an Improper Output Neutralization for Logs Vulnerability",
+      "severity" : "MEDIUM",
+      "cvssScore" : 6.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.apache.struts:struts-extras:1.3.10"
+      ]
+    },
+    {
+      "id" : "CVE-2025-8885",
+      "aliases" : [
+        "GHSA-67mf-3cr5-8w23"
+      ],
+      "summary" : "Bouncy Castle for Java on All (API modules) allows Excessive Allocation",
+      "severity" : "MEDIUM",
+      "cvssScore" : null,
+      "severitySource" : "ghsa-label",
+      "packages" : [
+        "org.bouncycastle:bcprov-jdk14:1.38"
+      ]
+    },
+    {
+      "id" : "CVE-2026-42198",
+      "aliases" : [
+        "BIT-postgresql-jdbc-driver-2026-42198",
+        "GHSA-98qh-xjc8-98pq"
+      ],
+      "summary" : "pgjdbc: Unbounded PBKDF2 iterations in SCRAM authentication allows CPU exhaustion DoS",
+      "severity" : "HIGH",
+      "cvssScore" : 7.5,
+      "severitySource" : "cvss-v3-computed",
+      "packages" : [
+        "org.postgresql:postgresql:42.2.27"
+      ]
+    }
+  ],
+  "inputsFingerprint" : "5438c8f7243b8e40f4d145d7452c7268985317483004208c61047b04e31dc770",
+  "libraries" : [
+    {
+      "file" : "antlr-2.7.2.jar",
+      "groupId" : "antlr",
+      "artifactId" : "antlr",
+      "version" : "2.7.2",
+      "identifiedBy" : "reference-table",
+      "sha1" : "546b5220622c4d9b2da45ad1899224b6ce1c8830",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "bcmail-jdk14-1.38.jar",
+      "groupId" : "org.bouncycastle",
+      "artifactId" : "bcmail-jdk14",
+      "version" : "1.38",
+      "identifiedBy" : "reference-table",
+      "sha1" : "14ff2dfec8578f5f6838c4d6a77a86789afe5382",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "bcmail-jdk14-138.jar",
+      "groupId" : null,
+      "artifactId" : null,
+      "version" : null,
+      "identifiedBy" : null,
+      "sha1" : "14ff2dfec8578f5f6838c4d6a77a86789afe5382",
+      "osvStatus" : "DUPLICATE",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : "bcmail-jdk14-1.38.jar"
+    },
+    {
+      "file" : "bcprov-jdk14-1.38.jar",
+      "groupId" : "org.bouncycastle",
+      "artifactId" : "bcprov-jdk14",
+      "version" : "1.38",
+      "identifiedBy" : "reference-table",
+      "sha1" : "de366c3243a586eb3c0e2bcde1ed9bb1bfb985ff",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2015-7940",
+        "CVE-2016-1000338",
+        "CVE-2016-1000339",
+        "CVE-2016-1000341",
+        "CVE-2016-1000342",
+        "CVE-2016-1000343",
+        "CVE-2016-1000344",
+        "CVE-2016-1000345",
+        "CVE-2016-1000346",
+        "CVE-2016-1000352",
+        "CVE-2018-1000180",
+        "CVE-2020-15522",
+        "CVE-2020-26939",
+        "CVE-2023-33202",
+        "CVE-2024-29857",
+        "CVE-2024-30171",
+        "CVE-2025-8885"
+      ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "bcprov-jdk14-138.jar",
+      "groupId" : null,
+      "artifactId" : null,
+      "version" : null,
+      "identifiedBy" : null,
+      "sha1" : "de366c3243a586eb3c0e2bcde1ed9bb1bfb985ff",
+      "osvStatus" : "DUPLICATE",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : "bcprov-jdk14-1.38.jar"
+    },
+    {
+      "file" : "bctsp-jdk14-1.38.jar",
+      "groupId" : "org.bouncycastle",
+      "artifactId" : "bctsp-jdk14",
+      "version" : "1.38",
+      "identifiedBy" : "reference-table",
+      "sha1" : "4821122f8390d15f4b5ee652621e2a2bb1f1bf16",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "commons-beanutils-1.8.0.jar",
+      "groupId" : "commons-beanutils",
+      "artifactId" : "commons-beanutils",
+      "version" : "1.8.0",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "0c651d5103c649c12b20d53731643e5fffceb536",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2014-0114",
+        "CVE-2019-10086",
+        "CVE-2025-48734"
+      ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "commons-chain-1.2.jar",
+      "groupId" : "commons-chain",
+      "artifactId" : "commons-chain",
+      "version" : "1.2",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "744a13e8766e338bd347b6fbc28c6db12979d0c6",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "commons-collections-3.2.1.jar",
+      "groupId" : "commons-collections",
+      "artifactId" : "commons-collections",
+      "version" : "3.2.1",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "761ea405b9b37ced573d2df0d1e3a4e0f9edc668",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2015-6420",
+        "CVE-2015-7501"
+      ],
+      "eol" : {
+        "status" : "SUPERSEDED",
+        "since" : null,
+        "note" : "3.2.2 and the 4.x line fix unsafe deserialization in 3.2.1.",
+        "source" : "https://commons.apache.org/proper/commons-collections/security-reports.html"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "commons-digester-1.8.jar",
+      "groupId" : "commons-digester",
+      "artifactId" : "commons-digester",
+      "version" : "1.8",
+      "identifiedBy" : "reference-table",
+      "sha1" : "dc6a73fdbd1fa3f0944e8497c6c872fa21dca37e",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "commons-logging-1.0.4.jar",
+      "groupId" : "commons-logging",
+      "artifactId" : "commons-logging",
+      "version" : "1.0.4",
+      "identifiedBy" : "reference-table",
+      "sha1" : "f029a2aefe2b3e1517573c580f948caac31b1056",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "commons-validator-1.3.1.jar",
+      "groupId" : "commons-validator",
+      "artifactId" : "commons-validator",
+      "version" : "1.3.1",
+      "identifiedBy" : "reference-table",
+      "sha1" : "d1fd6b1510f25e827adffcf17de3c85fa00e9391",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "itext-2.1.7.jar",
+      "groupId" : "com.lowagie",
+      "artifactId" : "itext",
+      "version" : "2.1.7",
+      "identifiedBy" : "reference-table",
+      "sha1" : "892bfb3e97074a61123b3b2d7caa2db112750864",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2017-9096"
+      ],
+      "eol" : {
+        "status" : "UNMAINTAINED",
+        "since" : "2009",
+        "note" : "2.1.7 (2009) is the last release under this coordinate. Newer iText releases use a different licence; OpenPDF is a maintained fork.",
+        "source" : "https://repo.maven.apache.org/maven2/com/lowagie/itext/"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "log4j-1.2.17.jar",
+      "groupId" : "log4j",
+      "artifactId" : "log4j",
+      "version" : "1.2.17",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "5af35056b4d257e4b64b9e8069c0746e8b08629f",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2019-17571",
+        "CVE-2021-4104",
+        "CVE-2022-23302",
+        "CVE-2022-23305",
+        "CVE-2022-23307",
+        "CVE-2023-26464"
+      ],
+      "eol" : {
+        "status" : "EOL",
+        "since" : "2015-08-05",
+        "note" : "Log4j 1.x reached end of life. Replaced by Log4j 2 or Logback.",
+        "source" : "https://logging.apache.org/log4j/1.2/"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "oro-2.0.8.jar",
+      "groupId" : "oro",
+      "artifactId" : "oro",
+      "version" : "2.0.8",
+      "identifiedBy" : "reference-table",
+      "sha1" : "5592374f834645c4ae250f4c9fbb314c9369d698",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "quartz-1.8.6.jar",
+      "groupId" : "org.quartz-scheduler",
+      "artifactId" : "quartz",
+      "version" : "1.8.6",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "552019e55385a5fdbc6b594fabc4c03ea45a99bc",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2019-13990"
+      ],
+      "eol" : {
+        "status" : "SUPERSEDED",
+        "since" : null,
+        "note" : "The Quartz 1.x line is superseded by the maintained 2.x line.",
+        "source" : "https://www.quartz-scheduler.org/"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "slf4j-api-1.6.0.jar",
+      "groupId" : "org.slf4j",
+      "artifactId" : "slf4j-api",
+      "version" : "1.6.0",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "b353147a7d51fcfcd818d8aa6784839783db0915",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "slf4j-log4j12-1.6.6.jar",
+      "groupId" : "org.slf4j",
+      "artifactId" : "slf4j-log4j12",
+      "version" : "1.6.6",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "5cd9b4fbc3ff6a97beaade3206137d76f65df805",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : "struts-core-1.3.10.jar",
+      "groupId" : "org.apache.struts",
+      "artifactId" : "struts-core",
+      "version" : "1.3.10",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "0c0f68cd5e17487c16d266d1280e3e16bef5a848",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2015-0899",
+        "CVE-2016-1181",
+        "CVE-2016-1182",
+        "CVE-2023-34396"
+      ],
+      "eol" : {
+        "status" : "EOL",
+        "since" : "2013-04-05",
+        "note" : "Apache Struts 1 reached end of life. No security fixes; there is no Jakarta-compatible Struts 1.",
+        "source" : "https://struts.apache.org/struts1eol-announcement.html"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "struts-extras-1.3.10.jar",
+      "groupId" : "org.apache.struts",
+      "artifactId" : "struts-extras",
+      "version" : "1.3.10",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "bbc4f2b320b7e2479f4fa42ff79006eb413e6c51",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2025-54656"
+      ],
+      "eol" : {
+        "status" : "EOL",
+        "since" : "2013-04-05",
+        "note" : "Apache Struts 1 reached end of life. No security fixes; there is no Jakarta-compatible Struts 1.",
+        "source" : "https://struts.apache.org/struts1eol-announcement.html"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "struts-taglib-1.3.10.jar",
+      "groupId" : "org.apache.struts",
+      "artifactId" : "struts-taglib",
+      "version" : "1.3.10",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "9ef247d8eb03a09a3b1c9d434f9f9acd45ba1c62",
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : {
+        "status" : "EOL",
+        "since" : "2013-04-05",
+        "note" : "Apache Struts 1 reached end of life. No security fixes; there is no Jakarta-compatible Struts 1.",
+        "source" : "https://struts.apache.org/struts1eol-announcement.html"
+      },
+      "duplicateOf" : null
+    },
+    {
+      "file" : "struts-tiles-1.3.10.jar",
+      "groupId" : "org.apache.struts",
+      "artifactId" : "struts-tiles",
+      "version" : "1.3.10",
+      "identifiedBy" : "pom.properties",
+      "sha1" : "40693e3aa8a8586b8baa0317d0127597cad3d5ec",
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2023-49735"
+      ],
+      "eol" : {
+        "status" : "EOL",
+        "since" : "2013-04-05",
+        "note" : "Apache Struts 1 reached end of life. No security fixes; there is no Jakarta-compatible Struts 1.",
+        "source" : "https://struts.apache.org/struts1eol-announcement.html"
+      },
+      "duplicateOf" : null
+    }
+  ],
+  "provenance" : {
+    "dataAsOf" : "2026-10-05",
+    "dataSource" : "https://api.osv.dev/v1/query",
+    "eolTableAsOf" : "2026-10-05",
+    "note" : "Severity is the CVSS v3 base score computed from the OSV vector; if only a GHSA label exists it is used; otherwise UNKNOWN.",
+    "tool" : "assess 1.0.0"
+  },
+  "provided" : [
+    {
+      "file" : null,
+      "groupId" : "javax.servlet",
+      "artifactId" : "javax.servlet-api",
+      "version" : "3.1.0",
+      "identifiedBy" : "pom (provided scope)",
+      "sha1" : null,
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : null,
+      "groupId" : "javax.servlet.jsp",
+      "artifactId" : "javax.servlet.jsp-api",
+      "version" : "2.3.1",
+      "identifiedBy" : "pom (provided scope)",
+      "sha1" : null,
+      "osvStatus" : "NO_RECORDS",
+      "advisoryIds" : [ ],
+      "eol" : null,
+      "duplicateOf" : null
+    },
+    {
+      "file" : null,
+      "groupId" : "org.postgresql",
+      "artifactId" : "postgresql",
+      "version" : "42.2.27",
+      "identifiedBy" : "pom (provided scope)",
+      "sha1" : null,
+      "osvStatus" : "OK",
+      "advisoryIds" : [
+        "CVE-2022-26520",
+        "CVE-2024-1597",
+        "CVE-2026-42198"
+      ],
+      "eol" : null,
+      "duplicateOf" : null
+    }
+  ],
+  "schema" : 1,
+  "summary" : {
+    "duplicateJars" : 2,
+    "eolFlaggedLibraries" : 8,
+    "findings" : 36,
+    "identifiedLibraries" : 20,
+    "jarsInWar" : 22,
+    "librariesWithAdvisories" : 9,
+    "librariesWithNoOsvRecords" : 11,
+    "lookupsUnknownOffline" : 0,
+    "providedFindings" : 3,
+    "unidentifiedJars" : 0,
+    "uniqueAdvisories" : 39,
+    "uniqueAdvisoriesBySeverity" : {
+      "CRITICAL" : 6,
+      "HIGH" : 20,
+      "LOW" : 1,
+      "MEDIUM" : 12,
+      "NONE" : 0,
+      "UNKNOWN" : 0
+    },
+    "uniqueAdvisoriesInWar" : 36,
+    "withdrawnAdvisories" : 0
+  },
+  "unidentified" : [ ],
+  "war" : {
+    "file" : "portal.war",
+    "jarsFingerprint" : "5f03c2608c4d4f3da9e6ee11b8c1fc87a33e1c800c3e88aad0c8a91a30481d94"
+  },
+  "withdrawn" : [ ]
+}

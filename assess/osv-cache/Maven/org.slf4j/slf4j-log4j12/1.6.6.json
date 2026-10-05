@@ -1,0 +1,7 @@
+{
+  "fetchedAt" : "2026-10-05",
+  "source" : "https://api.osv.dev/v1/query",
+  "package" : "org.slf4j:slf4j-log4j12",
+  "version" : "1.6.6",
+  "vulns" : [ ]
+}

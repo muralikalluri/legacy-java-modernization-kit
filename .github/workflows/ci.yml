@@ -27,3 +27,24 @@ jobs:
           java-version: "21"
           cache: maven
       - run: mvn -B -f modern-app verify
+
+  assess:
+    name: assess (Java 21)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+      - name: Unit tests
+        run: mvn -B -f assess/pom.xml verify
+      - name: Build the legacy WAR in a temurin-8 container
+        run: |
+          docker run --rm -v "$PWD/legacy-app":/src -w /src \
+            maven:3.9-eclipse-temurin-8 mvn -B -q -DskipTests package
+      - name: Regenerate results offline and compare with the committed ones
+        run: |
+          ./assess/run-all.sh --offline
+          git diff --exit-code assess/results

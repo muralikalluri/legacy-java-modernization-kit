@@ -1,0 +1,7 @@
+{
+  "fetchedAt" : "2026-10-05",
+  "source" : "https://api.osv.dev/v1/query",
+  "package" : "commons-validator:commons-validator",
+  "version" : "1.3.1",
+  "vulns" : [ ]
+}

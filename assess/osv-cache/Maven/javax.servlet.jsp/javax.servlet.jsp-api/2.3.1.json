@@ -1,0 +1,7 @@
+{
+  "fetchedAt" : "2026-10-05",
+  "source" : "https://api.osv.dev/v1/query",
+  "package" : "javax.servlet.jsp:javax.servlet.jsp-api",
+  "version" : "2.3.1",
+  "vulns" : [ ]
+}

@@ -1,0 +1,7 @@
+{
+  "fetchedAt" : "2026-10-05",
+  "source" : "https://api.osv.dev/v1/query",
+  "package" : "antlr:antlr",
+  "version" : "2.7.2",
+  "vulns" : [ ]
+}
