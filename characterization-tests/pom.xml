@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.harborclaims</groupId>
+  <artifactId>characterization-tests</artifactId>
+  <version>1.0.0</version>
+  <name>characterization-tests (HTTP behaviour of Customers and Claims search)</name>
+
+  <properties>
+    <maven.compiler.release>21</maven.compiler.release>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <junit.version>5.11.4</junit.version>
+    <jsoup.version>1.18.3</jsoup.version>
+    <!-- The target under test. Defaults are the legacy app run by docker compose. -->
+    <base.url>http://localhost:8081</base.url>
+    <target>legacy</target>
+    <!-- Random test order. run.sh passes a fresh seed and prints it; the default keeps a plain mvn test reproducible. -->
+    <order.seed>20261005</order.seed>
+  </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>${jsoup.version}</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>3.5.2</version>
+        <configuration>
+          <systemPropertyVariables>
+            <base.url>${base.url}</base.url>
+            <target>${target}</target>
+            <junit.jupiter.execution.order.random.seed>${order.seed}</junit.jupiter.execution.order.random.seed>
+          </systemPropertyVariables>
+          <!-- Tests share one database, so they never run in parallel. -->
+          <parallel>none</parallel>
+
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

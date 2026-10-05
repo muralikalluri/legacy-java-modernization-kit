@@ -4,7 +4,7 @@
     "webXmlNeedsJakartaNamespace" : true,
     "webXmlVersion" : "3.0"
   },
-  "inputsFingerprint" : "68c230f91b3f2ccc62568e38cf9450d6c707205bf41499703bd685535dcb72de",
+  "inputsFingerprint" : "ff2587dfa1962461eaca25267fd881efd367c26d2fc82ac7b0d2f97ed7b4fb82",
   "javaMain" : {
     "files" : 73,
     "filesWithJakartaMigratingJavax" : 41,

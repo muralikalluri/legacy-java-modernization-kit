@@ -13,6 +13,16 @@
           "path" : null
         },
         {
+          "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+          "line" : 41,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+          "line" : 48,
+          "path" : null
+        },
+        {
           "file" : "src/main/webapp/WEB-INF/jsp/adminUserEdit.jsp",
           "line" : 8,
           "path" : null
@@ -45,16 +55,6 @@
         {
           "file" : "src/main/webapp/WEB-INF/jsp/policyEdit.jsp",
           "line" : 8,
-          "path" : null
-        },
-        {
-          "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
-          "line" : 41,
-          "path" : null
-        },
-        {
-          "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
-          "line" : 48,
           "path" : null
         }
       ],
@@ -178,7 +178,7 @@
       ]
     }
   ],
-  "inventoryFingerprint" : "6b6cf6cdafc598f6991043f65c2aa8be7b15bafd25a791eeb8e5173f22b12fa9",
+  "inventoryFingerprint" : "a7d354cd221fe032c1e09b145a024b50287b0145c5bb5d5d4db753e94d2fbde6",
   "notes" : [
     "Facts only: severity, likelihood and fix cost are assigned in the estimation model, not here.",
     "SQL injection sites are counted as query sites: one statement is one site even if it concatenates two parameters.",
@@ -187,12 +187,24 @@
   "schema" : 1,
   "semgrep" : {
     "config" : "assess/rules",
-    "inputsFingerprint" : "3e37224531d9d9f3e5c08ad9d64ff8af33ce8ad652f79b721a34acf0ae81c00e",
+    "inputsFingerprint" : "d8b1d51d986624032c951b8ff0f9c5b1f8c743eef5ee89033641faa222b56ea6",
     "rawFindings" : [
       {
         "ruleId" : "harbor.html-post-form-without-token",
         "file" : "src/main/webapp/WEB-INF/jsp/adminJobs.jsp",
         "line" : 14,
+        "message" : "Plain HTML POST form without a token"
+      },
+      {
+        "ruleId" : "harbor.html-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+        "line" : 41,
+        "message" : "Plain HTML POST form without a token"
+      },
+      {
+        "ruleId" : "harbor.html-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+        "line" : 48,
         "message" : "Plain HTML POST form without a token"
       },
       {
@@ -265,18 +277,6 @@
         "ruleId" : "harbor.struts-post-form-without-token",
         "file" : "src/main/webapp/WEB-INF/jsp/policyEdit.jsp",
         "line" : 8,
-        "message" : "POST form without a Struts synchronizer token"
-      },
-      {
-        "ruleId" : "harbor.struts-post-form-without-token",
-        "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
-        "line" : 41,
-        "message" : "POST form without a Struts synchronizer token"
-      },
-      {
-        "ruleId" : "harbor.struts-post-form-without-token",
-        "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
-        "line" : 48,
         "message" : "POST form without a Struts synchronizer token"
       }
     ],

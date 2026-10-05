@@ -119,6 +119,15 @@ contains "claim page shows SLA" 'id="sla"' "$page"
 contains "claim page shows reserve" 'id="reserve"' "$page"
 contains "paid claim shows a letter preview" 'id="letter"' "$page"
 
+# Every page must render to the end. A JSP that fails half way still answers 200 (the status is already sent),
+# so check for the closing tag. This caught /policy/view.do failing for roles that can renew and cancel.
+for role in admin underwriter1 supervisor1; do
+  for url in "/policy/view.do?id=1" "/policy/view.do?id=$pid" "/customers/view.do?id=1" "/claim/view.do?id=$id" "/policies/list.do" "/customers/list.do" "/claims/search.do"; do
+    contains "page renders to the end: $role $url" "</html>" "$(curl -s -b "$JAR_DIR/$role" "$BASE$url")"
+  done
+done
+contains "underwriter sees the renew and cancel buttons" "Cancel policy" "$(curl -s -b "$JAR_DIR/underwriter1" "$BASE/policy/view.do?id=1")"
+
 # ---------------------------------------------------------------- M2: reports
 for r in index claimsByStatus claimsByStatusPdf policyExpiry claimsByAdjuster; do
   check "csr may not open report $r" "403" "$(code -b "$JAR_DIR/csr1" "$BASE/reports/$r.do")"

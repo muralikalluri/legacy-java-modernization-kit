@@ -40,7 +40,7 @@ Object-level access: any signed-in user may view any claim or customer by id (no
 ## Responses
 
 - No session on a protected path: 302 to `/login.do`. No return-to URL.
-- Unknown `id` on a view/edit/transition path: **404**.
+- Unknown, malformed or missing `id` on a view, edit, delete or transition path, and a save for an unknown id: **404** (never 400).
 - Validation or business-rule failure: the input page again, HTTP 200, messages inside `<div id="errors">`.
 - Unhandled exception (including SQL errors): generic 500 page with no stack trace.
 - Login failure: one message for unknown user, wrong password or inactive user. Username is trimmed and case-sensitive.
@@ -73,7 +73,7 @@ APPROVED accepts an optional approved amount: blank means the claimed amount; ot
 ## Search and paging
 
 - Case-insensitive contains match. Input is trimmed. Empty means all rows.
-- Customer search matches first name, last name or email. Claim search matches claim number or customer last name. Claim `status` filter is exact and upper-case. An unknown status returns zero rows.
+- Customer search matches first name, last name or email. Claim search matches claim number or customer last name. Claim `status` filter is exact: the value is trimmed but **not** case-folded, so `paid` returns zero rows. An unknown status returns zero rows.
 - `%` and `_` typed by the user act as SQL wildcards in legacy. The modern app keeps that behaviour.
 - Page size is 10. A page that is missing, non-numeric or below 1 is treated as page 1. A page past the end shows no rows (HTTP 200). `total` on an out-of-range page is unspecified, so tests do not assert it.
 - Orders are deterministic: customers by last name, first name, id; claims by id.

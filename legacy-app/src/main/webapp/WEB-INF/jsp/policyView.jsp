@@ -38,16 +38,16 @@
 </table>
 <% if (canEdit) { %>
   <p><a id="edit-link" href="${pageContext.request.contextPath}/policy/edit.do?id=<bean:write name="policy" property="id"/>">Edit terms</a></p>
-  <html:form action="/policy/renew" method="post">
+  <form method="post" action="${pageContext.request.contextPath}/policy/renew.do">
     <input type="hidden" name="id" value="<bean:write name="policy" property="id"/>"/>
     <input type="hidden" name="expectedEnd" value="<bean:write name="policy" property="endDate"/>"/>
-    <html:submit value="Renew for one year"/>
-  </html:form>
+    <input type="submit" value="Renew for one year"/>
+  </form>
 <% } %>
 <% if (canCancel) { %>
-  <html:form action="/policy/cancel" method="post">
+  <form method="post" action="${pageContext.request.contextPath}/policy/cancel.do">
     <input type="hidden" name="id" value="<bean:write name="policy" property="id"/>"/>
-    <html:submit value="Cancel policy"/>
-  </html:form>
+    <input type="submit" value="Cancel policy"/>
+  </form>
 <% } %>
 <p><a href="${pageContext.request.contextPath}/policies/list.do">Back to policies</a></p>
