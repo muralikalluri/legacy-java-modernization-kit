@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Regenerates every assessment output: assess/results/*.json and sample-deliverable/QUICK_ASSESSMENT.md.
+# Regenerates every assessment output: assess/results/*.json, sample-deliverable/QUICK_ASSESSMENT.md, sample-deliverable/ASSESSMENT_AND_ROADMAP.md
+# and the results block in README.md. PDFs are separate: ./assess/make-pdf.sh.
 #   ./assess/run-all.sh             OSV from the cache (queries only misses); OpenRewrite dry run runs
 #   ./assess/run-all.sh --offline   no network: OSV from the committed cache, OpenRewrite result reused if the sources are unchanged
 #   ./assess/run-all.sh --refresh   re-query OSV for every library and rewrite the cache
@@ -36,4 +37,4 @@ if command -v semgrep >/dev/null 2>&1; then $ASSESS security --semgrep run; else
 echo "== estimate";   $ASSESS estimate
 echo "== report";     $ASSESS report
 
-echo "done. outputs in assess/results/ and sample-deliverable/"
+echo "done. outputs in assess/results/, sample-deliverable/ and the README results block"

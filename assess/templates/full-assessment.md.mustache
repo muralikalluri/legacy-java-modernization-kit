@@ -1,0 +1,287 @@
+# Assessment and roadmap: {{appName}}
+
+> {{disclaimer}} Everything below is generated from `assess/results/` by `assess report`. Nothing is typed by hand. Vulnerability data as of {{dataAsOf}}. The short version of this report is `QUICK_ASSESSMENT.md`.
+
+## Executive summary
+
+{{summary}}
+
+**Recommendation.** {{recommendation}}
+
+{{provenNote}}
+
+| Phase | Work | Effort (ideal person-days) |
+|---|---|---:|
+{{#phases}}
+| {{id}} | {{name}} | {{effort}} |
+{{/phases}}
+
+{{excludedNote}}
+
+{{topIntro}}
+
+{{#riskNotes}}
+{{.}}
+
+{{/riskNotes}}
+
+| Rank | Risk | Evidence | Score |
+|---:|---|---|---:|
+{{#risks}}
+| {{rank}} | {{title}} | {{evidence}} | {{score}} |
+{{/risks}}
+
+## System inventory
+
+| Module | Actions | JSPs | Java files | Java lines | Scriptlet blocks |
+|---|---:|---:|---:|---:|---:|
+{{#modules}}
+| {{name}} | {{actions}} | {{jsps}} | {{javaFiles}} | {{javaLines}} | {{scriptletBlocks}} |
+{{/modules}}
+| **{{totalLabel}}** | **{{totalActions}}** | **{{totalJsps}}** | **{{totalJavaFiles}}** | **{{totalJavaLines}}** | **{{totalScriptletBlocks}}** |
+
+{{#facts}}
+- {{.}}
+{{/facts}}
+
+Roles and the actions that declare them:
+
+| Role | Actions declaring it |
+|---|---:|
+{{#roleRows}}
+| {{role}} | {{actions}} |
+{{/roleRows}}
+
+{{noRolesNote}}
+
+Integrations found:
+
+| Integration | Evidence |
+|---|---|
+{{#integrations}}
+| {{name}} | {{evidence}} |
+{{/integrations}}
+
+## Risk register
+
+{{registerNote}}
+
+| Rank | Group | Risk | Evidence | Likelihood | Impact | Score | Basis |
+|---:|---|---|---|---:|---:|---:|---|
+{{#register}}
+| {{rank}} | {{group}} | {{title}} | {{evidence}} | {{likelihood}} | {{impact}} | {{score}} | {{basis}} |
+{{/register}}
+
+## Framework mapping
+
+| Legacy construct | Spring Boot target | Found in this app | Migration notes |
+|---|---|---|---|
+{{#mapping}}
+| {{legacy}} | {{target}} | {{found}} | {{notes}} |
+{{/mapping}}
+
+## Module scoring and migration order
+
+{{scoreNote}}
+
+| Module | Business value | Coupling per class | Band | Decision | Phase |
+|---|---:|---:|---|---|---|
+{{#scores}}
+| {{module}} | {{value}} | {{coupling}} | {{band}} | {{decision}} | {{phase}} |
+{{/scores}}
+
+**Migrate first**
+
+{{#migrateFirst}}
+- {{.}}
+{{/migrateFirst}}
+
+**Migrate later**
+
+{{#migrateLater}}
+- {{.}}
+{{/migrateLater}}
+
+**Leave alone**
+
+{{#leaveAlone}}
+- {{.}}
+{{/leaveAlone}}
+
+Structure behind the scoring (instability is fan-out over fan-in plus fan-out, in percent):
+
+| Module | Classes | Lines | Fan-in | Fan-out | Instability % |
+|---|---:|---:|---:|---:|---:|
+{{#structureRows}}
+| {{name}} | {{classes}} | {{lines}} | {{fanIn}} | {{fanOut}} | {{instability}} |
+{{/structureRows}}
+
+{{#cycles}}
+- {{.}}
+{{/cycles}}
+
+Largest classes (a God class starts at {{godThreshold}} lines):
+
+| Class | Module | Lines | God class |
+|---|---|---:|---|
+{{#biggest}}
+| {{name}} | {{module}} | {{lines}} | {{god}} |
+{{/biggest}}
+
+## Target architecture
+
+```mermaid
+{{{architectureDiagram}}}
+```
+
+{{#architectureNotes}}
+- {{.}}
+{{/architectureNotes}}
+
+## Phased roadmap
+
+```mermaid
+{{{phaseFlow}}}
+```
+
+{{#roadmap}}
+### Phase {{id}}: {{name}}
+
+{{goal}}
+
+- Modules touched: {{modules}}
+- Effort: {{effort}} ideal person-days
+- Exit criterion: {{exit}}
+
+{{/roadmap}}
+## Effort estimate
+
+{{effortSummary}}
+
+By module, across all phases:
+
+| Module | Effort (ideal person-days) |
+|---|---:|
+{{#moduleEffort}}
+| {{module}} | {{effort}} |
+{{/moduleEffort}}
+
+By phase and module:
+
+| Phase | Module | Effort (ideal person-days) |
+|---:|---|---:|
+{{#modulePhaseEffort}}
+| {{phase}} | {{module}} | {{effort}} |
+{{/modulePhaseEffort}}
+
+Approaches compared:
+
+| Approach | Verdict | Effort (ideal person-days) | Why |
+|---|---|---|---|
+{{#approaches}}
+| {{name}} | {{verdict}} | {{effort}} | {{why}} |
+{{/approaches}}
+
+The inputs the total is most sensitive to, largest first (change in the midpoint, in ideal person-days, when the input is halved and when it is raised by half):
+
+| Input | Halved | Raised by half |
+|---|---:|---:|
+{{#sensitivity}}
+| {{parameter}} | {{half}} | {{oneAndHalf}} |
+{{/sensitivity}}
+
+{{alternativeNote}}
+
+{{teamShape}}
+
+Assumptions:
+
+{{#assumptions}}
+- {{.}}
+{{/assumptions}}
+
+{{caveat}}
+
+## Security gaps to close during migration
+
+| Gap | CWE | Found in legacy | Fix in the first phase (legacy) | In the migrated modules |
+|---|---|---|---|---|
+{{#gaps}}
+| {{title}} | {{cwe}} | {{count}} | {{phaseZero}} | {{modern}} |
+{{/gaps}}
+
+{{inherited}}
+
+{{cveSummary}}
+
+| Severity | Advisories in the WAR |
+|---|---:|
+{{#severities}}
+| {{name}} | {{count}} |
+{{/severities}}
+
+Most severe advisories affecting the WAR:
+
+| Advisory | Library | Severity | Score | Summary |
+|---|---|---|---:|---|
+{{#topAdvisories}}
+| {{id}} | {{library}} | {{severity}} | {{score}} | {{summary}} |
+{{/topAdvisories}}
+
+End-of-life and unmaintained frameworks:
+
+| Library | Status | Since |
+|---|---|---|
+{{#eol}}
+| {{library}} | {{status}} | {{since}} |
+{{/eol}}
+
+{{providedNote}}
+
+## Appendix: raw tool outputs
+
+### Output files
+
+| File | Produced by | Contains | Inputs fingerprint |
+|---|---|---|---|
+{{#outputs}}
+| `{{file}}` | `{{command}}` | {{contains}} | {{fingerprint}} |
+{{/outputs}}
+
+### Action inventory
+
+| Path | Module | Class | Roles declared | Migrated |
+|---|---|---|---|---|
+{{#actions}}
+| {{path}} | {{module}} | {{class}} | {{roles}} | {{migrated}} |
+{{/actions}}
+
+### Libraries in the WAR
+
+| Jar | OSV records | Advisories | End-of-life status |
+|---|---|---:|---|
+{{#libraries}}
+| {{file}} | {{osv}} | {{advisories}} | {{eol}} |
+{{/libraries}}
+
+### javax imports in the main sources
+
+| Package | Imports | Moves to jakarta |
+|---|---:|---|
+{{#javaxPackages}}
+| {{pkg}} | {{imports}} | {{moves}} |
+{{/javaxPackages}}
+
+{{rewriteNote}}
+
+### Estimate line items
+
+| Phase | Module | Kind | Work | Quantity | Effort |
+|---:|---|---|---|---:|---:|
+{{#lineItems}}
+| {{phase}} | {{module}} | {{kind}} | {{description}} | {{quantity}} | {{effort}} |
+{{/lineItems}}
+
+---
+
+Generated by {{tool}}. Inputs fingerprint {{fingerprint}}. Security scan by Semgrep {{semgrepVersion}} with the local ruleset. End-of-life table as of {{eolAsOf}}.

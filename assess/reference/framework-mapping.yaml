@@ -1,0 +1,55 @@
+# Legacy construct to Spring Boot 3 equivalent, with migration notes. Reference data, like eol.yaml: text lives here,
+# counts come from the results files through `count` (see FullReportBuilder.count). Unknown keys are rejected.
+mappings:
+  - legacy: "Struts Action (one class per mapping)"
+    target: "@Controller or @RestController method"
+    notes: "Charged per distinct action class, not per mapping: several mappings often share one class. ForwardAction mappings become a view name or a redirect."
+    count: ACTION_CLASSES
+  - legacy: "ActionForm and validate()"
+    target: "Java record DTO with Bean Validation"
+    notes: "Keep the legacy validation rules exactly, then pin them with characterisation tests before tightening anything."
+    count: FORM_BEANS
+  - legacy: "Tiles definitions and JSP with scriptlets"
+    target: "Thymeleaf template with a layout dialect"
+    notes: "Scriptlets become model attributes prepared in the controller. Output escaping becomes the default instead of something each page remembers."
+    count: TILES
+  - legacy: "JDBC DAO with string-built SQL"
+    target: "JdbcClient or Spring Data JDBC with bound parameters"
+    notes: "The SQL injection sites disappear by construction. Keep the SQL shape like for like first; improve queries in a later pass."
+    count: DAOS
+  - legacy: "Manager singleton and session facade"
+    target: "@Service with constructor injection"
+    notes: "Break the God class along the business seams the characterisation tests expose, not along file size."
+    count: MANAGERS
+  - legacy: "JNDI DataSource lookup"
+    target: "Spring Boot DataSource configuration with Hikari"
+    notes: "Credentials come from the environment or a secret store, never from the image."
+    count: RESOURCE_REFS
+  - legacy: "web.xml filters (encoding, homegrown login)"
+    target: "SecurityFilterChain with Spring Security"
+    notes: "Role rules move out of the actions and into one place, so a missing role check cannot hide in one class."
+    count: FILTERS
+  - legacy: "Session role checks inside actions"
+    target: "Request matchers plus method security on services"
+    notes: "Two layers: the filter chain refuses early, method security is the second line."
+    count: ROLES
+  - legacy: "Plaintext password comparison"
+    target: "DelegatingPasswordEncoder (bcrypt)"
+    notes: "Needs a one-time credential migration and a forced reset path; plan it in Phase 0 because it also runs in the legacy app."
+    count: NONE
+  - legacy: "Quartz 1.x job"
+    target: "Spring scheduling with a lock for overlap protection"
+    notes: "Keep run history. Decide the cluster story before the first deploy, not after."
+    count: LISTENERS
+  - legacy: "iText 2 PDF export"
+    target: "A maintained PDF library behind a small interface"
+    notes: "Compare the generated PDFs page by page; layout drift is the usual surprise."
+    count: NONE
+  - legacy: "log4j 1.x"
+    target: "SLF4J with Logback (the Boot default)"
+    notes: "Replace the configuration, then check that no message formatting relied on log4j-specific layouts."
+    count: NONE
+  - legacy: "javax.* imports"
+    target: "jakarta.* namespace"
+    notes: "An OpenRewrite recipe does the mechanical part. Struts 1 has no Jakarta build, so the legacy app cannot take it: the new code takes it."
+    count: JAKARTA_IMPORTS
