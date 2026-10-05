@@ -9,7 +9,7 @@
   <div id="errors"><html:errors/></div>
 </logic:messagesPresent>
 <table id="claim-details" data-claim-id="<bean:write name="claim" property="id"/>" data-status="<bean:write name="claim" property="status"/>">
-  <tr><th>Status</th><td><span class="badge badge-<%= shown.getStatus().toLowerCase() %>" id="claim-status"><bean:write name="claim" property="status"/></span></td></tr>
+  <tr><th>Status</th><td><span class="badge <%= com.harborclaims.portal.claims.ClaimManager.statusCss(shown.getStatus()) %>" id="claim-status"><bean:write name="claim" property="status"/></span></td></tr>
   <tr><th>Customer</th><td><a href="${pageContext.request.contextPath}/customers/view.do?id=<bean:write name="claim" property="customerId"/>"><bean:write name="claim" property="customerName"/></a></td></tr>
   <tr><th>Policy</th><td><bean:write name="claim" property="policyNumber"/></td></tr>
   <tr><th>Loss date</th><td><bean:write name="claim" property="lossDate"/></td></tr>
@@ -18,6 +18,19 @@
   <tr><th>Approved</th><td id="amount-approved"><bean:write name="claim" property="amountApprovedDisplay"/></td></tr>
   <tr><th>Description</th><td><bean:write name="claim" property="description"/></td></tr>
 </table>
+
+<div id="insight">
+  <p id="next-action"><strong>Next:</strong> <bean:write name="insight" property="hint"/></p>
+  <p id="sla" data-sla="<bean:write name="insight" property="slaState"/>"><bean:write name="insight" property="sla"/></p>
+  <p id="reserve">Reserve held: <bean:write name="insight" property="reserve"/></p>
+  <logic:notEmpty name="insight" property="flags">
+    <ul id="flags">
+      <logic:iterate id="f" name="insight" property="flags">
+        <li><bean:write name="f"/></li>
+      </logic:iterate>
+    </ul>
+  </logic:notEmpty>
+</div>
 
 <logic:notEmpty name="transitions">
   <h3>Change status</h3>
@@ -34,6 +47,11 @@
     <label>Reason <input type="text" name="reason" size="60"/></label>
     <p><html:submit value="Apply"/></p>
   </html:form>
+</logic:notEmpty>
+
+<logic:notEmpty name="insight" property="letter">
+  <h3>Customer letter preview</h3>
+  <pre id="letter"><bean:write name="insight" property="letter"/></pre>
 </logic:notEmpty>
 
 <h3>Notes</h3>

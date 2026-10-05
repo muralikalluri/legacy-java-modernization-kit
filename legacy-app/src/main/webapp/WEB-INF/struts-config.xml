@@ -12,6 +12,8 @@
     <form-bean name="claimForm" type="com.harborclaims.portal.claims.ClaimForm"/>
     <form-bean name="transitionForm" type="com.harborclaims.portal.claims.TransitionForm"/>
     <form-bean name="noteForm" type="com.harborclaims.portal.claims.NoteForm"/>
+    <form-bean name="policyForm" type="com.harborclaims.portal.policies.PolicyForm"/>
+    <form-bean name="adminUserForm" type="com.harborclaims.portal.admin.AdminUserForm"/>
   </form-beans>
 
   <action-mappings>
@@ -74,6 +76,79 @@
     <action path="/claim/note" type="com.harborclaims.portal.claims.ClaimNoteAction"
             name="noteForm" scope="request" validate="true" input="/claim/view.do"
             roles="ADMIN,ADJUSTER,SUPERVISOR,CSR"/>
+
+    <!-- Policies -->
+    <action path="/policies/list" type="com.harborclaims.portal.policies.PolicySearchAction"
+            name="searchForm" scope="request" validate="false">
+      <forward name="success" path="policy.search"/>
+    </action>
+    <action path="/policies/search" type="com.harborclaims.portal.policies.PolicySearchAction"
+            name="searchForm" scope="request" validate="false">
+      <forward name="success" path="policy.search"/>
+    </action>
+    <action path="/policy/view" type="com.harborclaims.portal.policies.PolicyViewAction">
+      <forward name="success" path="policy.view"/>
+    </action>
+    <action path="/policy/edit" type="com.harborclaims.portal.policies.PolicyEditAction"
+            name="policyForm" scope="request" validate="false" roles="ADMIN,UNDERWRITER">
+      <forward name="success" path="policy.edit"/>
+    </action>
+    <action path="/policy/save" type="com.harborclaims.portal.policies.PolicySaveAction"
+            name="policyForm" scope="request" validate="true" input="/policy/edit.do"
+            roles="ADMIN,UNDERWRITER"/>
+    <action path="/policy/cancel" type="com.harborclaims.portal.policies.PolicyCancelAction"
+            roles="ADMIN,UNDERWRITER,SUPERVISOR">
+      <forward name="view" path="/policy/view.do"/>
+    </action>
+    <action path="/policy/renew" type="com.harborclaims.portal.policies.PolicyRenewAction"
+            roles="ADMIN,UNDERWRITER">
+      <forward name="view" path="/policy/view.do"/>
+    </action>
+
+    <!-- Reports -->
+    <action path="/reports/index" type="com.harborclaims.portal.reports.ReportsIndexAction"
+            roles="ADMIN,SUPERVISOR,AUDITOR">
+      <forward name="success" path="report.index"/>
+    </action>
+    <action path="/reports/claimsByStatus" type="com.harborclaims.portal.reports.ClaimsByStatusAction"
+            roles="ADMIN,SUPERVISOR,AUDITOR">
+      <forward name="success" path="report.claimsByStatus"/>
+    </action>
+    <action path="/reports/claimsByStatusPdf" type="com.harborclaims.portal.reports.ClaimsByStatusPdfAction"
+            roles="ADMIN,SUPERVISOR,AUDITOR"/>
+    <action path="/reports/policyExpiry" type="com.harborclaims.portal.reports.PolicyExpiryAction"
+            roles="ADMIN,SUPERVISOR,AUDITOR">
+      <forward name="success" path="report.policyExpiry"/>
+    </action>
+    <action path="/reports/claimsByAdjuster" type="com.harborclaims.portal.reports.ClaimsByAdjusterAction"
+            roles="ADMIN,SUPERVISOR,AUDITOR">
+      <forward name="success" path="report.claimsByAdjuster"/>
+    </action>
+
+    <!-- Admin. userSave and jobRun deliberately have no roles= (seeded flaws). -->
+    <action path="/admin/index" type="com.harborclaims.portal.admin.AdminIndexAction" roles="ADMIN">
+      <forward name="success" path="admin.index"/>
+    </action>
+    <action path="/admin/users" type="com.harborclaims.portal.admin.AdminUsersAction"
+            name="searchForm" scope="request" validate="false" roles="ADMIN">
+      <forward name="success" path="admin.users"/>
+    </action>
+    <action path="/admin/userEdit" type="com.harborclaims.portal.admin.AdminUserEditAction"
+            name="adminUserForm" scope="request" validate="false" roles="ADMIN">
+      <forward name="success" path="admin.userEdit"/>
+    </action>
+    <action path="/admin/userSave" type="com.harborclaims.portal.admin.AdminUserSaveAction"
+            name="adminUserForm" scope="request" validate="true" input="/admin/userEdit.do"/>
+    <action path="/admin/userToggle" type="com.harborclaims.portal.admin.AdminUserToggleAction" roles="ADMIN">
+      <forward name="success" path="/admin/users.do" redirect="true"/>
+      <forward name="users" path="/admin/users.do"/>
+    </action>
+    <action path="/admin/jobs" type="com.harborclaims.portal.admin.AdminJobsAction" roles="ADMIN">
+      <forward name="success" path="admin.jobs"/>
+    </action>
+    <action path="/admin/jobRun" type="com.harborclaims.portal.admin.AdminJobRunAction">
+      <forward name="jobs" path="/admin/jobs.do"/>
+    </action>
 
   </action-mappings>
 

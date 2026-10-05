@@ -22,6 +22,16 @@ Paths are chosen so the gateway can route by prefix: `/customers/**` and `/claim
 | `/claim/new.do`, `/claim/save.do` | create a claim | ADMIN, ADJUSTER, CSR |
 | `/claim/transition.do` | status change | ADMIN, ADJUSTER, SUPERVISOR |
 | `/claim/note.do` | add a note | ADMIN, ADJUSTER, SUPERVISOR, CSR |
+| `/policies/list.do`, `/policies/search.do` | paged policy search (`q`, `status`, `page`) | any signed-in user |
+| `/policy/view.do?id=` | policy detail with its claims | any signed-in user |
+| `/policy/edit.do`, `/policy/save.do` | create or edit terms | ADMIN, UNDERWRITER |
+| `/policy/renew.do` | extend by one year | ADMIN, UNDERWRITER |
+| `/policy/cancel.do` | cancel | ADMIN, UNDERWRITER, SUPERVISOR |
+| `/reports/index.do`, `claimsByStatus.do`, `claimsByStatusPdf.do`, `policyExpiry.do`, `claimsByAdjuster.do` | reports | ADMIN, SUPERVISOR, AUDITOR |
+| `/admin/index.do`, `users.do`, `userEdit.do`, `userToggle.do`, `jobs.do` | administration | ADMIN |
+| `/admin/userSave.do`, `/admin/jobRun.do` | save a user, run the expiry job now | **none (seeded flaws)** |
+
+There are exactly **35** action mappings. The counting rule is "every `<action>` element in `struts-config.xml`, ForwardAction included". There is no DispatchAction and there is one Struts module. `StrutsConfigTest` enforces the count.
 
 Coarse role checks use the Struts `roles=` attribute on the action mapping. The login filter wraps the request so `isUserInRole` reads the session user's single role. A role outside the list gets **HTTP 403**. Fine-grained, per-transition rules live in `ClaimRules` and surface as validation messages (HTTP 200 on the input page).
 
@@ -75,6 +85,37 @@ APPROVED accepts an optional approved amount: blank means the claimed amount; ot
 - Tomcat uses cookie-only session tracking (no `;jsessionid` in URLs) and a UTF-8 request filter.
 - Seed uses explicit ids and fixed dates, and the sequences are advanced after. `scripts/reset-db.sh` truncates and reseeds. Seed text is ASCII and free of `& < > " '`.
 
+## Policies
+
+Statuses are ACTIVE, LAPSED and CANCELLED. Policy numbers are `POL-` plus the 6-digit id.
+
+- **In force through the end date, inclusive.** The nightly job lapses ACTIVE policies only when `end_date < asOf`. Known quirk, not fixed: once lapsed, a policy refuses new claims even for a loss inside its period.
+- **Cancel** needs an ACTIVE policy with no open claims. Open means NEW, UNDER_REVIEW, REOPENED or APPROVED (approved but unpaid). The cancel date goes in `cancelled_on`, and `end_date` is untouched. The update is `... WHERE id = ? AND status = 'ACTIVE'`, so a lost race gives "Policy status has changed. Reload and try again.". A second cancel from the UI hits the status check first ("Only active policies can be cancelled").
+- **Renew** extends the same row, from the old end date (`old_end + 1 year`, so 29 Feb becomes 28 Feb). Allowed from ACTIVE or LAPSED, not CANCELLED. Refused if the new end date is still before today. The form carries the expected end date and the update is `WHERE id = ? AND status = ? AND end_date = ?`, so a double submit gets the stale message.
+- **Edit** is limited to ACTIVE policies. Product, coverage limit and premium can change. The customer and the dates cannot change on an existing policy (dates change only through renewal). Lowering the limit below an existing claim is allowed because the limit applies per claim at creation time.
+- Double-submitting a new policy creates two rows. That is accepted legacy behaviour. No Struts token is used, so the seeded "missing CSRF" finding stays clean.
+
+## Nightly job
+
+`PolicyExpiryJob` (Quartz 1.8.6, RAMJobStore, one thread) runs `UPDATE policies SET status = 'LAPSED' WHERE status = 'ACTIVE' AND end_date < ?` once a night (`0 0 2 * * ?`, UTC). The admin "run now" calls the same `PolicyExpiryRunner`.
+
+- **Off by default.** The scheduler starts only with `-Dharbor.jobs.enabled=true` (compose: `HARBOR_JOBS_ENABLED`). The seed is a time bomb on purpose: every seeded ACTIVE policy ended before today, so one real run lapses all of them. Nothing runs at startup. Tests use `asOf=2000-01-01`, which lapses nothing, and `scripts/reset-db.sh` restores the seed.
+- **Idempotent.** A second run for the same date updates 0 rows.
+- **No overlap.** A JVM lock refuses a second run while one is active. "Run now" then redirects to `/admin/jobs.do?busy=1`. Otherwise it redirects to `/admin/jobs.do?run=<id>`, so a refresh never re-runs it.
+- **History.** Every run is a row in `job_runs` (RUNNING first, then SUCCEEDED with the row count, committed together with the data, or FAILED with the error). The jobs page shows the last 10.
+
+## Reports
+
+All report SQL is parameterised. Claims by status always lists all six statuses, including zero rows. Claims by adjuster includes an "Unassigned" bucket (last) and inactive users. Policy expiry takes `asOf` (default today UTC) and `days` (default 60, 1 to 365) and is inclusive at both ends, ordered by end date then id. The PDF uses base-14 Helvetica and prints no generation time, so its page text is stable for the same data (the file bytes are not: iText adds dates and an id).
+
+## Admin
+
+`userToggle` refuses to deactivate yourself or the last active admin. A changed role takes effect at that user's next login, because the session caches the user. A failed `userSave` or `jobRun` forwards to an admin-only page, so a non-admin caller sees 403 instead of the validation message (the forward re-checks `roles=`).
+
 ## Seeded flaws
 
-Concatenated SQL: `CustomerDao.search`, `ClaimDao.search` (one query site each, one window-count query so the statement is built once). The third site arrives in M2. The app connects as `harbor_app`, a non-superuser with DML only, so the demo stays exploitable but contained. No CSRF tokens on any form. Passwords are plaintext in `app_users`.
+Concatenated SQL, three query sites: `CustomerDao.search`, `ClaimDao.search` and `AdminUserDao.search` (one statement each, built once through a window count). Every other query is parameterised, which a smoke test checks for policy search.
+
+Missing role checks on exactly two admin mappings: `/admin/userSave` (any signed-in user can create or change users, including their role: privilege escalation) and `/admin/jobRun`. Both are visible as `<action>` elements under `/admin/` with no `roles=` attribute.
+
+`ClaimManager` is a God class (1,000+ lines) and `claims` and `policies` depend on each other: `ClaimManager` calls `PolicyManager` for policy lookups and `PolicyManager` calls `ClaimManager` for open-claim counts and a policy's claims. The app connects as `harbor_app`, a non-superuser with DML only, so the demo stays exploitable but contained. No CSRF tokens on any form. Passwords are plaintext in `app_users`.

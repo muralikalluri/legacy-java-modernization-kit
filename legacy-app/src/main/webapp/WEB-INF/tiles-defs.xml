@@ -46,4 +46,49 @@
     <put name="body" value="/WEB-INF/jsp/claimNew.jsp"/>
   </definition>
 
+  <definition name="policy.search" extends="base.layout">
+    <put name="title" value="Policies"/>
+    <put name="body" value="/WEB-INF/jsp/policySearch.jsp"/>
+  </definition>
+  <definition name="policy.view" extends="base.layout">
+    <put name="title" value="Policy"/>
+    <put name="body" value="/WEB-INF/jsp/policyView.jsp"/>
+  </definition>
+  <definition name="policy.edit" extends="base.layout">
+    <put name="title" value="Edit policy"/>
+    <put name="body" value="/WEB-INF/jsp/policyEdit.jsp"/>
+  </definition>
+  <definition name="report.index" extends="base.layout">
+    <put name="title" value="Reports"/>
+    <put name="body" value="/WEB-INF/jsp/reportsIndex.jsp"/>
+  </definition>
+  <definition name="report.claimsByStatus" extends="base.layout">
+    <put name="title" value="Claims by status"/>
+    <put name="body" value="/WEB-INF/jsp/reportClaimsByStatus.jsp"/>
+  </definition>
+  <definition name="report.policyExpiry" extends="base.layout">
+    <put name="title" value="Policy expiry"/>
+    <put name="body" value="/WEB-INF/jsp/reportPolicyExpiry.jsp"/>
+  </definition>
+  <definition name="report.claimsByAdjuster" extends="base.layout">
+    <put name="title" value="Claims by adjuster"/>
+    <put name="body" value="/WEB-INF/jsp/reportClaimsByAdjuster.jsp"/>
+  </definition>
+  <definition name="admin.index" extends="base.layout">
+    <put name="title" value="Admin"/>
+    <put name="body" value="/WEB-INF/jsp/adminIndex.jsp"/>
+  </definition>
+  <definition name="admin.users" extends="base.layout">
+    <put name="title" value="Users"/>
+    <put name="body" value="/WEB-INF/jsp/adminUsers.jsp"/>
+  </definition>
+  <definition name="admin.userEdit" extends="base.layout">
+    <put name="title" value="Edit user"/>
+    <put name="body" value="/WEB-INF/jsp/adminUserEdit.jsp"/>
+  </definition>
+  <definition name="admin.jobs" extends="base.layout">
+    <put name="title" value="Jobs"/>
+    <put name="body" value="/WEB-INF/jsp/adminJobs.jsp"/>
+  </definition>
+
 </tiles-definitions>

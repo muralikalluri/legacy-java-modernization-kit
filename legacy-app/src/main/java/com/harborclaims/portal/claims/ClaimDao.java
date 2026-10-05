@@ -46,6 +46,64 @@ public class ClaimDao {
         return new Page<Claim>(rows, page, total);
     }
 
+    public List<Claim> listByPolicy(int policyId) throws SQLException {
+        String sql = SELECT + FROM + " WHERE cl.policy_id = ? ORDER BY cl.id";
+        List<Claim> out = new ArrayList<Claim>();
+        try (Connection con = Db.get(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, policyId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    out.add(map(rs));
+                }
+            }
+        }
+        return out;
+    }
+
+    public int countOpenForPolicy(int policyId) throws SQLException {
+        String sql = "SELECT count(*) FROM claims WHERE policy_id = ? "
+                + "AND status IN ('NEW', 'UNDER_REVIEW', 'REOPENED', 'APPROVED')";
+        try (Connection con = Db.get(); PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, policyId);
+            try (ResultSet rs = ps.executeQuery()) {
+                rs.next();
+                return rs.getInt(1);
+            }
+        }
+    }
+
+    /** One row per status that has claims: status, count, total claimed. */
+    public List<Object[]> statusTotals() throws SQLException {
+        String sql = "SELECT status, count(*) AS cnt, COALESCE(sum(amount_claimed), 0) AS total FROM claims GROUP BY status";
+        List<Object[]> out = new ArrayList<Object[]>();
+        try (Connection con = Db.get(); PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                out.add(new Object[] {rs.getString("status"), Integer.valueOf(rs.getInt("cnt")), rs.getBigDecimal("total")});
+            }
+        }
+        return out;
+    }
+
+    /** One row per assignee including the unassigned bucket: id (nullable), name, count, total, open count. */
+    public List<Object[]> adjusterTotals() throws SQLException {
+        String sql = "SELECT cl.assigned_to, COALESCE(u.display_name, 'Unassigned') AS name, count(*) AS cnt, "
+                + "COALESCE(sum(cl.amount_claimed), 0) AS total, "
+                + "sum(CASE WHEN cl.status IN ('NEW', 'UNDER_REVIEW', 'REOPENED', 'APPROVED') THEN 1 ELSE 0 END) AS open_cnt "
+                + "FROM claims cl LEFT JOIN app_users u ON u.id = cl.assigned_to GROUP BY cl.assigned_to, u.display_name";
+        List<Object[]> out = new ArrayList<Object[]>();
+        try (Connection con = Db.get(); PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int assigned = rs.getInt("assigned_to");
+                Integer id = rs.wasNull() ? null : Integer.valueOf(assigned);
+                out.add(new Object[] {id, rs.getString("name"), Integer.valueOf(rs.getInt("cnt")),
+                        rs.getBigDecimal("total"), Integer.valueOf(rs.getInt("open_cnt"))});
+            }
+        }
+        return out;
+    }
+
     public Claim findById(int id) throws SQLException {
         String sql = SELECT + FROM + " WHERE cl.id = ?";
         try (Connection con = Db.get(); PreparedStatement ps = con.prepareStatement(sql)) {

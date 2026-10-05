@@ -15,6 +15,8 @@ public class Policy {
     private String startDate;
     private String endDate;
     private String status;
+    private String cancelledOn;
+    private String customerName;
 
     public int getId() {
         return id;
@@ -86,6 +88,22 @@ public class Policy {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCancelledOn() {
+        return cancelledOn;
+    }
+
+    public void setCancelledOn(String cancelledOn) {
+        this.cancelledOn = cancelledOn;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
     }
 
     public String getCoverageLimitDisplay() {

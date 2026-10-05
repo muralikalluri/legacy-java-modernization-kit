@@ -10,7 +10,8 @@ services:
       - ./legacy-app/db/00-app-role.sh:/docker-entrypoint-initdb.d/00-app-role.sh:ro
       - ./legacy-app/db/V1__schema.sql:/docker-entrypoint-initdb.d/10-schema.sql:ro
       - ./legacy-app/db/V2__seed.sql:/docker-entrypoint-initdb.d/20-seed.sql:ro
-      - ./legacy-app/db/V3__grants.sql:/docker-entrypoint-initdb.d/30-grants.sql:ro
+      - ./legacy-app/db/V3__m2_schema.sql:/docker-entrypoint-initdb.d/30-m2-schema.sql:ro
+      - ./legacy-app/db/V4__grants.sql:/docker-entrypoint-initdb.d/40-grants.sql:ro
     ports:
       - "${POSTGRES_PORT:-5442}:5432"
     healthcheck:
@@ -24,6 +25,7 @@ services:
     environment:
       JAVA_OPTS: >-
         -Duser.timezone=UTC
+        -Dharbor.jobs.enabled=${HARBOR_JOBS_ENABLED:-false}
         -Dharbor.db.url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-harbor}
         -Dharbor.db.user=harbor_app
         -Dharbor.db.password=${APP_DB_PASSWORD:-change-me-app-local}

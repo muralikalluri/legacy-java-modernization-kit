@@ -19,23 +19,8 @@ public class ClaimForm extends ActionForm {
     @Override
     public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
         ActionErrors errors = new ActionErrors();
-        if (blank(policyNumber)) {
-            errors.add("policyNumber", new ActionMessage("error.required", "policyNumber"));
-        }
-        if (blank(lossDate)) {
-            errors.add("lossDate", new ActionMessage("error.required", "lossDate"));
-        } else if (ClaimRules.parseDate(lossDate) == null) {
-            errors.add("lossDate", new ActionMessage("error.date.invalid", "lossDate"));
-        }
-        if (blank(amountClaimed)) {
-            errors.add("amountClaimed", new ActionMessage("error.required", "amountClaimed"));
-        } else if (ClaimRules.parseMoney(amountClaimed) == null) {
-            errors.add("amountClaimed", new ActionMessage("error.amount.invalid", "amountClaimed"));
-        }
-        if (blank(description)) {
-            errors.add("description", new ActionMessage("error.required", "description"));
-        } else if (description.trim().length() > 2000) {
-            errors.add("description", new ActionMessage("error.too.long", "description", 2000));
+        for (ClaimManager.FieldProblem p : ClaimManager.validateClaimForm(policyNumber, lossDate, amountClaimed, description)) {
+            errors.add(p.getField(), new ActionMessage(p.getKey(), p.getArgs()));
         }
         return errors;
     }
