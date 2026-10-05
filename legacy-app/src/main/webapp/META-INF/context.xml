@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+  <!-- Container-managed pool, looked up over JNDI as java:comp/env/jdbc/HarborDS -->
+  <Resource name="jdbc/HarborDS" auth="Container" type="javax.sql.DataSource"
+            driverClassName="org.postgresql.Driver"
+            url="${harbor.db.url}" username="${harbor.db.user}" password="${harbor.db.password}"
+            maxTotal="10" maxIdle="5" maxWaitMillis="5000"
+            validationQuery="SELECT 1" testOnBorrow="true"/>
+</Context>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<!-- Deliberately insecure for demonstration. Do not deploy. -->
+<struts-config>
+
+  <form-beans>
+    <form-bean name="loginForm" type="com.harborclaims.portal.auth.LoginForm"/>
+    <form-bean name="searchForm" type="com.harborclaims.portal.common.SearchForm"/>
+    <form-bean name="customerForm" type="com.harborclaims.portal.customers.CustomerForm"/>
+    <form-bean name="claimForm" type="com.harborclaims.portal.claims.ClaimForm"/>
+    <form-bean name="transitionForm" type="com.harborclaims.portal.claims.TransitionForm"/>
+    <form-bean name="noteForm" type="com.harborclaims.portal.claims.NoteForm"/>
+  </form-beans>
+
+  <action-mappings>
+
+    <!-- Auth -->
+    <action path="/login" type="org.apache.struts.actions.ForwardAction" parameter="login.page"/>
+    <action path="/loginSubmit" type="com.harborclaims.portal.auth.LoginSubmitAction"
+            name="loginForm" scope="request" validate="false">
+      <forward name="success" path="/home.do" redirect="true"/>
+      <forward name="failure" path="login.page"/>
+    </action>
+    <action path="/logout" type="com.harborclaims.portal.auth.LogoutAction">
+      <forward name="success" path="/login.do" redirect="true"/>
+    </action>
+    <action path="/home" type="org.apache.struts.actions.ForwardAction" parameter="home.page"/>
+
+    <!-- Customers -->
+    <action path="/customers/list" type="com.harborclaims.portal.customers.CustomerSearchAction"
+            name="searchForm" scope="request" validate="false">
+      <forward name="success" path="customer.search"/>
+    </action>
+    <action path="/customers/search" type="com.harborclaims.portal.customers.CustomerSearchAction"
+            name="searchForm" scope="request" validate="false">
+      <forward name="success" path="customer.search"/>
+    </action>
+    <action path="/customers/view" type="com.harborclaims.portal.customers.CustomerViewAction">
+      <forward name="success" path="customer.view"/>
+    </action>
+    <action path="/customers/edit" type="com.harborclaims.portal.customers.CustomerEditAction"
+            name="customerForm" scope="request" validate="false" roles="ADMIN,SUPERVISOR,CSR">
+      <forward name="success" path="customer.edit"/>
+    </action>
+    <action path="/customers/save" type="com.harborclaims.portal.customers.CustomerSaveAction"
+            name="customerForm" scope="request" validate="true" input="customer.edit"
+            roles="ADMIN,SUPERVISOR,CSR"/>
+    <action path="/customers/delete" type="com.harborclaims.portal.customers.CustomerDeleteAction"
+            roles="ADMIN">
+      <forward name="success" path="/customers/list.do" redirect="true"/>
+      <forward name="view" path="/customers/view.do"/>
+    </action>
+
+    <!-- Claims -->
+    <action path="/claims/search" type="com.harborclaims.portal.claims.ClaimSearchAction"
+            name="searchForm" scope="request" validate="false">
+      <forward name="success" path="claim.search"/>
+    </action>
+    <action path="/claim/view" type="com.harborclaims.portal.claims.ClaimViewAction">
+      <forward name="success" path="claim.view"/>
+    </action>
+    <action path="/claim/new" type="com.harborclaims.portal.claims.ClaimNewAction"
+            name="claimForm" scope="request" validate="false" roles="ADMIN,ADJUSTER,CSR">
+      <forward name="success" path="claim.new"/>
+    </action>
+    <action path="/claim/save" type="com.harborclaims.portal.claims.ClaimSaveAction"
+            name="claimForm" scope="request" validate="true" input="claim.new"
+            roles="ADMIN,ADJUSTER,CSR"/>
+    <action path="/claim/transition" type="com.harborclaims.portal.claims.ClaimTransitionAction"
+            name="transitionForm" scope="request" validate="true" input="/claim/view.do"
+            roles="ADMIN,ADJUSTER,SUPERVISOR"/>
+    <action path="/claim/note" type="com.harborclaims.portal.claims.ClaimNoteAction"
+            name="noteForm" scope="request" validate="true" input="/claim/view.do"
+            roles="ADMIN,ADJUSTER,SUPERVISOR,CSR"/>
+
+  </action-mappings>
+
+  <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+
+  <message-resources parameter="ApplicationResources"/>
+
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+    <set-property property="moduleAware" value="true"/>
+  </plug-in>
+
+</struts-config>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+    "-//Apache Software Foundation//DTD Tiles Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/tiles-config_1_3.dtd">
+<tiles-definitions>
+
+  <definition name="base.layout" path="/WEB-INF/jsp/layout.jsp">
+    <put name="title" value="Harbor Claims Portal"/>
+    <put name="header" value="/WEB-INF/jsp/header.jsp"/>
+    <put name="footer" value="/WEB-INF/jsp/footer.jsp"/>
+    <put name="body" value="/WEB-INF/jsp/home.jsp"/>
+  </definition>
+
+  <definition name="login.page" extends="base.layout">
+    <put name="title" value="Sign in"/>
+    <put name="body" value="/WEB-INF/jsp/login.jsp"/>
+  </definition>
+  <definition name="home.page" extends="base.layout">
+    <put name="title" value="Home"/>
+    <put name="body" value="/WEB-INF/jsp/home.jsp"/>
+  </definition>
+
+  <definition name="customer.search" extends="base.layout">
+    <put name="title" value="Customers"/>
+    <put name="body" value="/WEB-INF/jsp/customerSearch.jsp"/>
+  </definition>
+  <definition name="customer.view" extends="base.layout">
+    <put name="title" value="Customer"/>
+    <put name="body" value="/WEB-INF/jsp/customerView.jsp"/>
+  </definition>
+  <definition name="customer.edit" extends="base.layout">
+    <put name="title" value="Edit customer"/>
+    <put name="body" value="/WEB-INF/jsp/customerEdit.jsp"/>
+  </definition>
+
+  <definition name="claim.search" extends="base.layout">
+    <put name="title" value="Claims"/>
+    <put name="body" value="/WEB-INF/jsp/claimSearch.jsp"/>
+  </definition>
+  <definition name="claim.view" extends="base.layout">
+    <put name="title" value="Claim"/>
+    <put name="body" value="/WEB-INF/jsp/claimView.jsp"/>
+  </definition>
+  <definition name="claim.new" extends="base.layout">
+    <put name="title" value="New claim"/>
+    <put name="body" value="/WEB-INF/jsp/claimNew.jsp"/>
+  </definition>
+
+</tiles-definitions>
