@@ -1,0 +1,1184 @@
+{
+  "alternativePerMapping" : {
+    "deltaHigh" : 6.0,
+    "deltaLow" : 2.0,
+    "description" : "Charge the action-class rate per non-forward mapping instead of per distinct class",
+    "totalHigh" : 231.0,
+    "totalLow" : 90.5
+  },
+  "assumptions" : [
+    {
+      "group" : "Unit rates",
+      "item" : "actionClass",
+      "low" : 1.0,
+      "high" : 2.5,
+      "rationale" : "Controller, form validation and view model for one Struts action class moved to Spring MVC. Charged per distinct class, not per mapping."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "batchJob",
+      "low" : 3.0,
+      "high" : 6.0,
+      "rationale" : "Quartz 1.x job to Spring scheduling, including run history and overlap protection."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "characterizationTest",
+      "low" : 0.25,
+      "high" : 0.5,
+      "rationale" : "Characterisation tests per migrated non-forward mapping. Charged here only, never inside the unit rates above."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "dao",
+      "low" : 1.0,
+      "high" : 2.5,
+      "rationale" : "JDBC DAO to Spring Data JDBC or JdbcClient with parameterised queries."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "jsp",
+      "low" : 0.5,
+      "high" : 1.5,
+      "rationale" : "One JSP converted to a Thymeleaf template inside a shared layout."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "manager",
+      "low" : 1.5,
+      "high" : 4.0,
+      "rationale" : "Singleton manager to a constructor-injected service, including its unit tests."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "mappingRouting",
+      "low" : 0.1,
+      "high" : 0.25,
+      "rationale" : "Route, method security and URL compatibility for one action mapping (ForwardAction mappings pay only this)."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "pdfReport",
+      "low" : 3.0,
+      "high" : 6.0,
+      "rationale" : "iText 2 PDF export to a maintained PDF library with the same page text."
+    },
+    {
+      "group" : "Unit rates",
+      "item" : "scriptletBlock",
+      "low" : 0.05,
+      "high" : 0.15,
+      "rationale" : "Surcharge per scriptlet, expression or declaration block that must be rewritten rather than ported."
+    },
+    {
+      "group" : "One-off surcharges",
+      "item" : "cycleEdge",
+      "low" : 1.0,
+      "high" : 3.0,
+      "rationale" : "Break one package dependency edge inside a cycle (for example by reading the shared table directly). Charged once per edge."
+    },
+    {
+      "group" : "One-off surcharges",
+      "item" : "godClass",
+      "low" : 8.0,
+      "high" : 15.0,
+      "rationale" : "Decompose one God class (1,000+ lines) before its module can be migrated. Charged once, in the first phase that touches it."
+    },
+    {
+      "group" : "Fixed costs",
+      "item" : "authBridge",
+      "low" : 4.0,
+      "high" : 8.0,
+      "rationale" : "Shared sign-in so both apps accept the same session (signed cookie), plus the decision record."
+    },
+    {
+      "group" : "Fixed costs",
+      "item" : "characterizationHarness",
+      "low" : 4.0,
+      "high" : 8.0,
+      "rationale" : "HTTP characterisation test harness that runs unchanged against legacy and migrated routes."
+    },
+    {
+      "group" : "Fixed costs",
+      "item" : "gateway",
+      "low" : 3.0,
+      "high" : 6.0,
+      "rationale" : "Routing layer that sends migrated paths to the new app and everything else to legacy."
+    },
+    {
+      "group" : "Fixed costs",
+      "item" : "platform",
+      "low" : 10.0,
+      "high" : 18.0,
+      "rationale" : "Spring Boot 3 skeleton, Spring Security 6, Flyway baseline on the existing schema, Testcontainers, CI, observability."
+    },
+    {
+      "group" : "Multipliers (additive, cap 0.5)",
+      "item" : "couplingHigh",
+      "low" : 0.15,
+      "high" : 0.15,
+      "rationale" : "High cross-module coupling (see scoring thresholds)."
+    },
+    {
+      "group" : "Multipliers (additive, cap 0.5)",
+      "item" : "couplingMedium",
+      "low" : 0.05,
+      "high" : 0.05,
+      "rationale" : "Medium cross-module coupling (see scoring thresholds)."
+    },
+    {
+      "group" : "Multipliers (additive, cap 0.5)",
+      "item" : "inCycle",
+      "low" : 0.15,
+      "high" : 0.15,
+      "rationale" : "The module sits in a package dependency cycle, so its code cannot be moved without untangling neighbours."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "CSRF base",
+      "low" : 2.0,
+      "high" : 4.0,
+      "rationale" : "One app-wide synchronizer token filter, plus moving GET mutations to POST. Not per form."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "MISSING_AUTHORIZATION base",
+      "low" : 0.25,
+      "high" : 0.5,
+      "rationale" : "Add and test the role check pattern."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "MISSING_AUTHORIZATION per site",
+      "low" : 0.25,
+      "high" : 0.5,
+      "rationale" : "Declare roles on one unprotected admin mapping."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "PLAINTEXT_PASSWORD base",
+      "low" : 3.0,
+      "high" : 6.0,
+      "rationale" : "Hash passwords, migrate stored values and force a reset."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "SESSION_FIXATION base",
+      "low" : 0.25,
+      "high" : 0.5,
+      "rationale" : "Renew the session id at login."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "SQL_INJECTION base",
+      "low" : 0.5,
+      "high" : 1.0,
+      "rationale" : "Shared helper and a regression test for parameterised queries."
+    },
+    {
+      "group" : "Phase 0 security fixes",
+      "item" : "SQL_INJECTION per site",
+      "low" : 0.5,
+      "high" : 1.5,
+      "rationale" : "Rewrite one concatenated statement with bound parameters."
+    },
+    {
+      "group" : "Phase 0 dependencies",
+      "item" : "upgrade per library family",
+      "low" : 0.5,
+      "high" : 2.0,
+      "rationale" : "Upgrade or replace one library family that has advisories or is end of life, plus a smoke test."
+    },
+    {
+      "group" : "Phase 0 dependencies",
+      "item" : "compensating controls",
+      "low" : 3.0,
+      "high" : 6.0,
+      "rationale" : "Controls (WAF rules, input filtering, network limits) for a framework with no fixed version."
+    },
+    {
+      "group" : "Business value (1 to 5)",
+      "item" : "Admin",
+      "low" : 1,
+      "high" : 1,
+      "rationale" : "Assumption: a handful of internal users."
+    },
+    {
+      "group" : "Business value (1 to 5)",
+      "item" : "Claims",
+      "low" : 5,
+      "high" : 5,
+      "rationale" : "Assumption: the core of the business and the busiest screens."
+    },
+    {
+      "group" : "Business value (1 to 5)",
+      "item" : "Customers",
+      "low" : 3,
+      "high" : 3,
+      "rationale" : "Assumption: every claim and policy hangs off a customer; simple CRUD."
+    },
+    {
+      "group" : "Business value (1 to 5)",
+      "item" : "Policies",
+      "low" : 4,
+      "high" : 4,
+      "rationale" : "Assumption: underwriting depends on it; changes are less frequent than claims."
+    },
+    {
+      "group" : "Business value (1 to 5)",
+      "item" : "Reports",
+      "low" : 2,
+      "high" : 2,
+      "rationale" : "Assumption: read-only management reporting."
+    },
+    {
+      "group" : "Team",
+      "item" : "developers and focus factor",
+      "low" : 2,
+      "high" : 0.7,
+      "rationale" : "Two developers; 70% of a working week is productive build time (meetings, reviews, environment friction)."
+    }
+  ],
+  "excludedModules" : [
+    {
+      "module" : "Reports",
+      "reason" : "Value 2 is at or below the leave-alone value 2; the cost shown is what migrating it would take.",
+      "effort" : {
+        "low" : 13.0,
+        "high" : 35.0
+      }
+    },
+    {
+      "module" : "Admin",
+      "reason" : "Value 1 is at or below the leave-alone value 2; the cost shown is what migrating it would take.",
+      "effort" : {
+        "low" : 13.5,
+        "high" : 35.5
+      }
+    }
+  ],
+  "inputsFingerprint" : "d211ab0a0315c527ec070685195d98cbf28a1374396e5dfca0cfc9dcd9f1d740",
+  "modelFingerprint" : "2b1f72e0f97560b5fbf8fa312c7f628be6be719818467f907201dbf394efb745",
+  "moduleScores" : [
+    {
+      "module" : "Customers",
+      "businessValue" : 3,
+      "couplingPerClass" : 0.44,
+      "couplingBand" : "LOW",
+      "riskSites" : 2,
+      "priority" : 9,
+      "decision" : "MIGRATE_FIRST",
+      "inM6Scope" : true,
+      "phase" : 1,
+      "note" : null
+    },
+    {
+      "module" : "Claims",
+      "businessValue" : 5,
+      "couplingPerClass" : 1.07,
+      "couplingBand" : "MEDIUM",
+      "riskSites" : 4,
+      "priority" : 25,
+      "decision" : "MIGRATE_LATER",
+      "inM6Scope" : true,
+      "phase" : 1,
+      "note" : "Only the in-scope actions move first (the M6 proof slice); the rest follows its score."
+    },
+    {
+      "module" : "Policies",
+      "businessValue" : 4,
+      "couplingPerClass" : 1.25,
+      "couplingBand" : "MEDIUM",
+      "riskSites" : 3,
+      "priority" : 16,
+      "decision" : "MIGRATE_LATER",
+      "inM6Scope" : false,
+      "phase" : 3,
+      "note" : null
+    },
+    {
+      "module" : "Reports",
+      "businessValue" : 2,
+      "couplingPerClass" : 1.14,
+      "couplingBand" : "MEDIUM",
+      "riskSites" : 0,
+      "priority" : 2,
+      "decision" : "LEAVE_ALONE",
+      "inM6Scope" : false,
+      "phase" : null,
+      "note" : null
+    },
+    {
+      "module" : "Admin",
+      "businessValue" : 1,
+      "couplingPerClass" : 0.50,
+      "couplingBand" : "LOW",
+      "riskSites" : 5,
+      "priority" : 6,
+      "decision" : "LEAVE_ALONE",
+      "inM6Scope" : false,
+      "phase" : null,
+      "note" : null
+    }
+  ],
+  "notes" : [
+    "Effort is in ideal person-days. Bands add lows and highs separately: a hard band, not a confidence interval.",
+    "Rows are rounded outward to 0.5 day; every total is the sum of the rows shown.",
+    "Modules left alone are listed with their cost and are not in the total.",
+    "Phase 0 fixes in legacy are partly thrown away when the code is rewritten: deliberate double work.",
+    "Business values, rates and multipliers are labelled assumptions in the estimation model."
+  ],
+  "phases" : [
+    {
+      "id" : 0,
+      "name" : "Security quick fixes in the legacy app",
+      "items" : [
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix csrf (shared work)",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 2.0,
+            "high" : 4.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 2.0,
+            "high" : 4.0
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix missing authorization (shared work)",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 0.5
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix missing authorization (per site)",
+          "quantity" : "2",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 0.5,
+            "high" : 1.0
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix plaintext password (shared work)",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 3.0,
+            "high" : 6.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 3.0,
+            "high" : 6.0
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix session fixation (shared work)",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 0.5
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix sql injection (shared work)",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 1.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 0.5,
+            "high" : 1.0
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Fix sql injection (per site)",
+          "quantity" : "3",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 1.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 4.5
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Upgrade or replace library families with advisories or end of life",
+          "quantity" : "7",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 2.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 3.5,
+            "high" : 14.0
+          }
+        },
+        {
+          "phase" : 0,
+          "module" : "Legacy",
+          "kind" : "PHASE0",
+          "description" : "Compensating controls for frameworks with no fixed version",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 3.0,
+            "high" : 6.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 3.0,
+            "high" : 6.0
+          }
+        }
+      ],
+      "total" : {
+        "low" : 14.0,
+        "high" : 37.5
+      }
+    },
+    {
+      "id" : 1,
+      "name" : "Platform, gateway and first slice (Customers, Claims)",
+      "items" : [
+        {
+          "phase" : 1,
+          "module" : "Platform",
+          "kind" : "FIXED",
+          "description" : "Spring Boot 3 platform",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 10.0,
+            "high" : 18.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 10.0,
+            "high" : 18.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Platform",
+          "kind" : "FIXED",
+          "description" : "Gateway",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 3.0,
+            "high" : 6.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 3.0,
+            "high" : 6.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Platform",
+          "kind" : "FIXED",
+          "description" : "Auth bridge",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 4.0,
+            "high" : 8.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 4.0,
+            "high" : 8.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Platform",
+          "kind" : "FIXED",
+          "description" : "Characterisation test harness",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 4.0,
+            "high" : 8.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 4.0,
+            "high" : 8.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "BUILD",
+          "description" : "Action classes",
+          "quantity" : "5",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.15,
+          "effort" : {
+            "low" : 5.5,
+            "high" : 14.5
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "BUILD",
+          "description" : "Mapping routing",
+          "quantity" : "6",
+          "unit" : {
+            "low" : 0.1,
+            "high" : 0.25
+          },
+          "multiplier" : 1.15,
+          "effort" : {
+            "low" : 0.5,
+            "high" : 2.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "BUILD",
+          "description" : "JSP templates",
+          "quantity" : "3",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 1.5
+          },
+          "multiplier" : 1.15,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 5.5
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "BUILD",
+          "description" : "Scriptlet blocks",
+          "quantity" : "5",
+          "unit" : {
+            "low" : 0.05,
+            "high" : 0.15
+          },
+          "multiplier" : 1.15,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 1.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "BUILD",
+          "description" : "DAOs",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.15,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "BUILD",
+          "description" : "Managers",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.5,
+            "high" : 4.0
+          },
+          "multiplier" : 1.15,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 5.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "TEST",
+          "description" : "Characterisation tests",
+          "quantity" : "6",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "Action classes",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "Mapping routing",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 0.1,
+            "high" : 0.25
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 0.5
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "JSP templates",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 1.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 0.5,
+            "high" : 2.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "DAOs",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "Managers",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.5,
+            "high" : 4.0
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 5.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "TEST",
+          "description" : "Characterisation tests",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 0.5
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "SURCHARGE",
+          "description" : "Decompose God class ClaimManager",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 8.0,
+            "high" : 15.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 8.0,
+            "high" : 15.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Claims",
+          "kind" : "SURCHARGE",
+          "description" : "Break dependency claims -> policies",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 3.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Customers",
+          "kind" : "SURCHARGE",
+          "description" : "Break dependency customers -> policies",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 3.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Policies",
+          "kind" : "SURCHARGE",
+          "description" : "Break dependency policies -> claims",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 3.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        },
+        {
+          "phase" : 1,
+          "module" : "Policies",
+          "kind" : "SURCHARGE",
+          "description" : "Break dependency policies -> customers",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 3.0
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 3.0
+          }
+        }
+      ],
+      "total" : {
+        "low" : 48.5,
+        "high" : 115.0
+      }
+    },
+    {
+      "id" : 2,
+      "name" : "Migrate the rest of Claims",
+      "items" : [
+        {
+          "phase" : 2,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "Action classes",
+          "quantity" : "5",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 6.0,
+            "high" : 15.0
+          }
+        },
+        {
+          "phase" : 2,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "Mapping routing",
+          "quantity" : "5",
+          "unit" : {
+            "low" : 0.1,
+            "high" : 0.25
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 0.5,
+            "high" : 1.5
+          }
+        },
+        {
+          "phase" : 2,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "JSP templates",
+          "quantity" : "2",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 1.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 4.0
+          }
+        },
+        {
+          "phase" : 2,
+          "module" : "Claims",
+          "kind" : "BUILD",
+          "description" : "Scriptlet blocks",
+          "quantity" : "2",
+          "unit" : {
+            "low" : 0.05,
+            "high" : 0.15
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 0.5
+          }
+        },
+        {
+          "phase" : 2,
+          "module" : "Claims",
+          "kind" : "TEST",
+          "description" : "Characterisation tests",
+          "quantity" : "5",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.0,
+            "high" : 2.5
+          }
+        }
+      ],
+      "total" : {
+        "low" : 8.5,
+        "high" : 23.5
+      }
+    },
+    {
+      "id" : 3,
+      "name" : "Migrate Policies",
+      "items" : [
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "Action classes",
+          "quantity" : "6",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 7.0,
+            "high" : 18.0
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "Mapping routing",
+          "quantity" : "7",
+          "unit" : {
+            "low" : 0.1,
+            "high" : 0.25
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 0.5,
+            "high" : 2.5
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "JSP templates",
+          "quantity" : "3",
+          "unit" : {
+            "low" : 0.5,
+            "high" : 1.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 5.5
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "Scriptlet blocks",
+          "quantity" : "5",
+          "unit" : {
+            "low" : 0.05,
+            "high" : 0.15
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 0.0,
+            "high" : 1.0
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "DAOs",
+          "quantity" : "2",
+          "unit" : {
+            "low" : 1.0,
+            "high" : 2.5
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 2.0,
+            "high" : 6.0
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "Managers",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 1.5,
+            "high" : 4.0
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 5.0
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "BUILD",
+          "description" : "Batch jobs",
+          "quantity" : "1",
+          "unit" : {
+            "low" : 3.0,
+            "high" : 6.0
+          },
+          "multiplier" : 1.20,
+          "effort" : {
+            "low" : 3.5,
+            "high" : 7.5
+          }
+        },
+        {
+          "phase" : 3,
+          "module" : "Policies",
+          "kind" : "TEST",
+          "description" : "Characterisation tests",
+          "quantity" : "7",
+          "unit" : {
+            "low" : 0.25,
+            "high" : 0.5
+          },
+          "multiplier" : 1.00,
+          "effort" : {
+            "low" : 1.5,
+            "high" : 3.5
+          }
+        }
+      ],
+      "total" : {
+        "low" : 17.5,
+        "high" : 49.0
+      }
+    }
+  ],
+  "scenarios" : {
+    "bigBangRewrite" : {
+      "high" : 243.5,
+      "low" : 94.5,
+      "note" : "Platform and harness plus every module in full (leave-alone modules included), every God class and cycle edge. No gateway, auth bridge or Phase 0 fixes, because nothing runs side by side."
+    },
+    "bigBangRewriteSameModules" : {
+      "high" : 173.0,
+      "low" : 68.0,
+      "note" : "The big-bang figure minus the modules the strangler plan leaves alone, so both cover the same modules."
+    },
+    "strangler" : {
+      "high" : 225.0,
+      "low" : 88.5,
+      "note" : "Phases above: security fixes, platform and first slice, then module by module behind a gateway."
+    }
+  },
+  "schema" : 1,
+  "sensitivity" : [
+    {
+      "parameter" : "rates.actionClass",
+      "halfEffectOnMidpoint" : -17.5,
+      "oneAndHalfEffectOnMidpoint" : 17.8
+    },
+    {
+      "parameter" : "fixed.platform",
+      "halfEffectOnMidpoint" : -7.0,
+      "oneAndHalfEffectOnMidpoint" : 7.0
+    },
+    {
+      "parameter" : "surcharges.godClass",
+      "halfEffectOnMidpoint" : -5.8,
+      "oneAndHalfEffectOnMidpoint" : 5.8
+    },
+    {
+      "parameter" : "rates.jsp",
+      "halfEffectOnMidpoint" : -5.5,
+      "oneAndHalfEffectOnMidpoint" : 5.3
+    },
+    {
+      "parameter" : "rates.manager",
+      "halfEffectOnMidpoint" : -5.3,
+      "oneAndHalfEffectOnMidpoint" : 5.0
+    },
+    {
+      "parameter" : "rates.dao",
+      "halfEffectOnMidpoint" : -4.0,
+      "oneAndHalfEffectOnMidpoint" : 4.3
+    },
+    {
+      "parameter" : "surcharges.cycleEdge",
+      "halfEffectOnMidpoint" : -4.0,
+      "oneAndHalfEffectOnMidpoint" : 4.0
+    },
+    {
+      "parameter" : "rates.characterizationTest",
+      "halfEffectOnMidpoint" : -3.3,
+      "oneAndHalfEffectOnMidpoint" : 3.8
+    },
+    {
+      "parameter" : "fixed.authBridge",
+      "halfEffectOnMidpoint" : -3.0,
+      "oneAndHalfEffectOnMidpoint" : 3.0
+    },
+    {
+      "parameter" : "fixed.characterizationHarness",
+      "halfEffectOnMidpoint" : -3.0,
+      "oneAndHalfEffectOnMidpoint" : 3.0
+    },
+    {
+      "parameter" : "rates.batchJob",
+      "halfEffectOnMidpoint" : -2.8,
+      "oneAndHalfEffectOnMidpoint" : 2.5
+    },
+    {
+      "parameter" : "fixed.gateway",
+      "halfEffectOnMidpoint" : -2.3,
+      "oneAndHalfEffectOnMidpoint" : 2.3
+    },
+    {
+      "parameter" : "rates.mappingRouting",
+      "halfEffectOnMidpoint" : -2.0,
+      "oneAndHalfEffectOnMidpoint" : 2.0
+    },
+    {
+      "parameter" : "rates.scriptletBlock",
+      "halfEffectOnMidpoint" : -0.5,
+      "oneAndHalfEffectOnMidpoint" : 0.8
+    },
+    {
+      "parameter" : "rates.pdfReport",
+      "halfEffectOnMidpoint" : 0.0,
+      "oneAndHalfEffectOnMidpoint" : 0.0
+    }
+  ],
+  "source" : "legacy-app",
+  "tool" : "assess 1.0.0",
+  "totals" : {
+    "calendarWeeksHigh" : 32.5,
+    "calendarWeeksLow" : 12.5,
+    "developers" : 2,
+    "focusFactor" : 0.7,
+    "high" : 225.0,
+    "includesExcludedModules" : false,
+    "low" : 88.5,
+    "unit" : "ideal person-days"
+  }
+}

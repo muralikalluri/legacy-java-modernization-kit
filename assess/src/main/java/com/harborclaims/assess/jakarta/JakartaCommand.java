@@ -58,6 +58,11 @@ public class JakartaCommand implements Callable<Integer> {
         if (old.isMissingNode()) {
             throw new IOException(out + " has no rewrite section to reuse");
         }
+        String current = JakartaBuilder.sourcesFingerprint(source);
+        if (!current.equals(old.path("sourcesFingerprint").asText())) {
+            throw new IOException("The committed OpenRewrite result is stale: the sources, pom or recipe pins changed since the dry run. "
+                    + "Run without --rewrite reuse (needs Maven and network).");
+        }
         return Json.MAPPER.convertValue(old, new com.fasterxml.jackson.core.type.TypeReference<TreeMap<String, Object>>() {
         });
     }
@@ -95,6 +100,7 @@ public class JakartaCommand implements Callable<Integer> {
         block.put("changedFiles", changes.size());
         block.put("changedFilesByKind", byKind);
         block.put("files", files);
+        block.put("sourcesFingerprint", JakartaBuilder.sourcesFingerprint(source));
         block.put("patchFile", patchOut.getFileName().toString());
         block.put("patchSha256", com.harborclaims.assess.common.Hashing.sha256(patch.getBytes(StandardCharsets.UTF_8)));
         return block;

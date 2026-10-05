@@ -22,3 +22,12 @@ scripts/reset-db.sh            # truncate and reseed the demo database
 Business rules and URL shapes for the legacy app are in [docs/adr/0001-legacy-business-rules.md](docs/adr/0001-legacy-business-rules.md).
 
 The nightly policy-expiry job is off by default (`HARBOR_JOBS_ENABLED=false`) because one real run lapses every seeded policy. See the ADR.
+
+## Assessment toolkit
+
+```bash
+./assess/run-all.sh             # inventory, deps, jakarta, structure, security, estimate, report
+./assess/run-all.sh --offline   # no network: cached OSV data and the committed OpenRewrite result
+```
+
+Outputs are written to `assess/results/` and `sample-deliverable/QUICK_ASSESSMENT.md`, and are byte-identical when regenerated. Decisions: [ADR 0002](docs/adr/0002-assessment-toolkit-decisions.md) and [ADR 0003](docs/adr/0003-estimation-risk-and-report-decisions.md).

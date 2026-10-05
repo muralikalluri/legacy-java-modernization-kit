@@ -38,13 +38,19 @@ jobs:
           distribution: temurin
           java-version: "21"
           cache: maven
-      - name: Unit tests
-        run: mvn -B -f assess/pom.xml verify
-      - name: Build the legacy WAR in a temurin-8 container
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install the pinned Semgrep (runs offline with the local rules)
+        run: pip install semgrep==1.176.0
+      - name: Build the legacy app in a temurin-8 container (WAR and compiled classes for jdeps)
         run: |
           docker run --rm -v "$PWD/legacy-app":/src -w /src \
             maven:3.9-eclipse-temurin-8 mvn -B -q -DskipTests package
-      - name: Regenerate results offline and compare with the committed ones
+      - name: Unit tests
+        run: mvn -B -f assess/pom.xml verify
+      - name: Regenerate everything offline and compare with the committed results and deliverable
         run: |
           ./assess/run-all.sh --offline
-          git diff --exit-code assess/results
+          git diff --exit-code assess/results sample-deliverable
+          test -z "$(git status --porcelain assess/results sample-deliverable)"

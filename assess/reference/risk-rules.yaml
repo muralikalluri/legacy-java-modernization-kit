@@ -1,0 +1,59 @@
+# Inputs for the risk register: likelihood and impact (1 to 5) per risk type, with a rationale for each.
+# These are judgements, not measurements. Counts, names and evidence come from the results files.
+topN: 10
+perGroupCap: 3
+groupOrder:
+  - "Application security"
+  - "Dependencies"
+  - "Structure"
+  - "Platform"
+  - "Knowledge"
+
+securityCategories:
+  SQL_INJECTION:
+    likelihood: 5
+    impact: 5
+    rationale: "Reachable by any signed-in user through a search box; full database read and write."
+  PLAINTEXT_PASSWORD:
+    likelihood: 4
+    impact: 5
+    rationale: "Any database read exposes every credential, and users reuse passwords."
+  CSRF:
+    likelihood: 4
+    impact: 3
+    rationale: "Every state-changing form and several GET links can be triggered from another site."
+  SESSION_FIXATION:
+    likelihood: 3
+    impact: 3
+    rationale: "Needs a way to plant a session id; limited to one sign-in path."
+  MISSING_AUTHORIZATION:
+    likelihood: 5
+    impact: 4
+    rationale: "Any signed-in user can call the unprotected admin actions, including creating administrators."
+
+dependencySeverity:
+  CRITICAL: {likelihood: 4, impact: 5}
+  HIGH: {likelihood: 3, impact: 4}
+  MEDIUM: {likelihood: 3, impact: 3}
+  LOW: {likelihood: 2, impact: 2}
+  UNKNOWN: {likelihood: 3, impact: 3}
+
+eolStatus:
+  EOL: {likelihood: 4, impact: 4}
+  UNMAINTAINED: {likelihood: 3, impact: 3}
+  SUPERSEDED: {likelihood: 2, impact: 2}
+
+structure:
+  GOD_CLASS: {likelihood: 5, impact: 2}
+  PACKAGE_CYCLES: {likelihood: 5, impact: 2}
+
+platform:
+  NO_JAKARTA_STRUTS: {likelihood: 5, impact: 4}
+
+knowledge:
+  - id: "KNOW-CODE-ONLY"
+    title: "Business rules are recorded only in code"
+    likelihood: 4
+    impact: 3
+    assumed: true
+    rationale: "Assumption to confirm with the client: typical for a system of this age, and the reason characterisation tests come first."

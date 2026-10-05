@@ -1,0 +1,488 @@
+{
+  "crossCheck" : {
+    "packageEdgesOnlyInImports" : [ ],
+    "packageEdgesOnlyInJdeps" : [ ]
+  },
+  "inputsFingerprint" : "db57947cba3f5455cb57e9c74556b473acba42c1bf144cb4033b7490257ea446",
+  "largestClasses" : [
+    {
+      "className" : "com.harborclaims.portal.claims.ClaimManager",
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimManager.java",
+      "module" : "Claims",
+      "lines" : 1122,
+      "godClass" : true
+    },
+    {
+      "className" : "com.harborclaims.portal.claims.ClaimDao",
+      "file" : "src/main/java/com/harborclaims/portal/claims/ClaimDao.java",
+      "module" : "Claims",
+      "lines" : 236,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.policies.PolicyDao",
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyDao.java",
+      "module" : "Policies",
+      "lines" : 204,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.customers.CustomerForm",
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerForm.java",
+      "module" : "Customers",
+      "lines" : 200,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.policies.PolicyManager",
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyManager.java",
+      "module" : "Policies",
+      "lines" : 140,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.admin.AdminUserDao",
+      "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserDao.java",
+      "module" : "Admin",
+      "lines" : 134,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.policies.PolicyForm",
+      "file" : "src/main/java/com/harborclaims/portal/policies/PolicyForm.java",
+      "module" : "Policies",
+      "lines" : 134,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.customers.CustomerDao",
+      "file" : "src/main/java/com/harborclaims/portal/customers/CustomerDao.java",
+      "module" : "Customers",
+      "lines" : 129,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.claims.Claim",
+      "file" : "src/main/java/com/harborclaims/portal/claims/Claim.java",
+      "module" : "Claims",
+      "lines" : 125,
+      "godClass" : false
+    },
+    {
+      "className" : "com.harborclaims.portal.policies.Policy",
+      "file" : "src/main/java/com/harborclaims/portal/policies/Policy.java",
+      "module" : "Policies",
+      "lines" : 116,
+      "godClass" : false
+    }
+  ],
+  "moduleCycles" : [
+    {
+      "members" : [
+        "Claims",
+        "Customers",
+        "Policies"
+      ],
+      "path" : [
+        "Claims",
+        "Policies",
+        "Claims"
+      ],
+      "witnesses" : [ ]
+    }
+  ],
+  "moduleEdges" : [
+    {
+      "from" : "Admin",
+      "to" : "Platform",
+      "classEdges" : 25
+    },
+    {
+      "from" : "Admin",
+      "to" : "Policies",
+      "classEdges" : 4
+    },
+    {
+      "from" : "Admin",
+      "to" : "Reports",
+      "classEdges" : 1
+    },
+    {
+      "from" : "Claims",
+      "to" : "Platform",
+      "classEdges" : 25
+    },
+    {
+      "from" : "Claims",
+      "to" : "Policies",
+      "classEdges" : 4
+    },
+    {
+      "from" : "Customers",
+      "to" : "Platform",
+      "classEdges" : 16
+    },
+    {
+      "from" : "Customers",
+      "to" : "Policies",
+      "classEdges" : 2
+    },
+    {
+      "from" : "Policies",
+      "to" : "Claims",
+      "classEdges" : 6
+    },
+    {
+      "from" : "Policies",
+      "to" : "Customers",
+      "classEdges" : 2
+    },
+    {
+      "from" : "Policies",
+      "to" : "Platform",
+      "classEdges" : 26
+    },
+    {
+      "from" : "Reports",
+      "to" : "Claims",
+      "classEdges" : 5
+    },
+    {
+      "from" : "Reports",
+      "to" : "Platform",
+      "classEdges" : 7
+    },
+    {
+      "from" : "Reports",
+      "to" : "Policies",
+      "classEdges" : 2
+    }
+  ],
+  "modules" : [
+    {
+      "name" : "Customers",
+      "packages" : 1,
+      "classes" : 9,
+      "lines" : 620,
+      "fanOut" : 2,
+      "fanIn" : 1,
+      "instabilityPercent" : 67,
+      "classEdgesOut" : 18,
+      "classEdgesIn" : 2,
+      "classEdgesOutExcludingPlatform" : 2,
+      "classEdgesInExcludingPlatform" : 2
+    },
+    {
+      "name" : "Claims",
+      "packages" : 1,
+      "classes" : 14,
+      "lines" : 1963,
+      "fanOut" : 2,
+      "fanIn" : 2,
+      "instabilityPercent" : 50,
+      "classEdgesOut" : 29,
+      "classEdgesIn" : 11,
+      "classEdgesOutExcludingPlatform" : 4,
+      "classEdgesInExcludingPlatform" : 11
+    },
+    {
+      "name" : "Policies",
+      "packages" : 2,
+      "classes" : 16,
+      "lines" : 1200,
+      "fanOut" : 3,
+      "fanIn" : 4,
+      "instabilityPercent" : 43,
+      "classEdgesOut" : 34,
+      "classEdgesIn" : 12,
+      "classEdgesOutExcludingPlatform" : 8,
+      "classEdgesInExcludingPlatform" : 12
+    },
+    {
+      "name" : "Reports",
+      "packages" : 1,
+      "classes" : 7,
+      "lines" : 273,
+      "fanOut" : 3,
+      "fanIn" : 1,
+      "instabilityPercent" : 75,
+      "classEdgesOut" : 14,
+      "classEdgesIn" : 1,
+      "classEdgesOutExcludingPlatform" : 7,
+      "classEdgesInExcludingPlatform" : 1
+    },
+    {
+      "name" : "Admin",
+      "packages" : 1,
+      "classes" : 10,
+      "lines" : 536,
+      "fanOut" : 3,
+      "fanIn" : 0,
+      "instabilityPercent" : 100,
+      "classEdgesOut" : 30,
+      "classEdgesIn" : 0,
+      "classEdgesOutExcludingPlatform" : 5,
+      "classEdgesInExcludingPlatform" : 0
+    },
+    {
+      "name" : "Platform",
+      "packages" : 2,
+      "classes" : 17,
+      "lines" : 584,
+      "fanOut" : 0,
+      "fanIn" : 5,
+      "instabilityPercent" : 0,
+      "classEdgesOut" : 0,
+      "classEdgesIn" : 99,
+      "classEdgesOutExcludingPlatform" : 0,
+      "classEdgesInExcludingPlatform" : 99
+    }
+  ],
+  "packageCycles" : [
+    {
+      "members" : [
+        "com.harborclaims.portal.auth",
+        "com.harborclaims.portal.common"
+      ],
+      "path" : [
+        "com.harborclaims.portal.auth",
+        "com.harborclaims.portal.common",
+        "com.harborclaims.portal.auth"
+      ],
+      "witnesses" : [
+        "com.harborclaims.portal.auth.UserDao -> com.harborclaims.portal.common.Db",
+        "com.harborclaims.portal.common.BaseAction -> com.harborclaims.portal.auth.AppUser",
+        "com.harborclaims.portal.common.BaseAction -> com.harborclaims.portal.auth.LoginFilter"
+      ]
+    },
+    {
+      "members" : [
+        "com.harborclaims.portal.claims",
+        "com.harborclaims.portal.customers",
+        "com.harborclaims.portal.policies"
+      ],
+      "path" : [
+        "com.harborclaims.portal.claims",
+        "com.harborclaims.portal.policies",
+        "com.harborclaims.portal.claims"
+      ],
+      "witnesses" : [
+        "com.harborclaims.portal.claims.ClaimManager -> com.harborclaims.portal.policies.Policy",
+        "com.harborclaims.portal.claims.ClaimManager -> com.harborclaims.portal.policies.PolicyManager",
+        "com.harborclaims.portal.claims.ClaimViewAction -> com.harborclaims.portal.policies.Policy",
+        "com.harborclaims.portal.claims.ClaimViewAction -> com.harborclaims.portal.policies.PolicyManager",
+        "com.harborclaims.portal.customers.CustomerManager -> com.harborclaims.portal.policies.Policy",
+        "com.harborclaims.portal.customers.CustomerManager -> com.harborclaims.portal.policies.PolicyDao",
+        "com.harborclaims.portal.policies.PolicyForm -> com.harborclaims.portal.claims.ClaimRules",
+        "com.harborclaims.portal.policies.PolicyManager -> com.harborclaims.portal.claims.Claim",
+        "com.harborclaims.portal.policies.PolicyManager -> com.harborclaims.portal.claims.ClaimManager",
+        "com.harborclaims.portal.policies.PolicyManager -> com.harborclaims.portal.claims.ClaimRules",
+        "com.harborclaims.portal.policies.PolicyManager -> com.harborclaims.portal.customers.Customer",
+        "com.harborclaims.portal.policies.PolicyManager -> com.harborclaims.portal.customers.CustomerDao",
+        "com.harborclaims.portal.policies.PolicyViewAction -> com.harborclaims.portal.claims.ClaimManager"
+      ]
+    }
+  ],
+  "packageEdges" : [
+    {
+      "from" : "com.harborclaims.portal.admin",
+      "to" : "com.harborclaims.portal.auth",
+      "classEdges" : 6
+    },
+    {
+      "from" : "com.harborclaims.portal.admin",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 19
+    },
+    {
+      "from" : "com.harborclaims.portal.admin",
+      "to" : "com.harborclaims.portal.jobs",
+      "classEdges" : 4
+    },
+    {
+      "from" : "com.harborclaims.portal.admin",
+      "to" : "com.harborclaims.portal.reports",
+      "classEdges" : 1
+    },
+    {
+      "from" : "com.harborclaims.portal.auth",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 1
+    },
+    {
+      "from" : "com.harborclaims.portal.claims",
+      "to" : "com.harborclaims.portal.auth",
+      "classEdges" : 5
+    },
+    {
+      "from" : "com.harborclaims.portal.claims",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 20
+    },
+    {
+      "from" : "com.harborclaims.portal.claims",
+      "to" : "com.harborclaims.portal.policies",
+      "classEdges" : 4
+    },
+    {
+      "from" : "com.harborclaims.portal.common",
+      "to" : "com.harborclaims.portal.auth",
+      "classEdges" : 2
+    },
+    {
+      "from" : "com.harborclaims.portal.customers",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 16
+    },
+    {
+      "from" : "com.harborclaims.portal.customers",
+      "to" : "com.harborclaims.portal.policies",
+      "classEdges" : 2
+    },
+    {
+      "from" : "com.harborclaims.portal.jobs",
+      "to" : "com.harborclaims.portal.claims",
+      "classEdges" : 1
+    },
+    {
+      "from" : "com.harborclaims.portal.jobs",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 3
+    },
+    {
+      "from" : "com.harborclaims.portal.jobs",
+      "to" : "com.harborclaims.portal.policies",
+      "classEdges" : 2
+    },
+    {
+      "from" : "com.harborclaims.portal.policies",
+      "to" : "com.harborclaims.portal.auth",
+      "classEdges" : 4
+    },
+    {
+      "from" : "com.harborclaims.portal.policies",
+      "to" : "com.harborclaims.portal.claims",
+      "classEdges" : 5
+    },
+    {
+      "from" : "com.harborclaims.portal.policies",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 19
+    },
+    {
+      "from" : "com.harborclaims.portal.policies",
+      "to" : "com.harborclaims.portal.customers",
+      "classEdges" : 2
+    },
+    {
+      "from" : "com.harborclaims.portal.reports",
+      "to" : "com.harborclaims.portal.claims",
+      "classEdges" : 5
+    },
+    {
+      "from" : "com.harborclaims.portal.reports",
+      "to" : "com.harborclaims.portal.common",
+      "classEdges" : 7
+    },
+    {
+      "from" : "com.harborclaims.portal.reports",
+      "to" : "com.harborclaims.portal.policies",
+      "classEdges" : 2
+    }
+  ],
+  "packages" : [
+    {
+      "name" : "com.harborclaims.portal.admin",
+      "module" : "Admin",
+      "classes" : 10,
+      "lines" : 536,
+      "fanOut" : 4,
+      "fanIn" : 0,
+      "instabilityPercent" : 100
+    },
+    {
+      "name" : "com.harborclaims.portal.auth",
+      "module" : "Platform",
+      "classes" : 7,
+      "lines" : 287,
+      "fanOut" : 1,
+      "fanIn" : 4,
+      "instabilityPercent" : 20
+    },
+    {
+      "name" : "com.harborclaims.portal.claims",
+      "module" : "Claims",
+      "classes" : 14,
+      "lines" : 1963,
+      "fanOut" : 3,
+      "fanIn" : 3,
+      "instabilityPercent" : 50
+    },
+    {
+      "name" : "com.harborclaims.portal.common",
+      "module" : "Platform",
+      "classes" : 10,
+      "lines" : 297,
+      "fanOut" : 1,
+      "fanIn" : 7,
+      "instabilityPercent" : 13
+    },
+    {
+      "name" : "com.harborclaims.portal.customers",
+      "module" : "Customers",
+      "classes" : 9,
+      "lines" : 620,
+      "fanOut" : 2,
+      "fanIn" : 1,
+      "instabilityPercent" : 67
+    },
+    {
+      "name" : "com.harborclaims.portal.jobs",
+      "module" : "Policies",
+      "classes" : 5,
+      "lines" : 384,
+      "fanOut" : 3,
+      "fanIn" : 1,
+      "instabilityPercent" : 75
+    },
+    {
+      "name" : "com.harborclaims.portal.policies",
+      "module" : "Policies",
+      "classes" : 11,
+      "lines" : 816,
+      "fanOut" : 4,
+      "fanIn" : 4,
+      "instabilityPercent" : 50
+    },
+    {
+      "name" : "com.harborclaims.portal.reports",
+      "module" : "Reports",
+      "classes" : 7,
+      "lines" : 273,
+      "fanOut" : 3,
+      "fanIn" : 1,
+      "instabilityPercent" : 75
+    }
+  ],
+  "parameters" : {
+    "godClassThresholdLines" : 1000,
+    "graphSource" : "jdeps -verbose:class on legacy-app/target/classes, folded to top-level classes",
+    "instabilityPercent" : "fanOut * 100 / (fanIn + fanOut), rounded half up (Martin's I)"
+  },
+  "schema" : 1,
+  "source" : "legacy-app",
+  "summary" : {
+    "classEdges" : 210,
+    "classes" : 73,
+    "godClasses" : 1,
+    "importGraphAgreesWithJdeps" : true,
+    "largestClassLines" : 1122,
+    "moduleCycles" : 1,
+    "moduleEdges" : 13,
+    "packageCycles" : 2,
+    "packageEdges" : 21,
+    "packages" : 8,
+    "packagesInCycles" : 5
+  },
+  "tool" : "assess 1.0.0"
+}

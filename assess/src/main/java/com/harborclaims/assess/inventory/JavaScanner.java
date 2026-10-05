@@ -54,7 +54,7 @@ public final class JavaScanner {
     }
 
     /** Replaces comments, string literals and char literals with spaces (newlines kept). */
-    static String strip(String s) {
+    public static String strip(String s) {
         StringBuilder out = new StringBuilder(s.length());
         int i = 0;
         int n = s.length();

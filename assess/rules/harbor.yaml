@@ -1,0 +1,71 @@
+# The small local Semgrep ruleset used by "assess security". Rule ids all start with "harbor.".
+# Run offline: semgrep --config assess/rules --metrics=off --disable-version-check
+rules:
+  - id: harbor.sql-concat-taint
+    languages: [java]
+    severity: ERROR
+    message: "A String method parameter reaches a SQL statement built by concatenation"
+    mode: taint
+    pattern-sources:
+      - patterns:
+          - pattern: $T $M(..., String $X, ...) { ... }
+          - focus-metavariable: $X
+    pattern-sinks:
+      - pattern: $ST.executeQuery($ARG)
+      - pattern: $ST.executeUpdate($ARG)
+      - pattern: $ST.execute($ARG)
+  - id: harbor.prepared-statement-concat
+    languages: [java]
+    severity: ERROR
+    message: "prepareStatement is given a string concatenated with a non-constant value"
+    patterns:
+      - pattern-either:
+          - pattern: $C.prepareStatement(... + $V + ...)
+          - pattern: $C.prepareStatement(... + $V)
+          - pattern: $C.prepareStatement($V + ...)
+      - metavariable-pattern:
+          metavariable: $V
+          patterns:
+            - pattern-not: '"..."'
+      - metavariable-regex:
+          metavariable: $V
+          regex: '^(?![A-Z][A-Z0-9_]*$)[A-Za-z_][A-Za-z0-9_.()]*$'
+  - id: harbor.plaintext-password-compare
+    languages: [java]
+    severity: ERROR
+    message: "Password compared in plaintext with equals()"
+    pattern-either:
+      - pattern: $U.getPassword().equals(...)
+      - pattern: $X.equals($U.getPassword())
+  - id: harbor.struts-post-form-without-token
+    languages: [generic]
+    severity: WARNING
+    message: "POST form without a Struts synchronizer token"
+    paths:
+      include: ["*.jsp"]
+    patterns:
+      - pattern-regex: |-
+          (?is)<html:form\b(?![^>]*method=["'](get)["'])[^>]*>.*?</html:form>
+      - pattern-not-regex: '(?is)TOKEN|token'
+  - id: harbor.html-post-form-without-token
+    languages: [generic]
+    severity: WARNING
+    message: "Plain HTML POST form without a token"
+    paths:
+      include: ["*.jsp"]
+    patterns:
+      - pattern-regex: |-
+          (?is)<form\b[^>]*method=["'](post)["'][^>]*>.*?</form>
+      - pattern-not-regex: '(?is)TOKEN|token'
+  - id: harbor.login-session-reuse
+    languages: [java]
+    severity: WARNING
+    message: "Session obtained at login without changeSessionId(): the session id is not renewed (session fixation)"
+    patterns:
+      - pattern: $R.getSession(true)
+      - pattern-not-inside: |
+          $T $M(...) {
+            ...
+            $R.changeSessionId();
+            ...
+          }

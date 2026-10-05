@@ -22,6 +22,20 @@ public final class JakartaBuilder {
     private JakartaBuilder() {
     }
 
+    /** Hash of everything OpenRewrite reads (Java sources and the pom), so a reused dry-run result can be checked for staleness. */
+    public static String sourcesFingerprint(Path root) throws IOException {
+        List<String> lines = new ArrayList<>();
+        for (String dir : new String[] {"src/main/java", "src/test/java"}) {
+            for (Path p : SourceTree.files(root.resolve(dir), x -> x.toString().endsWith(".java"))) {
+                lines.add(SourceTree.rel(root, p) + ":" + Hashing.sha256(p));
+            }
+        }
+        lines.add("pom.xml:" + Hashing.sha256(root.resolve("pom.xml")));
+        lines.add("web.xml:" + Hashing.sha256(root.resolve("src/main/webapp/WEB-INF/web.xml")));
+        lines.add("rewrite:" + RewriteRunner.PLUGIN + ":" + RewriteRunner.RECIPE_ARTIFACT + ":" + RewriteRunner.RECIPE);
+        return Hashing.fingerprint(lines);
+    }
+
     public static Map<String, Object> build(Path root, Map<String, Object> rewriteBlock) throws IOException {
         List<String> fingerprint = new ArrayList<>();
         Map<String, Object> main = scanJava(root, root.resolve("src/main/java"), fingerprint);
@@ -79,7 +93,7 @@ public final class JakartaBuilder {
                 "OpenRewrite does not rewrite JSPs, so JSP javax references are reported separately.",
                 "There is no Jakarta-compatible Struts 1: after the rewrite, struts-core still needs javax.servlet. "
                         + "The changed-file count measures the javax surface, not whether a migration is feasible.",
-                "javax.servlet imports in main sources: " + jakartaImports + " import statements and " + jakartaQualified
+                "Jakarta-migrating javax imports in main sources: " + jakartaImports + " import statements and " + jakartaQualified
                         + " fully qualified uses move to jakarta."));
         return out;
     }
@@ -89,6 +103,7 @@ public final class JakartaBuilder {
         Map<String, Integer> qualifiedByPackage = new TreeMap<>();
         int files = 0;
         int filesWithJavax = 0;
+        int filesWithJakartaMigrating = 0;
         for (Path p : SourceTree.files(dir, x -> x.toString().endsWith(".java"))) {
             String text = Files.readString(p, StandardCharsets.UTF_8);
             fingerprint.add(SourceTree.rel(root, p) + ":" + Hashing.sha256(text.getBytes(StandardCharsets.UTF_8)));
@@ -97,12 +112,18 @@ public final class JakartaBuilder {
             if (!r.javaxImports().isEmpty() || !r.javaxQualified().isEmpty()) {
                 filesWithJavax++;
             }
+            boolean moves = r.javaxImports().stream().anyMatch(k -> Javax.bucket(k).equals(Javax.JAKARTA))
+                    || r.javaxQualified().stream().anyMatch(k -> Javax.bucket(k).equals(Javax.JAKARTA));
+            if (moves) {
+                filesWithJakartaMigrating++;
+            }
             r.javaxImports().forEach(k -> byPackage.merge(k, 1, Integer::sum));
             r.javaxQualified().forEach(k -> qualifiedByPackage.merge(k, 1, Integer::sum));
         }
         Map<String, Object> out = new TreeMap<>();
         out.put("files", files);
         out.put("filesWithJavax", filesWithJavax);
+        out.put("filesWithJakartaMigratingJavax", filesWithJakartaMigrating);
         out.put("javaxImports", byPackage.values().stream().mapToInt(Integer::intValue).sum());
         out.put("importsByPackage", byPackage);
         out.put("qualifiedUsesByPackage", qualifiedByPackage);

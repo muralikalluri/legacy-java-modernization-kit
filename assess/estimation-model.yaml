@@ -1,0 +1,149 @@
+# The estimation model: INPUTS ONLY. Every value here is a labelled assumption with a rationale.
+# It holds rates, multipliers, thresholds, business values and team shape. It holds no counts and no totals:
+# counts come from assess/results/*.json and totals are computed by `assess estimate`.
+unit: "ideal person-days"
+roundingStepDays: 0.5
+
+team:
+  developers: 2
+  focusFactor: 0.7
+  rationale: "Two developers; 70% of a working week is productive build time (meetings, reviews, environment friction)."
+
+# Effort per unit, as [low, high] ideal person-days. Totals add lows and highs separately (a hard band, not a confidence interval).
+rates:
+  actionClass:
+    low: 1.0
+    high: 2.5
+    rationale: "Controller, form validation and view model for one Struts action class moved to Spring MVC. Charged per distinct class, not per mapping."
+  mappingRouting:
+    low: 0.1
+    high: 0.25
+    rationale: "Route, method security and URL compatibility for one action mapping (ForwardAction mappings pay only this)."
+  jsp:
+    low: 0.5
+    high: 1.5
+    rationale: "One JSP converted to a Thymeleaf template inside a shared layout."
+  scriptletBlock:
+    low: 0.05
+    high: 0.15
+    rationale: "Surcharge per scriptlet, expression or declaration block that must be rewritten rather than ported."
+  dao:
+    low: 1.0
+    high: 2.5
+    rationale: "JDBC DAO to Spring Data JDBC or JdbcClient with parameterised queries."
+  manager:
+    low: 1.5
+    high: 4.0
+    rationale: "Singleton manager to a constructor-injected service, including its unit tests."
+  batchJob:
+    low: 3.0
+    high: 6.0
+    rationale: "Quartz 1.x job to Spring scheduling, including run history and overlap protection."
+  pdfReport:
+    low: 3.0
+    high: 6.0
+    rationale: "iText 2 PDF export to a maintained PDF library with the same page text."
+  characterizationTest:
+    low: 0.25
+    high: 0.5
+    rationale: "Characterisation tests per migrated non-forward mapping. Charged here only, never inside the unit rates above."
+
+multipliers:
+  cap: 0.5
+  rationale: "Factors add (1 + sum) and are capped. They apply to module build rows only, never to fixed, platform or Phase 0 costs."
+  factors:
+    inCycle:
+      value: 0.15
+      rationale: "The module sits in a package dependency cycle, so its code cannot be moved without untangling neighbours."
+    couplingMedium:
+      value: 0.05
+      rationale: "Medium cross-module coupling (see scoring thresholds)."
+    couplingHigh:
+      value: 0.15
+      rationale: "High cross-module coupling (see scoring thresholds)."
+
+# One-off items, charged once in the phase that first touches the thing.
+surcharges:
+  godClass:
+    low: 8.0
+    high: 15.0
+    rationale: "Decompose one God class (1,000+ lines) before its module can be migrated. Charged once, in the first phase that touches it."
+  cycleEdge:
+    low: 1.0
+    high: 3.0
+    rationale: "Break one package dependency edge inside a cycle (for example by reading the shared table directly). Charged once per edge."
+
+fixed:
+  platform:
+    low: 10.0
+    high: 18.0
+    rationale: "Spring Boot 3 skeleton, Spring Security 6, Flyway baseline on the existing schema, Testcontainers, CI, observability."
+  gateway:
+    low: 3.0
+    high: 6.0
+    rationale: "Routing layer that sends migrated paths to the new app and everything else to legacy."
+  authBridge:
+    low: 4.0
+    high: 8.0
+    rationale: "Shared sign-in so both apps accept the same session (signed cookie), plus the decision record."
+  characterizationHarness:
+    low: 4.0
+    high: 8.0
+    rationale: "HTTP characterisation test harness that runs unchanged against legacy and migrated routes."
+
+phase0:
+  rationale: "Security quick fixes done in the legacy app first. Charged per finding group, not per CVE. SQL fixes in legacy are later thrown away when the DAO is rewritten: deliberate double work, kept because the exposure exists today."
+  securityCategories:
+    SQL_INJECTION:
+      base: {low: 0.5, high: 1.0, rationale: "Shared helper and a regression test for parameterised queries."}
+      perSite: {low: 0.5, high: 1.5, rationale: "Rewrite one concatenated statement with bound parameters."}
+    PLAINTEXT_PASSWORD:
+      base: {low: 3.0, high: 6.0, rationale: "Hash passwords, migrate stored values and force a reset."}
+      perSite: {low: 0.0, high: 0.0, rationale: "Covered by the base cost."}
+    CSRF:
+      base: {low: 2.0, high: 4.0, rationale: "One app-wide synchronizer token filter, plus moving GET mutations to POST. Not per form."}
+      perSite: {low: 0.0, high: 0.0, rationale: "Covered by the base cost."}
+    SESSION_FIXATION:
+      base: {low: 0.25, high: 0.5, rationale: "Renew the session id at login."}
+      perSite: {low: 0.0, high: 0.0, rationale: "Covered by the base cost."}
+    MISSING_AUTHORIZATION:
+      base: {low: 0.25, high: 0.5, rationale: "Add and test the role check pattern."}
+      perSite: {low: 0.25, high: 0.5, rationale: "Declare roles on one unprotected admin mapping."}
+  dependencyUpgradePerFamily:
+    low: 0.5
+    high: 2.0
+    rationale: "Upgrade or replace one library family that has advisories or is end of life, plus a smoke test."
+  compensatingControls:
+    low: 3.0
+    high: 6.0
+    rationale: "Controls (WAF rules, input filtering, network limits) for a framework with no fixed version."
+  noFixFamilies:
+    - "org.apache.struts"
+
+detect:
+  batchJobClassSuffix: "Job"
+  pdfReportClassSuffix: "PdfReportBuilder"
+
+# Business value cannot be read from code. These are assumptions to confirm with the client.
+businessValue:
+  Customers:
+    value: 3
+    rationale: "Assumption: every claim and policy hangs off a customer; simple CRUD."
+  Claims:
+    value: 5
+    rationale: "Assumption: the core of the business and the busiest screens."
+  Policies:
+    value: 4
+    rationale: "Assumption: underwriting depends on it; changes are less frequent than claims."
+  Reports:
+    value: 2
+    rationale: "Assumption: read-only management reporting."
+  Admin:
+    value: 1
+    rationale: "Assumption: a handful of internal users."
+
+scoring:
+  leaveAloneMaxValue: 2
+  couplingLowBelow: 0.75
+  couplingHighFrom: 1.5
+  rationale: "Coupling is class-level edges crossing the module boundary into other non-Platform modules, in plus out, per class in the module. Cut points are round numbers fixed before the results were read. Low value (at most the leave-alone value) means leave alone; otherwise low coupling means migrate first and anything else later."

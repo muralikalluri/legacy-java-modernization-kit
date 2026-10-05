@@ -1,0 +1,216 @@
+{
+  "moreAtCutoffScore" : 0,
+  "omittedByCap" : [
+    "DEP-org.quartz-scheduler",
+    "DEP-org.apache.struts",
+    "DEP-com.lowagie",
+    "DEP-commons-beanutils",
+    "DEP-org.bouncycastle",
+    "SEC-CSRF"
+  ],
+  "perGroupCap" : 3,
+  "register" : [
+    {
+      "assumed" : false,
+      "evidence" : "3 query sites",
+      "group" : "Application security",
+      "id" : "SEC-SQL_INJECTION",
+      "impact" : 5,
+      "likelihood" : 5,
+      "rank" : 1,
+      "score" : 25,
+      "title" : "SQL built by string concatenation (CWE-89)"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "1 comparison site",
+      "group" : "Application security",
+      "id" : "SEC-PLAINTEXT_PASSWORD",
+      "impact" : 5,
+      "likelihood" : 4,
+      "rank" : 2,
+      "score" : 20,
+      "title" : "Passwords stored and compared in plaintext (CWE-256)"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "3 advisories (1 critical, 1 high, 1 medium)",
+      "group" : "Dependencies",
+      "id" : "DEP-PROVIDED-org.postgresql",
+      "impact" : 5,
+      "likelihood" : 4,
+      "rank" : 3,
+      "score" : 20,
+      "title" : "postgresql 42.2.27 (provided by the container, not in the WAR)"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "2 advisories (1 critical, 1 high); superseded",
+      "group" : "Dependencies",
+      "id" : "DEP-commons-collections",
+      "impact" : 5,
+      "likelihood" : 4,
+      "rank" : 4,
+      "score" : 20,
+      "title" : "commons-collections 3.2.1"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "6 advisories (3 critical, 3 high); end of life since 2015-08-05",
+      "group" : "Dependencies",
+      "id" : "DEP-log4j",
+      "impact" : 5,
+      "likelihood" : 4,
+      "rank" : 5,
+      "score" : 20,
+      "title" : "log4j 1.2.17"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "1 advisory (1 critical); superseded",
+      "group" : "Dependencies",
+      "id" : "DEP-org.quartz-scheduler",
+      "impact" : 5,
+      "likelihood" : 4,
+      "rank" : 6,
+      "score" : 20,
+      "title" : "quartz 1.8.6"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "2 actions",
+      "group" : "Application security",
+      "id" : "SEC-MISSING_AUTHORIZATION",
+      "impact" : 4,
+      "likelihood" : 5,
+      "rank" : 7,
+      "score" : 20,
+      "title" : "Admin actions without a role check (CWE-862)"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "90 javax.servlet imports in 41 files",
+      "group" : "Platform",
+      "id" : "PLT-NO-JAKARTA-STRUTS",
+      "impact" : 4,
+      "likelihood" : 5,
+      "rank" : 8,
+      "score" : 20,
+      "title" : "Struts 1 has no Jakarta build, so it blocks a javax to jakarta upgrade"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "6 advisories (5 high, 1 medium); end of life since 2013-04-05",
+      "group" : "Dependencies",
+      "id" : "DEP-org.apache.struts",
+      "impact" : 4,
+      "likelihood" : 4,
+      "rank" : 9,
+      "score" : 16,
+      "title" : "struts-core, struts-extras, struts-taglib, struts-tiles 1.3.10"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "1 advisory (1 high); unmaintained since 2009",
+      "group" : "Dependencies",
+      "id" : "DEP-com.lowagie",
+      "impact" : 4,
+      "likelihood" : 3,
+      "rank" : 10,
+      "score" : 12,
+      "title" : "itext 2.1.7"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "3 advisories (3 high)",
+      "group" : "Dependencies",
+      "id" : "DEP-commons-beanutils",
+      "impact" : 4,
+      "likelihood" : 3,
+      "rank" : 11,
+      "score" : 12,
+      "title" : "commons-beanutils 1.8.0"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "17 advisories (6 high, 10 medium, 1 low)",
+      "group" : "Dependencies",
+      "id" : "DEP-org.bouncycastle",
+      "impact" : 4,
+      "likelihood" : 3,
+      "rank" : 12,
+      "score" : 12,
+      "title" : "bcmail-jdk14, bcprov-jdk14, bctsp-jdk14 1.38"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "10 POST forms",
+      "group" : "Application security",
+      "id" : "SEC-CSRF",
+      "impact" : 3,
+      "likelihood" : 4,
+      "rank" : 13,
+      "score" : 12,
+      "title" : "State-changing forms without an anti-CSRF token (CWE-352)"
+    },
+    {
+      "assumed" : true,
+      "evidence" : "assumption, confirm with the client",
+      "group" : "Knowledge",
+      "id" : "KNOW-CODE-ONLY",
+      "impact" : 3,
+      "likelihood" : 4,
+      "rank" : 14,
+      "score" : 12,
+      "title" : "Business rules are recorded only in code"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "ClaimManager (1122 lines)",
+      "group" : "Structure",
+      "id" : "STR-GOD-CLASS",
+      "impact" : 2,
+      "likelihood" : 5,
+      "rank" : 15,
+      "score" : 10,
+      "title" : "God class"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "2 cycles: auth + common; claims + customers + policies",
+      "group" : "Structure",
+      "id" : "STR-PACKAGE-CYCLES",
+      "impact" : 2,
+      "likelihood" : 5,
+      "rank" : 16,
+      "score" : 10,
+      "title" : "Package dependency cycles"
+    },
+    {
+      "assumed" : false,
+      "evidence" : "1 site",
+      "group" : "Application security",
+      "id" : "SEC-SESSION_FIXATION",
+      "impact" : 3,
+      "likelihood" : 3,
+      "rank" : 17,
+      "score" : 9,
+      "title" : "Session id not renewed at login (CWE-384)"
+    }
+  ],
+  "schema" : 1,
+  "tool" : "assess 1.0.0",
+  "topIds" : [
+    "SEC-SQL_INJECTION",
+    "SEC-PLAINTEXT_PASSWORD",
+    "DEP-PROVIDED-org.postgresql",
+    "DEP-commons-collections",
+    "DEP-log4j",
+    "SEC-MISSING_AUTHORIZATION",
+    "PLT-NO-JAKARTA-STRUTS",
+    "KNOW-CODE-ONLY",
+    "STR-GOD-CLASS",
+    "STR-PACKAGE-CYCLES"
+  ],
+  "topN" : 10
+}

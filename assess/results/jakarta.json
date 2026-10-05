@@ -7,6 +7,7 @@
   "inputsFingerprint" : "68c230f91b3f2ccc62568e38cf9450d6c707205bf41499703bd685535dcb72de",
   "javaMain" : {
     "files" : 73,
+    "filesWithJakartaMigratingJavax" : 41,
     "filesWithJavax" : 42,
     "importsByPackage" : {
       "javax.naming" : 3,
@@ -24,6 +25,7 @@
   },
   "javaTest" : {
     "files" : 8,
+    "filesWithJakartaMigratingJavax" : 0,
     "filesWithJavax" : 1,
     "importsByPackage" : {
       "javax.xml.parsers" : 1
@@ -50,7 +52,7 @@
     "Imports are read from Java sources with comments and string literals removed.",
     "OpenRewrite does not rewrite JSPs, so JSP javax references are reported separately.",
     "There is no Jakarta-compatible Struts 1: after the rewrite, struts-core still needs javax.servlet. The changed-file count measures the javax surface, not whether a migration is feasible.",
-    "javax.servlet imports in main sources: 90 import statements and 0 fully qualified uses move to jakarta."
+    "Jakarta-migrating javax imports in main sources: 90 import statements and 0 fully qualified uses move to jakarta."
   ],
   "rewrite" : {
     "changedFiles" : 43,
@@ -112,7 +114,8 @@
     "patchSha256" : "dd9d3def993c2a04952b20ec7e0e48b9836ac88134acb750976f35455763ac3e",
     "plugin" : "org.openrewrite.maven:rewrite-maven-plugin:6.46.1",
     "recipe" : "org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta",
-    "recipeArtifact" : "org.openrewrite.recipe:rewrite-migrate-java:3.42.1"
+    "recipeArtifact" : "org.openrewrite.recipe:rewrite-migrate-java:3.42.1",
+    "sourcesFingerprint" : "7d5a07e9fee4e907ca8d086b3ff41e0cbaf3f340a70c71db11b21655f2b105d7"
   },
   "schema" : 1,
   "source" : "legacy-app",

@@ -1,0 +1,299 @@
+{
+  "findings" : [
+    {
+      "category" : "CSRF",
+      "title" : "State-changing forms without an anti-CSRF token",
+      "cwe" : "CWE-352",
+      "count" : 10,
+      "countUnit" : "POST forms",
+      "locations" : [
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/adminJobs.jsp",
+          "line" : 14,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/adminUserEdit.jsp",
+          "line" : 8,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/claimNew.jsp",
+          "line" : 8,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/claimView.jsp",
+          "line" : 37,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/claimView.jsp",
+          "line" : 63,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/customerEdit.jsp",
+          "line" : 8,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/login.jsp",
+          "line" : 8,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/policyEdit.jsp",
+          "line" : 8,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+          "line" : 41,
+          "path" : null
+        },
+        {
+          "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+          "line" : 48,
+          "path" : null
+        }
+      ],
+      "evidence" : {
+        "mutatingMappings" : [
+          "/admin/jobRun",
+          "/admin/userSave",
+          "/admin/userToggle",
+          "/claim/note",
+          "/claim/save",
+          "/claim/transition",
+          "/customers/delete",
+          "/customers/save",
+          "/policy/cancel",
+          "/policy/renew",
+          "/policy/save"
+        ],
+        "note" : "Reported once for the whole app. Some mutating mappings (delete, toggle) are reached by GET links, so they are exposed even though no form posts to them.",
+        "postFormsWithoutToken" : 10,
+        "tokenChecksInActions" : 0
+      },
+      "sources" : [
+        "semgrep",
+        "source scan"
+      ]
+    },
+    {
+      "category" : "MISSING_AUTHORIZATION",
+      "title" : "Admin actions without a role check",
+      "cwe" : "CWE-862",
+      "count" : 2,
+      "countUnit" : "actions",
+      "locations" : [
+        {
+          "file" : null,
+          "line" : null,
+          "path" : "/admin/jobRun"
+        },
+        {
+          "file" : null,
+          "line" : null,
+          "path" : "/admin/userSave"
+        }
+      ],
+      "evidence" : {
+        "adminActions" : 7,
+        "rule" : "an action under /admin/ whose mapping has no roles= attribute"
+      },
+      "sources" : [
+        "inventory"
+      ]
+    },
+    {
+      "category" : "PLAINTEXT_PASSWORD",
+      "title" : "Passwords stored and compared in plaintext",
+      "cwe" : "CWE-256",
+      "count" : 1,
+      "countUnit" : "comparison sites",
+      "locations" : [
+        {
+          "file" : "src/main/java/com/harborclaims/portal/auth/AuthManager.java",
+          "line" : 29,
+          "path" : null
+        }
+      ],
+      "evidence" : {
+        "note" : "Passwords are compared with equals() on the stored value, so they are stored in plaintext."
+      },
+      "sources" : [
+        "semgrep"
+      ]
+    },
+    {
+      "category" : "SESSION_FIXATION",
+      "title" : "Session id not renewed at login",
+      "cwe" : "CWE-384",
+      "count" : 1,
+      "countUnit" : "sites",
+      "locations" : [
+        {
+          "file" : "src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java",
+          "line" : 32,
+          "path" : null
+        }
+      ],
+      "evidence" : {
+        "note" : "The session id is not renewed when a user signs in."
+      },
+      "sources" : [
+        "semgrep"
+      ]
+    },
+    {
+      "category" : "SQL_INJECTION",
+      "title" : "SQL built by string concatenation",
+      "cwe" : "CWE-89",
+      "count" : 3,
+      "countUnit" : "query sites",
+      "locations" : [
+        {
+          "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserDao.java",
+          "line" : 31,
+          "path" : null
+        },
+        {
+          "file" : "src/main/java/com/harborclaims/portal/claims/ClaimDao.java",
+          "line" : 40,
+          "path" : null
+        },
+        {
+          "file" : "src/main/java/com/harborclaims/portal/customers/CustomerDao.java",
+          "line" : 35,
+          "path" : null
+        }
+      ],
+      "evidence" : {
+        "note" : "Each site is one SQL statement built by concatenating a String method parameter."
+      },
+      "sources" : [
+        "semgrep"
+      ]
+    }
+  ],
+  "inventoryFingerprint" : "6b6cf6cdafc598f6991043f65c2aa8be7b15bafd25a791eeb8e5173f22b12fa9",
+  "notes" : [
+    "Facts only: severity, likelihood and fix cost are assigned in the estimation model, not here.",
+    "SQL injection sites are counted as query sites: one statement is one site even if it concatenates two parameters.",
+    "A missing roles= attribute means three different things (public, any signed-in user, a flaw); only /admin/ mappings are judged."
+  ],
+  "schema" : 1,
+  "semgrep" : {
+    "config" : "assess/rules",
+    "inputsFingerprint" : "3e37224531d9d9f3e5c08ad9d64ff8af33ce8ad652f79b721a34acf0ae81c00e",
+    "rawFindings" : [
+      {
+        "ruleId" : "harbor.html-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/adminJobs.jsp",
+        "line" : 14,
+        "message" : "Plain HTML POST form without a token"
+      },
+      {
+        "ruleId" : "harbor.login-session-reuse",
+        "file" : "src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java",
+        "line" : 32,
+        "message" : "Session obtained at login without changeSessionId(): the session id is not renewed (session fixation)"
+      },
+      {
+        "ruleId" : "harbor.plaintext-password-compare",
+        "file" : "src/main/java/com/harborclaims/portal/auth/AuthManager.java",
+        "line" : 29,
+        "message" : "Password compared in plaintext with equals()"
+      },
+      {
+        "ruleId" : "harbor.sql-concat-taint",
+        "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserDao.java",
+        "line" : 31,
+        "message" : "A String method parameter reaches a SQL statement built by concatenation"
+      },
+      {
+        "ruleId" : "harbor.sql-concat-taint",
+        "file" : "src/main/java/com/harborclaims/portal/claims/ClaimDao.java",
+        "line" : 40,
+        "message" : "A String method parameter reaches a SQL statement built by concatenation"
+      },
+      {
+        "ruleId" : "harbor.sql-concat-taint",
+        "file" : "src/main/java/com/harborclaims/portal/customers/CustomerDao.java",
+        "line" : 35,
+        "message" : "A String method parameter reaches a SQL statement built by concatenation"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/adminUserEdit.jsp",
+        "line" : 8,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/claimNew.jsp",
+        "line" : 8,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/claimView.jsp",
+        "line" : 37,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/claimView.jsp",
+        "line" : 63,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/customerEdit.jsp",
+        "line" : 8,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/login.jsp",
+        "line" : 8,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/policyEdit.jsp",
+        "line" : 8,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+        "line" : 41,
+        "message" : "POST form without a Struts synchronizer token"
+      },
+      {
+        "ruleId" : "harbor.struts-post-form-without-token",
+        "file" : "src/main/webapp/WEB-INF/jsp/policyView.jsp",
+        "line" : 48,
+        "message" : "POST form without a Struts synchronizer token"
+      }
+    ],
+    "version" : "1.176.0"
+  },
+  "source" : "legacy-app",
+  "summary" : {
+    "categories" : 5,
+    "semgrepErrors" : 0,
+    "semgrepRawFindings" : 15,
+    "sitesByCategory" : {
+      "CSRF" : 10,
+      "MISSING_AUTHORIZATION" : 2,
+      "PLAINTEXT_PASSWORD" : 1,
+      "SESSION_FIXATION" : 1,
+      "SQL_INJECTION" : 3
+    }
+  },
+  "tool" : "assess 1.0.0"
+}
