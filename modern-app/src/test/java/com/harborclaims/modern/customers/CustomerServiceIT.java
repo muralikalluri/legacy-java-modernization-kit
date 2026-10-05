@@ -6,10 +6,13 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import com.harborclaims.modern.PostgresIT;
 import com.harborclaims.modern.web.NotFoundException;
 import java.util.UUID;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -22,6 +25,22 @@ class CustomerServiceIT extends PostgresIT {
 
     @Autowired
     CustomerRepository repository;
+
+    @Autowired
+    JdbcTemplate jdbc;
+
+    private int highestIdBefore;
+
+    /** The database is shared by every test class in the run: remove what each test creates, so no test sees another's rows. */
+    @BeforeEach
+    void rememberHighestId() {
+        highestIdBefore = jdbc.queryForObject("SELECT COALESCE(MAX(id), 0) FROM customers", Integer.class);
+    }
+
+    @AfterEach
+    void removeWhatTheTestCreated() {
+        jdbc.update("DELETE FROM customers WHERE id > ?", highestIdBefore);
+    }
 
     private static String unique(String label) {
         return label + UUID.randomUUID().toString().replace("-", "").substring(0, 10);
