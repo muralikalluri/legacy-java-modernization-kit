@@ -107,6 +107,12 @@ The PDFs carry a creation date, so unlike the Markdown they are not part of the 
 - The nightly policy-expiry job is off by default (`HARBOR_JOBS_ENABLED=false`): one real run lapses every seeded policy.
 - Plain http only; for https set `HARBOR_COOKIE_SECURE=true` (see ADR 0005, "Not covered").
 - The legacy admin flaws (any signed-in user can create users) stay visible through the gateway on purpose: they are Phase 0 work in the roadmap.
+- Milestones M0 to M7 (the MVP in `SPEC.md` section 7) are all built. Where the build differs from the SPEC text, the difference is deliberate and recorded:
+  - the claim search route is `/claims/search.do`, matched exactly, not `/claims/search/**`;
+  - there is no separate shared auth endpoint: legacy issues the signed cookie;
+  - the modern app uses `JdbcClient` rather than Spring Data JDBC or JPA;
+  - the characterisation tests are plain HTTP tests (Java), not Playwright;
+  - the reports are in `sample-deliverable/` rather than `report/`.
 - Milestone M8 (OpenRewrite applied to one module in a branch) is marked "Later" in `SPEC.md` and is not built; the dry run is reported, not applied.
 
 ## Hire me
