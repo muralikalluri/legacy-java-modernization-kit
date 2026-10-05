@@ -89,7 +89,7 @@
     },
     {
       "assumed" : false,
-      "evidence" : "90 javax.servlet imports in 41 files",
+      "evidence" : "91 javax.servlet imports in 42 files",
       "group" : "Platform",
       "id" : "PLT-NO-JAKARTA-STRUTS",
       "impact" : 4,

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Claims')}"></head>
+<body>
+<div th:replace="~{fragments :: header}"></div>
+<div id="content">
+  <h2>Claims</h2>
+  <form action="/claims/search.do" method="get">
+    Search <input type="text" name="q" th:value="${q}"/>
+    Status
+    <select name="status">
+      <option value="">Any</option>
+      <option th:each="s : ${statuses}" th:value="${s}" th:text="${s}" th:selected="${s == status}">STATUS</option>
+    </select>
+    <input type="submit" value="Search"/>
+  </form>
+  <p>Total: <span id="total" th:text="${result.total}">0</span></p>
+  <table id="results">
+    <tr><th>Claim</th><th>Customer</th><th>Policy</th><th>Loss date</th><th>Claimed</th><th>Status</th></tr>
+    <tr th:each="c : ${result.items}" th:attr="data-claim-id=${c.id},data-status=${c.status}">
+      <td><a th:href="${'/claim/view.do?id=' + c.id}" th:text="${c.claimNumber}">CLM</a></td>
+      <td th:text="${c.customerName}">name</td>
+      <td th:text="${c.policyNumber}">POL</td>
+      <td th:text="${c.lossDate}">date</td>
+      <td th:text="${c.amountClaimedDisplay}">0.00</td>
+      <td th:text="${c.status}">NEW</td>
+    </tr>
+  </table>
+  <div id="pager">
+    Page <span th:text="${result.page}">1</span> of <span th:text="${result.totalPages}">1</span>
+    <a id="prev" th:if="${prevHref != null}" th:href="${prevHref}">Previous</a>
+    <a id="next" th:if="${nextHref != null}" th:href="${nextHref}">Next</a>
+  </div>
+  <p><a href="/claim/new.do">File a new claim</a></p>
+</div>
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

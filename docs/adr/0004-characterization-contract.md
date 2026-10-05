@@ -63,10 +63,18 @@ The first run found a real legacy defect the M2 smoke test had missed: `/policy/
 
 ## What the migrated app must do so the shared tests stay unchanged (M6)
 
+Status in M6: all of the following are implemented, and the suite passes unchanged against both targets.
+
 - **Delete mechanism.** The tests discover how to delete from the administrator's customer page: `#delete-link` as a link means a GET, as a form (or a control inside a form) means a POST to its action with its fields. Tokens come from the acting user's own pages. So the migrated app may turn delete into a POST form without changing a test; a plain GET delete is then refused (divergence 7).
 - **Anonymous requests.** An unauthenticated POST (no token possible) must still get `302` to `/login.do`. A CSRF filter alone would answer 403 first, so the migrated app needs an access-denied handler that redirects unauthenticated requests to the login page and answers 403 only to signed-in users.
 - **Forbidden roles and tokens.** A forbidden role cannot always obtain a token over HTTP (it sees no POST form), so on a CSRF-protected target the 403 of a forbidden save may come from the token check. The shared test still proves nothing is stored and the request is refused; the role check itself is additionally covered by MockMvc security tests in `modern-app`.
 - **Readiness markup.** `scripts/wait-ready.sh` reads `id="total">N` from the customer search page, so the migrated page must render the total the same way.
+
+## Corrections made while building M6
+
+- `CustomerViewTest` first asserted that `#delete-link` carries `href="/customers/delete.do?id=1"`. That encodes the legacy mechanism (a link) and contradicted this ADR ("delete may become a form without changing a test"). It now asserts the same target and customer id as either a link `href` or a form `action` plus its `id` field. The check is not weaker: it still pins where the control points and which customer it names. Raised by the M6 design review.
+- Added, and verified against legacy first: ids that Java would parse differently from Spring (`0x1`, `#1`, `1 2` are 404; `+1`, ` 1 ` and `01` are accepted), a save with `id=0` creates a customer, and today is a valid date of birth.
+- Deliberately **not** pinned: a date of birth such as `1980-01-1x` makes legacy answer 500 (its validator reads a prefix, then the database layer rejects it). The migrated app answers with the validation message. That is an unpinned improvement, not a divergence the suite checks.
 
 ## Risks recorded for M6
 

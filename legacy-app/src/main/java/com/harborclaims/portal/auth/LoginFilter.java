@@ -17,6 +17,9 @@ import javax.servlet.http.HttpSession;
 public class LoginFilter implements Filter {
 
     public static final String SESSION_USER = "currentUser";
+    public static final String AUTH_TIME = "authTime";
+    public static final String AUTH_SID = "authSid";
+    public static final String COOKIE_EXP = "authCookieExp";
 
     public void init(FilterConfig config) {
     }
@@ -37,7 +40,25 @@ public class LoginFilter implements Filter {
             response.sendRedirect(request.getContextPath() + "/login.do");
             return;
         }
+        refreshBridgeCookie(session, user, response);
         chain.doFilter(new RoleRequest(request, user), res);
+    }
+
+    /** Keeps the bridge cookie alive while the legacy session is in use, until the lifetime cap from the login time. */
+    private void refreshBridgeCookie(HttpSession session, AppUser user, HttpServletResponse response) {
+        Long auth = (Long) session.getAttribute(AUTH_TIME);
+        String sid = (String) session.getAttribute(AUTH_SID);
+        if (auth == null || sid == null || !AuthBridge.enabled()) {
+            return;
+        }
+        Long exp = (Long) session.getAttribute(COOKIE_EXP);
+        long now = System.currentTimeMillis();
+        if (exp == null || exp.longValue() - now < AuthBridge.IDLE_MILLIS / 2) {
+            long fresh = AuthBridge.issue(response, user.getUsername(), sid, auth.longValue(), now);
+            if (fresh > 0) {
+                session.setAttribute(COOKIE_EXP, Long.valueOf(fresh));
+            }
+        }
     }
 
     private boolean isPublic(String path) {

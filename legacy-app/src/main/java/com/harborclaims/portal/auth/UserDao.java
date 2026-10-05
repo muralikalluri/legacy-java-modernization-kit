@@ -29,4 +29,20 @@ public class UserDao {
             }
         }
     }
+
+    /** Records that this login (sid) was logged out, and drops revocations too old to matter (past the cookie lifetime cap). */
+    public void revokeLogin(String sid, long millis, long capMillis) throws SQLException {
+        try (Connection con = Db.get()) {
+            try (PreparedStatement ps = con.prepareStatement(
+                    "INSERT INTO auth_revocations (sid, revoked_at_ms) VALUES (?, ?) ON CONFLICT (sid) DO NOTHING")) {
+                ps.setString(1, sid);
+                ps.setLong(2, millis);
+                ps.executeUpdate();
+            }
+            try (PreparedStatement ps = con.prepareStatement("DELETE FROM auth_revocations WHERE revoked_at_ms < ?")) {
+                ps.setLong(1, millis - capMillis - 60000L);
+                ps.executeUpdate();
+            }
+        }
+    }
 }

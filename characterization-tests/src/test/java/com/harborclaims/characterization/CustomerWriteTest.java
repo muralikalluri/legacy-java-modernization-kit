@@ -102,6 +102,29 @@ class CustomerWriteTest {
         assertEquals("Zoë " + last, CSR.get("/customers/view.do?id=" + id).html().selectFirst("#customer-name").text());
     }
 
+    @Test
+    void anIdOfZeroCreatesANewCustomerRatherThanUpdating() {
+        String last = Run.lastName("Zero");
+        Map<String, String> f = new LinkedHashMap<>(Customers.valid(last));
+        f.put("id", "0");
+        Session.Reply r = Customers.save(CSR, f);
+        assertEquals(302, r.status(), Pages.errors(r.html()).toString());
+        String id = r.redirectPath().substring("/customers/view.do?id=".length());
+        assertTrue(Integer.parseInt(id) > 0, "a real id was assigned");
+        assertEquals(List.of(id), idsOf(last));
+        Customers.cleanup();
+    }
+
+    @Test
+    void todayIsAValidDateOfBirth() {
+        String last = Run.lastName("Today");
+        Map<String, String> f = new LinkedHashMap<>(Customers.valid(last));
+        f.put("dateOfBirth", java.time.LocalDate.now(java.time.ZoneOffset.UTC).toString());
+        Session.Reply r = Customers.save(CSR, f);
+        assertEquals(302, r.status(), "today is not in the future: " + Pages.errors(r.html()));
+        Customers.cleanup();
+    }
+
     // ---- validation
 
     static Stream<Arguments> invalidForms() {

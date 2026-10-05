@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Error')}"></head>
+<body>
+  <h2 id="error-title"><span th:text="${status}">500</span> <span th:text="${title}">Something went wrong</span></h2>
+  <p><a href="/home.do">Back to home</a></p>
+</body>
+</html>

@@ -1,3 +1,7 @@
+# Harbor Claims Portal: legacy app, migrated modules and the gateway in front of both.
+#   docker compose up -d --build        everything, then open http://localhost:8080
+#   docker compose up -d --build postgres legacy     only the legacy app (http://localhost:8081)
+# Published ports are bound to 127.0.0.1: this is a local demo, and the legacy app is deliberately insecure.
 services:
   postgres:
     image: postgres:16-alpine
@@ -11,15 +15,35 @@ services:
       - ./legacy-app/db/V1__schema.sql:/docker-entrypoint-initdb.d/10-schema.sql:ro
       - ./legacy-app/db/V2__seed.sql:/docker-entrypoint-initdb.d/20-seed.sql:ro
       - ./legacy-app/db/V3__m2_schema.sql:/docker-entrypoint-initdb.d/30-m2-schema.sql:ro
+      - ./legacy-app/db/V5__auth_bridge.sql:/docker-entrypoint-initdb.d/35-auth-bridge.sql:ro
       - ./legacy-app/db/V4__grants.sql:/docker-entrypoint-initdb.d/40-grants.sql:ro
     ports:
-      - "${POSTGRES_PORT:-5442}:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-5442}:5432"
     healthcheck:
       # TCP, not the socket: the temporary init server listens on the socket only, so this turns healthy after the init scripts ran
       test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-harbor} -d ${POSTGRES_DB:-harbor}"]
       interval: 5s
       timeout: 3s
       retries: 10
+
+  # Applies the migrations of the modern app with the OWNER account, once, so the app containers never hold DDL rights.
+  # The legacy schema (version 5) is the baseline; the modern migrations start at version 6.
+  flyway:
+    image: flyway/flyway:10-alpine
+    command: >-
+      -url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-harbor}
+      -user=${POSTGRES_USER:-harbor}
+      -password=${POSTGRES_PASSWORD:-change-me-local-only}
+      -baselineOnMigrate=true
+      -baselineVersion=5
+      -locations=filesystem:/flyway/sql
+      migrate
+    volumes:
+      - ./modern-app/src/main/resources/db/migration:/flyway/sql:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: "no"
 
   legacy:
     build: ./legacy-app
@@ -30,26 +54,61 @@ services:
         -Dharbor.db.url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-harbor}
         -Dharbor.db.user=harbor_app
         -Dharbor.db.password=${APP_DB_PASSWORD:-change-me-app-local}
+      # The auth bridge secret goes in the environment, not in JAVA_OPTS (a -D shows up in ps and docker inspect output).
+      HARBOR_AUTH_SECRET: ${HARBOR_AUTH_SECRET:-change-me-auth-secret-min-32-characters}
+      HARBOR_COOKIE_SECURE: ${HARBOR_COOKIE_SECURE:-false}
+    volumes:
+      - ./scripts/container-health.sh:/usr/local/bin/health:ro
     depends_on:
       postgres:
         condition: service_healthy
     ports:
-      - "${LEGACY_PORT:-8081}:8080"
+      - "127.0.0.1:${LEGACY_PORT:-8081}:8080"
+    healthcheck:
+      test: ["CMD", "bash", "/usr/local/bin/health", "8080", "/login.do", "200"]
+      interval: 5s
+      timeout: 3s
+      retries: 24
 
   modern:
     build: ./modern-app
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-harbor}
+      SPRING_DATASOURCE_USERNAME: harbor_app
+      SPRING_DATASOURCE_PASSWORD: ${APP_DB_PASSWORD:-change-me-app-local}
+      HARBOR_AUTH_SECRET: ${HARBOR_AUTH_SECRET:-change-me-auth-secret-min-32-characters}
+      # The app refuses to start with the .env.example placeholder secret. This switch is for the local demo only.
+      HARBOR_AUTH_ALLOW_PLACEHOLDER: ${HARBOR_AUTH_ALLOW_PLACEHOLDER:-false}
+      HARBOR_COOKIE_SECURE: ${HARBOR_COOKIE_SECURE:-false}
+    volumes:
+      - ./scripts/container-health.sh:/usr/local/bin/health:ro
     depends_on:
       postgres:
         condition: service_healthy
+      flyway:
+        condition: service_completed_successfully
     ports:
-      - "${MODERN_PORT:-8082}:8080"
+      - "127.0.0.1:${MODERN_PORT:-8082}:8080"
+    healthcheck:
+      test: ["CMD", "bash", "/usr/local/bin/health", "8080", "/actuator/health", "200"]
+      interval: 5s
+      timeout: 3s
+      retries: 24
 
   gateway:
     image: nginx:1.27-alpine
     volumes:
       - ./gateway/nginx.conf:/etc/nginx/conf.d/default.conf:ro
     depends_on:
-      - legacy
-      - modern
+      legacy:
+        condition: service_healthy
+      modern:
+        condition: service_healthy
     ports:
-      - "${GATEWAY_PORT:-8080}:80"
+      - "127.0.0.1:${GATEWAY_PORT:-8080}:80"
+    healthcheck:
+      # goes through nginx to the legacy login page, so it fails if the config is invalid or an upstream is down
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/login.do"]
+      interval: 5s
+      timeout: 3s
+      retries: 12

@@ -31,6 +31,14 @@ public class LoginSubmitAction extends Action {
         }
         HttpSession session = request.getSession(true);
         session.setAttribute(LoginFilter.SESSION_USER, user);
+        long now = System.currentTimeMillis();
+        session.setAttribute(LoginFilter.AUTH_TIME, Long.valueOf(now));
+        String sid = AuthBridge.newSid();
+        session.setAttribute(LoginFilter.AUTH_SID, sid);
+        long exp = AuthBridge.issue(response, user.getUsername(), sid, now, now);
+        if (exp > 0) {
+            session.setAttribute(LoginFilter.COOKIE_EXP, Long.valueOf(exp));
+        }
         LOG.info("Login ok for user " + user.getUsername() + " role " + user.getRole());
         return mapping.findForward("success");
     }

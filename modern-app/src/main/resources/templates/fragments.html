@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+  <meta charset="UTF-8"/>
+  <title th:text="${title} + ' - Harbor Claims Portal'">Harbor Claims Portal</title>
+  <link rel="stylesheet" href="/css/portal.css"/>
+</head>
+<body>
+<div id="header" th:fragment="header">
+  <div>
+    <strong>Harbor Claims Portal</strong>
+    &nbsp;&nbsp;
+    <a href="/home.do">Home</a>
+    <a href="/customers/list.do">Customers</a>
+    <a href="/claims/search.do">Claims</a>
+    <a href="/policies/list.do">Policies</a>
+    <a th:if="${canReports}" href="/reports/index.do">Reports</a>
+    <a th:if="${canAdmin}" href="/admin/index.do">Admin</a>
+  </div>
+  <div>
+    <span id="whoami" th:if="${username != null}" th:text="${username}">user</span>
+    &nbsp;<a href="/logout.do">Sign out</a>
+  </div>
+</div>
+<div id="footer" th:fragment="footer">Harbor Claims Portal (migrated modules). All data is fictional.</div>
+</body>
+</html>

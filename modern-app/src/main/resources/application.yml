@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      charset: UTF-8
+      force: true
+    session:
+      # The modern app never creates an HTTP session. If anything ever did, this name keeps it from replacing legacy's JSESSIONID
+      # (both apps share one host and the path "/").
+      cookie:
+        name: HARBOR_MODERN_SID
+      tracking-modes: cookie
+  error:
+    include-stacktrace: never
+    include-message: never
+    whitelabel:
+      enabled: false
+  # The gateway sends no forwarded protocol or port: redirects stay relative and the Host header (with its port) is the origin.
+  forward-headers-strategy: none
+
+spring:
+  application:
+    name: harbor-claims-modern
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5442/harbor}
+    username: ${SPRING_DATASOURCE_USERNAME:harbor_app}
+    password: ${SPRING_DATASOURCE_PASSWORD:}
+  flyway:
+    # Migrations are applied by the one-shot "flyway" service with the owner account, so the app user never holds DDL rights.
+    enabled: false
+  thymeleaf:
+    cache: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+harbor:
+  auth:
+    secret: ${HARBOR_AUTH_SECRET:}
+    previous-secret: ${HARBOR_AUTH_SECRET_PREVIOUS:}
+    allow-placeholder-secret: ${HARBOR_AUTH_ALLOW_PLACEHOLDER:false}
+    cookie-secure: ${HARBOR_COOKIE_SECURE:false}

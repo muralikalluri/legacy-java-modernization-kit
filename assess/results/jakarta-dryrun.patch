@@ -117,7 +117,7 @@ index 1f53caf..a628983 100644
  import org.apache.struts.action.ActionForward;
 
 diff --git a/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java b/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java
-index fc712f2..d33b961 100644
+index 5bccd48..93f5ea0 100644
 --- a/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java
 +++ b/src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java
 @@ -1,8 +1,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
@@ -134,7 +134,7 @@ index fc712f2..d33b961 100644
  import org.apache.struts.action.Action;
 
 diff --git a/src/main/java/com/harborclaims/portal/auth/LogoutAction.java b/src/main/java/com/harborclaims/portal/auth/LogoutAction.java
-index ffaaf54..6b04150 100644
+index 27d0eb5..a9d43a1 100644
 --- a/src/main/java/com/harborclaims/portal/auth/LogoutAction.java
 +++ b/src/main/java/com/harborclaims/portal/auth/LogoutAction.java
 @@ -1,8 +1,8 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
@@ -149,18 +149,18 @@ index ffaaf54..6b04150 100644
  
  import org.apache.struts.action.Action;
  import org.apache.struts.action.ActionForm;
-@@ -16,7 +16,7 @@
-             HttpServletResponse response) throws Exception {
+@@ -17,7 +17,7 @@
          HttpSession session = request.getSession(false);
          if (session != null) {
+             AuthBridge.revoke((String) session.getAttribute(LoginFilter.AUTH_SID));
 -            session.invalidate();
 +            request.logout();
          }
+         AuthBridge.clear(response);
          return mapping.findForward("success");
-     }
 
 diff --git a/src/main/java/com/harborclaims/portal/auth/LoginFilter.java b/src/main/java/com/harborclaims/portal/auth/LoginFilter.java
-index 86e8fbb..6e984a0 100644
+index 34c3b97..df4ef53 100644
 --- a/src/main/java/com/harborclaims/portal/auth/LoginFilter.java
 +++ b/src/main/java/com/harborclaims/portal/auth/LoginFilter.java
 @@ -2,16 +2,16 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
@@ -190,6 +190,20 @@ index 86e8fbb..6e984a0 100644
  
  /** Homegrown login filter: no session user means redirect to the login page. */
  public class LoginFilter implements Filter {
+
+diff --git a/src/main/java/com/harborclaims/portal/auth/AuthBridge.java b/src/main/java/com/harborclaims/portal/auth/AuthBridge.java
+index 011c214..b31523e 100644
+--- a/src/main/java/com/harborclaims/portal/auth/AuthBridge.java
++++ b/src/main/java/com/harborclaims/portal/auth/AuthBridge.java
+@@ -7,7 +7,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ 
+ import javax.crypto.Mac;
+ import javax.crypto.spec.SecretKeySpec;
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.apache.log4j.Logger;
+ 
 
 diff --git a/src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java b/src/main/java/com/harborclaims/portal/admin/AdminJobsAction.java
 index 142b215..611e080 100644
@@ -694,4 +708,18 @@ index 43fff30..b83672f 100644
    <display-name>Harbor Claims Portal</display-name>
  
    <filter>
+
+diff --git a/src/test/java/com/harborclaims/portal/auth/AuthBridgeTest.java b/src/test/java/com/harborclaims/portal/auth/AuthBridgeTest.java
+index 5db3bdd..dd14262 100644
+--- a/src/test/java/com/harborclaims/portal/auth/AuthBridgeTest.java
++++ b/src/test/java/com/harborclaims/portal/auth/AuthBridgeTest.java
+@@ -12,7 +12,7 @@ org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta
+ import java.util.Base64;
+ import java.util.List;
+ 
+-import javax.servlet.http.HttpServletResponse;
++import jakarta.servlet.http.HttpServletResponse;
+ 
+ import org.junit.Test;
+ 
 

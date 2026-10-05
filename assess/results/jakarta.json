@@ -4,35 +4,38 @@
     "webXmlNeedsJakartaNamespace" : true,
     "webXmlVersion" : "3.0"
   },
-  "inputsFingerprint" : "ff2587dfa1962461eaca25267fd881efd367c26d2fc82ac7b0d2f97ed7b4fb82",
+  "inputsFingerprint" : "be53ff0f11574943d3e92b1deb3e91ece5e340b1b9da516c8b7ab26156f1a3d2",
   "javaMain" : {
-    "files" : 73,
-    "filesWithJakartaMigratingJavax" : 41,
-    "filesWithJavax" : 42,
+    "files" : 74,
+    "filesWithJakartaMigratingJavax" : 42,
+    "filesWithJavax" : 43,
     "importsByPackage" : {
+      "javax.crypto" : 1,
+      "javax.crypto.spec" : 1,
       "javax.naming" : 3,
       "javax.servlet" : 14,
-      "javax.servlet.http" : 76,
+      "javax.servlet.http" : 77,
       "javax.sql" : 1
     },
-    "jakartaMigratingImports" : 90,
+    "jakartaMigratingImports" : 91,
     "jakartaMigratingQualifiedUses" : 0,
-    "javaxImports" : 94,
-    "jdkOwnedImports" : 4,
+    "javaxImports" : 97,
+    "jdkOwnedImports" : 6,
     "jdkOwnedQualifiedUses" : 0,
     "otherImports" : 0,
     "qualifiedUsesByPackage" : { }
   },
   "javaTest" : {
-    "files" : 8,
-    "filesWithJakartaMigratingJavax" : 0,
-    "filesWithJavax" : 1,
+    "files" : 9,
+    "filesWithJakartaMigratingJavax" : 1,
+    "filesWithJavax" : 2,
     "importsByPackage" : {
+      "javax.servlet.http" : 1,
       "javax.xml.parsers" : 1
     },
-    "jakartaMigratingImports" : 0,
+    "jakartaMigratingImports" : 1,
     "jakartaMigratingQualifiedUses" : 0,
-    "javaxImports" : 1,
+    "javaxImports" : 2,
     "jdkOwnedImports" : 1,
     "jdkOwnedQualifiedUses" : 0,
     "otherImports" : 0,
@@ -52,16 +55,16 @@
     "Imports are read from Java sources with comments and string literals removed.",
     "OpenRewrite does not rewrite JSPs, so JSP javax references are reported separately.",
     "There is no Jakarta-compatible Struts 1: after the rewrite, struts-core still needs javax.servlet. The changed-file count measures the javax surface, not whether a migration is feasible.",
-    "Jakarta-migrating javax imports in main sources: 90 import statements and 0 fully qualified uses move to jakarta."
+    "Jakarta-migrating javax imports in main sources: 91 import statements and 0 fully qualified uses move to jakarta."
   ],
   "rewrite" : {
-    "changedFiles" : 43,
+    "changedFiles" : 45,
     "changedFilesByKind" : {
       "jsp" : 0,
-      "mainJava" : 41,
+      "mainJava" : 42,
       "other" : 0,
       "pom" : 1,
-      "testJava" : 0,
+      "testJava" : 1,
       "xml" : 1
     },
     "files" : [
@@ -74,6 +77,7 @@
       "src/main/java/com/harborclaims/portal/admin/AdminUserSaveAction.java",
       "src/main/java/com/harborclaims/portal/admin/AdminUserToggleAction.java",
       "src/main/java/com/harborclaims/portal/admin/AdminUsersAction.java",
+      "src/main/java/com/harborclaims/portal/auth/AuthBridge.java",
       "src/main/java/com/harborclaims/portal/auth/LoginFilter.java",
       "src/main/java/com/harborclaims/portal/auth/LoginSubmitAction.java",
       "src/main/java/com/harborclaims/portal/auth/LogoutAction.java",
@@ -107,15 +111,16 @@
       "src/main/java/com/harborclaims/portal/reports/ClaimsByStatusPdfAction.java",
       "src/main/java/com/harborclaims/portal/reports/PolicyExpiryAction.java",
       "src/main/java/com/harborclaims/portal/reports/ReportsIndexAction.java",
-      "src/main/webapp/WEB-INF/web.xml"
+      "src/main/webapp/WEB-INF/web.xml",
+      "src/test/java/com/harborclaims/portal/auth/AuthBridgeTest.java"
     ],
     "mode" : "dry run on a copy of legacy-app; no source file was modified",
     "patchFile" : "jakarta-dryrun.patch",
-    "patchSha256" : "dd9d3def993c2a04952b20ec7e0e48b9836ac88134acb750976f35455763ac3e",
+    "patchSha256" : "635c03e977e49ddd28bf7247ab6ed8ec86a3cc9bb6194aa54fd68681902ed83f",
     "plugin" : "org.openrewrite.maven:rewrite-maven-plugin:6.46.1",
     "recipe" : "org.openrewrite.java.migrate.jakarta.JavaxMigrationToJakarta",
     "recipeArtifact" : "org.openrewrite.recipe:rewrite-migrate-java:3.42.1",
-    "sourcesFingerprint" : "7d5a07e9fee4e907ca8d086b3ff41e0cbaf3f340a70c71db11b21655f2b105d7"
+    "sourcesFingerprint" : "7619e251dad63a1b33749bbac4fd86301598a34002994cf12ca767246542c4e9"
   },
   "schema" : 1,
   "source" : "legacy-app",

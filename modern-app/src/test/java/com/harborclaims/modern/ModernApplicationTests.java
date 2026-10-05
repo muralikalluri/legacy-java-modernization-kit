@@ -8,13 +8,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
 @SpringBootTest
-class ModernApplicationTests {
+class ModernApplicationTests extends PostgresIT {
 
     @Autowired
     private ApplicationContext context;
 
     @Test
-    void contextLoads() {
+    void contextLoadsAgainstTheRealSchema() {
         assertThat(context).isNotNull();
     }
 

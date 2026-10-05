@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Customer')}"></head>
+<body>
+<div th:replace="~{fragments :: header}"></div>
+<div id="content">
+  <h2 id="customer-name" th:text="${customer.fullName}">Name</h2>
+  <div id="errors" th:if="${!errors.isEmpty()}"><ul><li th:each="e : ${errors}" th:text="${e}">error</li></ul></div>
+  <table id="customer-details" th:attr="data-customer-id=${customer.id}">
+    <tr><th>Email</th><td th:text="${customer.email}">email</td></tr>
+    <tr><th>Phone</th><td th:text="${customer.phone}">phone</td></tr>
+    <tr><th>Date of birth</th><td th:text="${customer.dateOfBirth}">dob</td></tr>
+    <tr><th>Address</th><td th:text="${(customer.addressLine ?: '') + ', ' + (customer.city ?: '') + ' ' + (customer.state ?: '') + ' ' + (customer.postalCode ?: '')}">address</td></tr>
+  </table>
+  <h3>Policies</h3>
+  <table id="policies">
+    <tr><th>Policy</th><th>Product</th><th>Coverage limit</th><th>Period</th><th>Status</th></tr>
+    <tr th:each="p : ${policies}">
+      <td th:text="${p.policyNumber}">POL</td>
+      <td th:text="${p.productType}">HOME</td>
+      <td th:text="${p.coverageLimitDisplay}">0.00</td>
+      <td th:text="${p.startDate + ' to ' + p.endDate}">period</td>
+      <td th:text="${p.status}">ACTIVE</td>
+    </tr>
+  </table>
+  <p>
+    <a id="edit-link" th:if="${canEdit}" th:href="${'/customers/edit.do?id=' + customer.id}">Edit</a>
+    <form id="delete-link" th:if="${canDelete}" method="post" action="/customers/delete.do" style="display:inline">
+      <input type="hidden" name="id" th:value="${customer.id}"/>
+      <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+      <input type="submit" value="Delete"/>
+    </form>
+    <a href="/customers/list.do">Back to list</a>
+  </p>
+</div>
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

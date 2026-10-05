@@ -108,8 +108,9 @@ class GoldenTest {
         Map<String, Object> main = (Map<String, Object>) out.get("javaMain");
         assertEquals((int) main.get("javaxImports"),
                 (int) main.get("jakartaMigratingImports") + (int) main.get("jdkOwnedImports") + (int) main.get("otherImports"));
-        assertEquals(90, main.get("jakartaMigratingImports"), "javax.servlet (14) + javax.servlet.http (76)");
-        assertEquals(4, main.get("jdkOwnedImports"), "javax.naming (3) + javax.sql (1) stay javax");
+        // facts of the legacy sources, checked independently with grep when M6 added AuthBridge (javax.servlet.http and javax.crypto)
+        assertEquals(91, main.get("jakartaMigratingImports"), "javax.servlet (14) + javax.servlet.http (77)");
+        assertEquals(6, main.get("jdkOwnedImports"), "javax.naming (3) + javax.sql (1) + javax.crypto (2) stay javax");
         assertEquals(Json.toString(out), Json.toString(JakartaBuilder.build(LEGACY, block)));
     }
 }

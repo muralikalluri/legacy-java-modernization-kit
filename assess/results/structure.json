@@ -3,7 +3,7 @@
     "packageEdgesOnlyInImports" : [ ],
     "packageEdgesOnlyInJdeps" : [ ]
   },
-  "inputsFingerprint" : "b0fbb860bf2f1e42b3461ea3f25b371510fb91c1da41894cb171063df469050a",
+  "inputsFingerprint" : "e51647955a08fdea41b01996a927ef5648b38bd68dc17090b2b8688e92540ea1",
   "largestClasses" : [
     {
       "className" : "com.harborclaims.portal.claims.ClaimManager",
@@ -41,6 +41,13 @@
       "godClass" : false
     },
     {
+      "className" : "com.harborclaims.portal.auth.AuthBridge",
+      "file" : "src/main/java/com/harborclaims/portal/auth/AuthBridge.java",
+      "module" : "Platform",
+      "lines" : 137,
+      "godClass" : false
+    },
+    {
       "className" : "com.harborclaims.portal.admin.AdminUserDao",
       "file" : "src/main/java/com/harborclaims/portal/admin/AdminUserDao.java",
       "module" : "Admin",
@@ -66,13 +73,6 @@
       "file" : "src/main/java/com/harborclaims/portal/claims/Claim.java",
       "module" : "Claims",
       "lines" : 125,
-      "godClass" : false
-    },
-    {
-      "className" : "com.harborclaims.portal.policies.Policy",
-      "file" : "src/main/java/com/harborclaims/portal/policies/Policy.java",
-      "module" : "Policies",
-      "lines" : 116,
       "godClass" : false
     }
   ],
@@ -227,8 +227,8 @@
     {
       "name" : "Platform",
       "packages" : 2,
-      "classes" : 17,
-      "lines" : 584,
+      "classes" : 18,
+      "lines" : 768,
       "fanOut" : 0,
       "fanIn" : 5,
       "instabilityPercent" : 0,
@@ -403,8 +403,8 @@
     {
       "name" : "com.harborclaims.portal.auth",
       "module" : "Platform",
-      "classes" : 7,
-      "lines" : 287,
+      "classes" : 8,
+      "lines" : 471,
       "fanOut" : 1,
       "fanIn" : 4,
       "instabilityPercent" : 20
@@ -472,8 +472,8 @@
   "schema" : 1,
   "source" : "legacy-app",
   "summary" : {
-    "classEdges" : 210,
-    "classes" : 73,
+    "classEdges" : 215,
+    "classes" : 74,
     "godClasses" : 1,
     "importGraphAgreesWithJdeps" : true,
     "largestClassLines" : 1122,

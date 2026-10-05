@@ -16,8 +16,10 @@ public class LogoutAction extends Action {
             HttpServletResponse response) throws Exception {
         HttpSession session = request.getSession(false);
         if (session != null) {
+            AuthBridge.revoke((String) session.getAttribute(LoginFilter.AUTH_SID));
             session.invalidate();
         }
+        AuthBridge.clear(response);
         return mapping.findForward("success");
     }
 }

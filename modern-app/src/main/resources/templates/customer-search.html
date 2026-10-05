@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Customers')}"></head>
+<body>
+<div th:replace="~{fragments :: header}"></div>
+<div id="content">
+  <h2>Customers</h2>
+  <form action="/customers/search.do" method="get">
+    Search <input type="text" name="q" th:value="${q}"/> <input type="submit" value="Search"/>
+  </form>
+  <p>Total: <span id="total" th:text="${result.total}">0</span></p>
+  <table id="results">
+    <tr><th>Name</th><th>Email</th><th>City</th></tr>
+    <tr th:each="c : ${result.items}" th:attr="data-customer-id=${c.id}">
+      <td><a th:href="${'/customers/view.do?id=' + c.id}" th:text="${c.lastName + ', ' + c.firstName}">Name</a></td>
+      <td th:text="${c.email}">email</td>
+      <td th:text="${c.city}">city</td>
+    </tr>
+  </table>
+  <div id="pager">
+    Page <span th:text="${result.page}">1</span> of <span th:text="${result.totalPages}">1</span>
+    <a id="prev" th:if="${prevHref != null}" th:href="${prevHref}">Previous</a>
+    <a id="next" th:if="${nextHref != null}" th:href="${nextHref}">Next</a>
+  </div>
+  <p><a href="/customers/edit.do">New customer</a></p>
+</div>
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

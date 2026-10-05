@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Edit customer')}"></head>
+<body>
+<div th:replace="~{fragments :: header}"></div>
+<div id="content">
+  <h2>Customer</h2>
+  <div id="errors" th:if="${!errors.isEmpty()}"><ul><li th:each="e : ${errors}" th:text="${e}">error</li></ul></div>
+  <form method="post" action="/customers/save.do">
+    <input type="hidden" name="id" th:value="${form.id}"/>
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    <label>First name <input type="text" name="firstName" th:value="${form.firstName}"/></label>
+    <label>Last name <input type="text" name="lastName" th:value="${form.lastName}"/></label>
+    <label>Email <input type="text" name="email" th:value="${form.email}"/></label>
+    <label>Phone <input type="text" name="phone" th:value="${form.phone}"/></label>
+    <label>Date of birth (yyyy-MM-dd) <input type="text" name="dateOfBirth" th:value="${form.dateOfBirth}"/></label>
+    <label>Address <input type="text" name="addressLine" th:value="${form.addressLine}"/></label>
+    <label>City <input type="text" name="city" th:value="${form.city}"/></label>
+    <label>State <input type="text" name="state" size="2" th:value="${form.state}"/></label>
+    <label>Postal code <input type="text" name="postalCode" th:value="${form.postalCode}"/></label>
+    <p><input type="submit" value="Save"/></p>
+  </form>
+</div>
+<div th:replace="~{fragments :: footer}"></div>
+</body>
+</html>

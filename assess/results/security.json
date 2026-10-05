@@ -178,7 +178,7 @@
       ]
     }
   ],
-  "inventoryFingerprint" : "a7d354cd221fe032c1e09b145a024b50287b0145c5bb5d5d4db753e94d2fbde6",
+  "inventoryFingerprint" : "c74af4d4dae77b9fc1acf4158d4471599ca5c9750e561d668ae123776fa4963c",
   "notes" : [
     "Facts only: severity, likelihood and fix cost are assigned in the estimation model, not here.",
     "SQL injection sites are counted as query sites: one statement is one site even if it concatenates two parameters.",
@@ -187,7 +187,7 @@
   "schema" : 1,
   "semgrep" : {
     "config" : "assess/rules",
-    "inputsFingerprint" : "d8b1d51d986624032c951b8ff0f9c5b1f8c743eef5ee89033641faa222b56ea6",
+    "inputsFingerprint" : "2b65ce9ac5af88fbe728b63bc4ec9395913cb441f1dbdfdc57ebf4b5eae10aec",
     "rawFindings" : [
       {
         "ruleId" : "harbor.html-post-form-without-token",

@@ -894,7 +894,7 @@
       "type" : "com.harborclaims.portal.admin.AdminUserForm"
     }
   ],
-  "inputsFingerprint" : "a7d354cd221fe032c1e09b145a024b50287b0145c5bb5d5d4db753e94d2fbde6",
+  "inputsFingerprint" : "c74af4d4dae77b9fc1acf4158d4471599ca5c9750e561d668ae123776fa4963c",
   "integrations" : [
     {
       "name" : "JNDI DataSource",
@@ -1015,6 +1015,14 @@
       "javaxImports" : 0
     },
     {
+      "file" : "src/main/java/com/harborclaims/portal/auth/AuthBridge.java",
+      "pkg" : "com.harborclaims.portal.auth",
+      "className" : "AuthBridge",
+      "module" : "Platform",
+      "lines" : 137,
+      "javaxImports" : 3
+    },
+    {
       "file" : "src/main/java/com/harborclaims/portal/auth/AuthManager.java",
       "pkg" : "com.harborclaims.portal.auth",
       "className" : "AuthManager",
@@ -1027,7 +1035,7 @@
       "pkg" : "com.harborclaims.portal.auth",
       "className" : "LoginFilter",
       "module" : "Platform",
-      "lines" : 71,
+      "lines" : 92,
       "javaxImports" : 10
     },
     {
@@ -1043,7 +1051,7 @@
       "pkg" : "com.harborclaims.portal.auth",
       "className" : "LoginSubmitAction",
       "module" : "Platform",
-      "lines" : 37,
+      "lines" : 45,
       "javaxImports" : 3
     },
     {
@@ -1051,7 +1059,7 @@
       "pkg" : "com.harborclaims.portal.auth",
       "className" : "LogoutAction",
       "module" : "Platform",
-      "lines" : 23,
+      "lines" : 25,
       "javaxImports" : 3
     },
     {
@@ -1059,7 +1067,7 @@
       "pkg" : "com.harborclaims.portal.auth",
       "className" : "UserDao",
       "module" : "Platform",
-      "lines" : 32,
+      "lines" : 48,
       "javaxImports" : 0
     },
     {
@@ -1811,13 +1819,13 @@
       "name" : "Platform",
       "actions" : 4,
       "jsps" : 8,
-      "javaMainFiles" : 17,
-      "javaMainLines" : 584,
+      "javaMainFiles" : 18,
+      "javaMainLines" : 768,
       "daos" : 1,
       "managers" : 1,
       "actionClasses" : 3,
       "forms" : 2,
-      "javaTestFiles" : 2,
+      "javaTestFiles" : 3,
       "scriptletBlocks" : 31
     }
   ],
@@ -1867,9 +1875,9 @@
     "filters" : 2,
     "formBeans" : 8,
     "forwardActions" : 2,
-    "javaMainFiles" : 73,
-    "javaMainLines" : 5176,
-    "javaTestFiles" : 8,
+    "javaMainFiles" : 74,
+    "javaMainLines" : 5360,
+    "javaTestFiles" : 9,
     "jspDeclarations" : 0,
     "jspExpressions" : 17,
     "jspScriptletBlocks" : 43,
