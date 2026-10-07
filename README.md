@@ -51,16 +51,16 @@ Needs Docker, and JDK 21 for the toolkit and the tests.
 cp .env.example .env                    # required: the compose file refuses the placeholder auth secret without it
 docker compose down -v                  # only if you have a database volume from an earlier version of this repo
 docker compose up -d --build            # postgres, migrations, legacy app, modern app, gateway
-open http://localhost:8080/             # the gateway: Customers and claim search are Spring Boot 3, the rest is legacy
-open http://localhost:8081/             # the legacy app on its own (deliberately insecure, see the banner)
+open http://localhost:8500/             # the gateway: Customers and claim search are Spring Boot 3, the rest is legacy
+open http://localhost:8501/             # the legacy app on its own (deliberately insecure, see the banner)
 ```
 
-`docker compose up -d --build postgres legacy` starts only the legacy app. The published ports come from `.env` (`GATEWAY_PORT`, `LEGACY_PORT`, `MODERN_PORT`, `POSTGRES_PORT`); change them if something else already uses 8080 to 8082 or 5442. Demo logins (plaintext on purpose, fictional): `admin`, `adjuster1`, `adjuster2`, `supervisor1`, `underwriter1`, `csr1`, `auditor1`; the password is the username plus `-demo`.
+`docker compose up -d --build postgres legacy` starts only the legacy app. The published ports come from `.env` (`GATEWAY_PORT`, `LEGACY_PORT`, `MODERN_PORT`, `POSTGRES_PORT`); change them if something else already uses 8500 to 8502 or 8532. Demo logins (plaintext on purpose, fictional): `admin`, `adjuster1`, `adjuster2`, `supervisor1`, `underwriter1`, `csr1`, `auditor1`; the password is the username plus `-demo`.
 
 ```bash
 scripts/smoke-strangler.sh                                                         # routing, cookies, redirects, spoofed headers, logout, through the gateway
-characterization-tests/run.sh                                                      # the suite against legacy (:8081)
-characterization-tests/run.sh --target modern --base-url http://localhost:8080     # the same suite through the gateway
+characterization-tests/run.sh                                                      # the suite against legacy (:8501)
+characterization-tests/run.sh --target modern --base-url http://localhost:8500     # the same suite through the gateway
 mvn -f modern-app verify                                                           # modern app tests (Testcontainers)
 ./assess/run-all.sh                                                                # inventory, deps, jakarta, structure, security, estimate, report
 ./assess/run-all.sh --offline                                                      # no network: cached OSV data, committed OpenRewrite result

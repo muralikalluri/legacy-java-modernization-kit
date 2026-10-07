@@ -15,7 +15,7 @@
     <junit.version>5.11.4</junit.version>
     <jsoup.version>1.18.3</jsoup.version>
     <!-- The target under test. Defaults are the legacy app run by docker compose. -->
-    <base.url>http://localhost:8081</base.url>
+    <base.url>http://localhost:8501</base.url>
     <target>legacy</target>
     <!-- Random test order. run.sh passes a fresh seed and prints it; the default keeps a plain mvn test reproducible. -->
     <order.seed>20261005</order.seed>

@@ -1,6 +1,6 @@
 # Harbor Claims Portal: legacy app, migrated modules and the gateway in front of both.
-#   docker compose up -d --build        everything, then open http://localhost:8080
-#   docker compose up -d --build postgres legacy     only the legacy app (http://localhost:8081)
+#   docker compose up -d --build        everything, then open http://localhost:8500
+#   docker compose up -d --build postgres legacy     only the legacy app (http://localhost:8501)
 # Published ports are bound to 127.0.0.1: this is a local demo, and the legacy app is deliberately insecure.
 name: legacy-java-modernization-kit
 
@@ -20,7 +20,7 @@ services:
       - ./legacy-app/db/V5__auth_bridge.sql:/docker-entrypoint-initdb.d/35-auth-bridge.sql:ro
       - ./legacy-app/db/V4__grants.sql:/docker-entrypoint-initdb.d/40-grants.sql:ro
     ports:
-      - "127.0.0.1:${POSTGRES_PORT:-5442}:5432"
+      - "127.0.0.1:${POSTGRES_PORT:-8532}:5432"
     healthcheck:
       # TCP, not the socket: the temporary init server listens on the socket only, so this turns healthy after the init scripts ran
       test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-harbor} -d ${POSTGRES_DB:-harbor}"]
@@ -31,8 +31,8 @@ services:
   # Applies the migrations of the modern app with the OWNER account, once, so the app containers never hold DDL rights.
   # The legacy schema (version 5) is the baseline; the modern migrations start at version 6.
   flyway:
-    # A multi-arch tag (amd64 and arm64): the Flyway 10 alpine images are amd64 only and run under emulation on Apple Silicon.
-    image: flyway/flyway:11.7.2-alpine
+    # Same major version as the app's own Flyway. This tag is multi-arch (amd64 and arm64); the 10-alpine tags are amd64 only.
+    image: flyway/flyway:10
     command: >-
       -url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-harbor}
       -user=${POSTGRES_USER:-harbor}
@@ -66,7 +66,7 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "127.0.0.1:${LEGACY_PORT:-8081}:8080"
+      - "127.0.0.1:${LEGACY_PORT:-8501}:8080"
     healthcheck:
       test: ["CMD", "bash", "/usr/local/bin/health", "8080", "/login.do", "200"]
       interval: 5s
@@ -91,7 +91,7 @@ services:
       flyway:
         condition: service_completed_successfully
     ports:
-      - "127.0.0.1:${MODERN_PORT:-8082}:8080"
+      - "127.0.0.1:${MODERN_PORT:-8502}:8080"
     healthcheck:
       test: ["CMD", "bash", "/usr/local/bin/health", "8080", "/actuator/health", "200"]
       interval: 5s
@@ -108,7 +108,7 @@ services:
       modern:
         condition: service_healthy
     ports:
-      - "127.0.0.1:${GATEWAY_PORT:-8080}:80"
+      - "127.0.0.1:${GATEWAY_PORT:-8500}:80"
     healthcheck:
       # goes through nginx to the legacy login page, so it fails if the config is invalid or an upstream is down
       test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1/login.do"]

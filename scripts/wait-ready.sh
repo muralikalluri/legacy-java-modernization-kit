@@ -3,7 +3,7 @@
 # seeded surname "almeida" finds the three seeded customers (so the webapp, the datasource and the seed are all fine).
 # Usage: scripts/wait-ready.sh [base-url] [timeout-seconds]
 set -uo pipefail
-BASE="${1:-http://localhost:8081}"
+BASE="${1:-http://localhost:8501}"
 TIMEOUT="${2:-120}"
 JAR="$(mktemp)"
 trap 'rm -f "$JAR"' EXIT

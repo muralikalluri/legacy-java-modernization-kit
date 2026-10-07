@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
-# Smoke test for the legacy app. Usage: scripts/smoke-legacy.sh [base-url]   (default http://localhost:8081)
+# Smoke test for the legacy app. Usage: scripts/smoke-legacy.sh [base-url]   (default http://localhost:8501)
 # Mutates data (creates customers, claims, policies, a user). Run scripts/reset-db.sh before each run for exact counts
 # (a second run without a reset still passes: the user-count checks below read the live total).
 set -uo pipefail
-BASE="${1:-http://localhost:8081}"
+BASE="${1:-http://localhost:8501}"
 JAR_DIR="$(mktemp -d)"
 trap 'rm -rf "$JAR_DIR"' EXIT
 pass=0; fail=0

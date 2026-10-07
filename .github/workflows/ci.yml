@@ -99,11 +99,11 @@ jobs:
           cp .env.example .env
           docker compose up -d --build
       - name: Wait until the whole stack answers through the gateway
-        run: scripts/wait-ready.sh http://localhost:8080 180
+        run: scripts/wait-ready.sh http://localhost:8500 180
       - name: Gateway smoke checks (routing, cookies, redirects, spoofed headers, logout)
         run: scripts/smoke-strangler.sh
       - name: The characterisation suite, unchanged, against the migrated routes (twice)
-        run: characterization-tests/run.sh --target modern --base-url http://localhost:8080 --twice
+        run: characterization-tests/run.sh --target modern --base-url http://localhost:8500 --twice
       - name: Collect logs on failure
         if: failure()
         run: |

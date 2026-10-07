@@ -8,7 +8,7 @@ Status: accepted. The tests in `characterization-tests/` capture what the legacy
 
 ```bash
 characterization-tests/run.sh --twice        # legacy: reset the database, run, then run again without a reset
-characterization-tests/run.sh --target modern --base-url http://localhost:8080 --no-reset
+characterization-tests/run.sh --target modern --base-url http://localhost:8500 --no-reset
 characterization-tests/mutants/run-mutants.sh   # proves the tests can fail
 ```
 

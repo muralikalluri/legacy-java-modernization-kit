@@ -11,7 +11,7 @@ public final class Target {
     }
 
     public static String baseUrl() {
-        String url = System.getProperty("base.url", "http://localhost:8081");
+        String url = System.getProperty("base.url", "http://localhost:8501");
         return url.endsWith("/") ? url.substring(0, url.length() - 1) : url;
     }
 

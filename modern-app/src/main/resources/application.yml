@@ -24,7 +24,7 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
   datasource:
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5442/harbor}
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:8532/harbor}
     username: ${SPRING_DATASOURCE_USERNAME:harbor_app}
     password: ${SPRING_DATASOURCE_PASSWORD:}
   flyway:

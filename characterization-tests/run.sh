@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 # Runs the characterisation suite.
-#   characterization-tests/run.sh                      legacy at http://localhost:8081, DB reset first
+#   characterization-tests/run.sh                      legacy at http://localhost:8501, DB reset first
 #   characterization-tests/run.sh --twice              also run a second time WITHOUT a reset (proves no dependence on leftovers)
-#   characterization-tests/run.sh --target modern --base-url http://localhost:8080 --no-reset
+#   characterization-tests/run.sh --target modern --base-url http://localhost:8500 --no-reset
 # The test order is random; the seed is printed so a failure can be replayed with SEED=<n>.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 
-TARGET="legacy"; BASE="http://localhost:8081"; RESET=1; TWICE=0
+TARGET="legacy"; BASE="http://localhost:8501"; RESET=1; TWICE=0
 while [ $# -gt 0 ]; do
   case "$1" in
     --target) TARGET="$2"; shift 2 ;;

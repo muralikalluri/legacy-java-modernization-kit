@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Checks the things only the whole stack can show: routing, cookies, redirects, spoofed headers and logout, through the gateway.
-# Usage: scripts/smoke-strangler.sh [gateway-url]   (default http://localhost:8080). Creates one customer; run scripts/reset-db.sh after.
+# Usage: scripts/smoke-strangler.sh [gateway-url]   (default http://localhost:8500). Creates one customer; run scripts/reset-db.sh after.
 set -uo pipefail
-BASE="${1:-http://localhost:8080}"
+BASE="${1:-http://localhost:8500}"
 DIR="$(mktemp -d)"
 trap 'rm -rf "$DIR"' EXIT
 pass=0; fail=0
