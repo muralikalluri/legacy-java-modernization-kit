@@ -2,6 +2,8 @@
 #   docker compose up -d --build        everything, then open http://localhost:8080
 #   docker compose up -d --build postgres legacy     only the legacy app (http://localhost:8081)
 # Published ports are bound to 127.0.0.1: this is a local demo, and the legacy app is deliberately insecure.
+name: legacy-java-modernization-kit
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -29,7 +31,8 @@ services:
   # Applies the migrations of the modern app with the OWNER account, once, so the app containers never hold DDL rights.
   # The legacy schema (version 5) is the baseline; the modern migrations start at version 6.
   flyway:
-    image: flyway/flyway:10-alpine
+    # A multi-arch tag (amd64 and arm64): the Flyway 10 alpine images are amd64 only and run under emulation on Apple Silicon.
+    image: flyway/flyway:11.7.2-alpine
     command: >-
       -url=jdbc:postgresql://postgres:5432/${POSTGRES_DB:-harbor}
       -user=${POSTGRES_USER:-harbor}

@@ -55,7 +55,7 @@ open http://localhost:8080/             # the gateway: Customers and claim searc
 open http://localhost:8081/             # the legacy app on its own (deliberately insecure, see the banner)
 ```
 
-`docker compose up -d --build postgres legacy` starts only the legacy app. Demo logins (plaintext on purpose, fictional): `admin`, `adjuster1`, `adjuster2`, `supervisor1`, `underwriter1`, `csr1`, `auditor1`; the password is the username plus `-demo`.
+`docker compose up -d --build postgres legacy` starts only the legacy app. The published ports come from `.env` (`GATEWAY_PORT`, `LEGACY_PORT`, `MODERN_PORT`, `POSTGRES_PORT`); change them if something else already uses 8080 to 8082 or 5442. Demo logins (plaintext on purpose, fictional): `admin`, `adjuster1`, `adjuster2`, `supervisor1`, `underwriter1`, `csr1`, `auditor1`; the password is the username plus `-demo`.
 
 ```bash
 scripts/smoke-strangler.sh                                                         # routing, cookies, redirects, spoofed headers, logout, through the gateway
